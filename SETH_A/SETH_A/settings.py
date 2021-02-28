@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'xmhizjs4nptgt68r&$v2=bw*qv5&btz=#2lfe)z877wxsus#ak'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -36,8 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'A_WEB'
+    # 'django.contrib.staticfiles',
+    'django_node_assets',
+    'A_WEB',        
+    'SETH_A',
+    'User',
+    'face_core'
+
 ]
 
 MIDDLEWARE = [
@@ -120,6 +126,27 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'staticfiles'),
+)
+
+STATICFILES_FINDERS = [
+    'django_node_assets.finders.NodeModulesFinder',
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 #Custom
 LOGIN_REDIRECT_URL = '/'
+
+AUTH_USER_MODEL = 'User.AUser'
+
+AUTHENTICATION_BACKENDS = ('User.backends.AuthenticationBackend.AuthenticationBackend','django.contrib.auth.backends.ModelBackend',)
+
+LOGOUT_REDIRECT_URL = '/login/'
+
+NODE_PACKAGE_JSON = os.path.join(BASE_DIR, 'package.json')
+
+NODE_MODULES_ROOT = os.path.join(BASE_DIR, 'node_modules')
+

@@ -24,6 +24,14 @@ class State(models.Model):
         db_table = 'state'
 
 class UserC(models.Model):
-    nik = models.IntegerField(default=1)
+    nik = models.CharField(max_length=50, blank=False)
     name = models.CharField(max_length=50, blank=False)
+    email = models.CharField(max_length=50, blank=False)
+    phone = models.CharField(max_length=50, blank=False)
+    bday = models.CharField(max_length=50, blank=False)
+    address = models.CharField(max_length=50, blank=False)
+    city = models.CharField(max_length=50, blank=False)
+    country = models.CharField(max_length=50, blank=False)
+    postalcode = models.CharField(max_length=50, blank=False)
     face_data = models.CharField(max_length=25, blank=True)
+    fingerprint = models.CharField(max_length=25, blank=True)
