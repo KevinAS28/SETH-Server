@@ -1,0 +1,17 @@
+<h1>List of People</h1>
+<form action="{% url 'results' %}" method="get">
+  <input name="q" type="text" placeholder="Search...">
+</form>
+<table border="1" width="600">
+<tr>
+<td>NIK</td>
+<td>Name</td>
+</tr>
+{% for his in object_list%}
+<tr>
+<td>{{his.nik}}</td>
+<td>{{his.name}}</td>
+</td>
+</tr>
+{% endfor %}
+</table>

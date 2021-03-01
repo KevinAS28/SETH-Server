@@ -1,0 +1,8 @@
+<table border="1" width="600">
+    {% for his in object_list%}
+<tr>
+<td><a href="/profile">{{his.nik}}</a></td>
+<td>{{his.name}}</td>
+    </tr>
+{% endfor %}
+</table>
