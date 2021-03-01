@@ -3,14 +3,11 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% comment %} <button onclick="{% url 'a_web:cert' %}">Make Certificate</button>
+<button onclick="window.location = '{% url 'a_web:regist_c_registered' %}'">The user has been registered with phone</button>
 <br>
 
-<button onclick="{% url 'a_web:past_cert' %}">Make Certificate</button>
-<br> {% endcomment %}
+<button onclick="window.location = '{% url 'a_web:regist_c_notregistered' %}'">The user has NOT been registered with phone</button>
 
-<button onclick="window.location = '{% url 'a_web:regist_c' %}'">Make Certificate</button>
-<br>
 
 {% if user.is_authenticated %}
   Hi {{ user.username }}!

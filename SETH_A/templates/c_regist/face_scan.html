@@ -9,8 +9,12 @@
 <button onclick="{% url 'a_web:past_cert' %}">Make Certificate</button>
 <br> {% endcomment %}
 
-<button onclick="window.location = '{% url 'a_web:regist_c' %}'">Make Certificate</button>
-<br>
+<h1>Face Registration {{user.name}} </h1>
+<h2> Please turn around to right and left slowly</h2>
+
+<form action="{% url 'a_web:face_result' %}" method="post">
+<button type="submit"> Done </button>
+</form>
 
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
@@ -19,4 +23,5 @@
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">Log In</a>
 {% endif %}
+
 {% endblock %}
