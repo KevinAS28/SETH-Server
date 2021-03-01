@@ -1,2 +1,2 @@
-Hello... this is initial commit
+Initial Commit
 
