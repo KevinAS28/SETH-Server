@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required as django_login
 from .models import *
 from django.shortcuts import render, redirect
 from django.contrib import messages 
+from django.db.models import Q
 # from facial_simple import Add as face_add
 
 def test_frontend(request, file):
@@ -42,6 +43,7 @@ def register_c(request):
         #     print("not a valid form")
         #     return render(request, "")
     elif request.method=='GET':
+        print("GET register_c")
         return render(request, "front1/user.html", {"data": []})
     else:
         print("invalid method")
@@ -51,10 +53,39 @@ def register_face(request):
         pass
     else:
         print("Invalid method")
+
+
+def find_user_c(request):
+    cert = request.GET["cert"]
+    if request.method=="POST":
+        
+        form = request.POST
+        name_nik = form.get("name_nik")
+        data = list(UserC.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 
+        print(data)
+        return render(request, "front1/find_user_c.html", {"users": data, "cert": cert})
+    elif request.method=="GET":
+        return render(request, "front1/find_user_c.html")
+    else:
+        print("invalid method")
+
+def make_cert(request):
+    cert = request.GET["cert"]
+    nik = request.GET["nik"]
+    if request.method=="POST":
+        user = list(UserC.objects.filter(nik=nik))
+        if len(user)==0:
+            print(f"No user with NIK: {nik}")
+            return None
+        the_user = user[0]
+        Certificate(nik=the_user, cert_type=cert, note=request.POST.get("note")).save()
+        # return render(request, "front1/template_cert1.html", )
+        messages.success(request, f' Data {the_user.nik} sucessfully registered !!') 
+        return redirect("a_web:makecert")
+    elif request.method=="GET":
+        user = list(UserC.objects.filter(nik=nik))[0]
+        return render(request, "front1/template_cert1.html", {"user": user})
+    else:
+        print("invalid method")
     
 
-
-class SignUpView(generic.CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'registration/signup.html'

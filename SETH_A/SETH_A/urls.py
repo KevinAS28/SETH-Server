@@ -16,18 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.urls.conf import re_path
-from django.views.generic.base import TemplateView # new
 from django.conf import settings
-from django.conf.urls.static import static
-from django.views.static import serve
 from .views import static_serve
 from django.contrib.auth import views as auth 
 import User.views as user_views
+from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    # path('', TemplateView.as_view(template_name='home.html'), name='home'), # new
+    path('', lambda r:  redirect('a_web:dashboard'), name='home'), # new
     path('a_web/', include('A_WEB.urls')),
     re_path(r'^staticfiles/(?P<path>.+)/$', static_serve, name="test_frontend"),
 

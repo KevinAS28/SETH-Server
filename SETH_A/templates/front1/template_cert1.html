@@ -65,35 +65,35 @@ The above copyright notice and this permission notice shall be included in all c
     </div>
 
     <!-- SIDEBAR -->
-    <div class="sidebar-wrapper">
-      <ul class="nav">
-        <li class="nav-item ">
-          <a class="nav-link" href="./dashboard.html">
-            <i class="material-icons">dashboard</i>
-            <p>Dashboard</p>
-          </a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link" href="./makecert.html">
-            <i class="material-icons">contact_page</i>
-            <p>Make Certificate</p>
-          </a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link" href="./user.html">
-            <i class="material-icons">person</i>
-            <p>User Registration</p>
-          </a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="./tables.html">
-            <i class="material-icons">content_paste</i>
-            <p>Certificate Made</p>
-          </a>
-        </li>
-      </ul>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item active  ">
+            <a class="nav-link" href="{% url 'a_web:dashboard' %}">
+              <i class="material-icons">dashboard</i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'a_web:makecert' %}">
+              <i class="material-icons">contact_page</i>
+              <p>Make Certificate</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'a_web:regist_c_notregistered' %}">
+              <i class="material-icons">person</i>
+              <p>User Registration</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'a_web:dashboard' %}">
+              <i class="material-icons">content_paste</i>
+              <p>Certificate Made</p>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
   <!-- END OF SIDEBAR -->
 
     <div class="main-panel">
@@ -101,7 +101,7 @@ The above copyright notice and this permission notice shall be included in all c
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Certificate</a>
+            <a class="navbar-brand" href="javascript:;">Full Profile</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -111,6 +111,14 @@ The above copyright notice and this permission notice shall be included in all c
           </button>
           <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:;">
+                  <i class="material-icons">dashboard</i>
+                  <p class="d-lg-none d-md-block">
+                    Stats
+                  </p>
+                </a>
+              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">person</i>
@@ -134,69 +142,143 @@ The above copyright notice and this permission notice shall be included in all c
 
       <div class="content">
         <div class="container-fluid">
-          <a href=".\tables.html"> << Back</a>
-          <d<div class="card">
-            <div class="card-header card-header-primary">
-              <h4 class="card-title">Certificate</h4>
-              <p class="card-category">PCR/Rapid/Swab</p>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead class=" text-primary">
-                    <th class="text-left">
-                      Category
-                    </th>
-                    <th class="text-left">
-                      Data
-                    </th>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th class="text-left">
-                        NAME
-                      </th>
-                      <td class="text-left">
-                        Dakota Rice
-                      </td>
-                    </tr>
-                    <tr>
-                      <th class="text-left">
-                        CERTIFICATE ID
-                      </th>
-                      <td class="text-left">
-                        12345678910
-                      </td>
-                    </tr>
-                    <tr>
-                      <th class="text-left">
-                        USER ID
-                      </th>
-                      <td class="text-left">
-                        12345678910
-                      </td>
-                    </tr>
-                    <tr>
-                      <th class="text-left">
-                        BLOOD TYPE
-                      </th>
-                      <td class="text-left">
-                        AB
-                      </td>
-                    </tr>
-                    <tr>
-                      <th class="text-left">
-                        TEST RESULT
-                      </th>
-                      <td class="text-left text-primary">
-                        POSITIVE
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+          <a href=".\regPCR.html"> << Back</a>
+          <div class"row">
+          <div class="col-md-10 ml-auto mr-auto">
+            <div class="card card-profile">
+              <div class="card-avatar">
+                <a href="javascript:;">
+                  <img class="img" src="/staticfiles/assets/img/faces/photo.jpeg" />
+                </a>
+              </div>
+              <div class="card-body">
+                  <h4 class="card-title">Bambang Mada</h4>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class=" text-primary">
+                          <th class="text-left">
+                            Category
+                          </th>
+                          <th class="text-left">
+                            Data
+                          </th>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th class="text-left">
+                              NIK
+                            </th>
+                            <td class="text-left">
+                              {{user.nik}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="text-left">
+                              EMAIL
+                            </th>
+                            <td class="text-left">
+                              {{user.email}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="text-left">
+                              PHONE
+                            </th>
+                            <td class="text-left">
+                              {{user.phone}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="text-left">
+                              ADDRESS
+                            </th>
+                            <td class="text-left">
+                              {{user.address}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="text-left">
+                              BIRTHDAY
+                            </th>
+                            <td class="text-left">
+                              {{user.bday}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="text-left">
+                              CITY
+                            </th>
+                            <td class="text-left">
+                              {{user.city}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="text-left">
+                              COUNTRY
+                            </th>
+                            <td class="text-left">
+                              {{user.country}}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="text-left">
+                              POSTAL CODE
+                            </th>
+                            <td class="text-left">
+                              {{user.postalcode}}
+                            </td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+              <div class="card">
+                <div class="card-header card-header-warning">
+                  <h4 class="card-title">Register PCR Certificate</h4>
+                  <p class="card-category">Fill the form</p>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="text">
+                        <label>Price: Rp 154.000</label>
+                      </div>
+                    </div>
+                  </div>
+                  <form method="POST">
+                    {% comment %} <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Date</label>
+                          <input type="text" class="form-control" value="2020-10-13" readonly="true">
+                        </div>
+                      </div>
+                    </div> {% endcomment %}
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Note</label>
+                          <input type="text" class="form-control" name="note">
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-warning pull-right">Register</button>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
       <!-- FOOTER -->
       <footer class="footer">

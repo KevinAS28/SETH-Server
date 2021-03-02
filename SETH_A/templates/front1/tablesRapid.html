@@ -37,35 +37,35 @@ The above copyright notice and this permission notice shall be included in all c
       </a>
     </div>
     <!-- SIDEBAR -->
-    <div class="sidebar-wrapper">
-      <ul class="nav">
-        <li class="nav-item ">
-          <a class="nav-link" href="./dashboard.html">
-            <i class="material-icons">dashboard</i>
-            <p>Rapid Certificate Made</p>
-          </a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link" href="./makecert.html">
-            <i class="material-icons">contact_page</i>
-            <p>Make Certificate</p>
-          </a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link" href="./user.html">
-            <i class="material-icons">person</i>
-            <p>Dashboard</p>
-          </a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="./tables.html">
-            <i class="material-icons">content_paste</i>
-            <p>Rapid Certificate Made</p>
-          </a>
-        </li>
-      </ul>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item active  ">
+            <a class="nav-link" href="{% url 'a_web:dashboard' %}">
+              <i class="material-icons">dashboard</i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'a_web:makecert' %}">
+              <i class="material-icons">contact_page</i>
+              <p>Make Certificate</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'a_web:regist_c_notregistered' %}">
+              <i class="material-icons">person</i>
+              <p>User Registration</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'a_web:dashboard' %}">
+              <i class="material-icons">content_paste</i>
+              <p>Certificate Made</p>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
   <!-- END OF SIDEBAR -->
     <div class="main-panel">
       <!-- NAVBAR ATAS KANAN -->
