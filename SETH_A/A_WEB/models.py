@@ -1,6 +1,7 @@
 # Create your models here.
 from django.db import models 
-from django.utils import timezone 
+# from django.utils import timezone 
+from datetime import date
   
 
 
@@ -16,8 +17,11 @@ class UserC(models.Model):
     postalcode = models.CharField(max_length=50, blank=False)
     face_data = models.CharField(max_length=25, blank=True)
     fingerprint = models.CharField(max_length=25, blank=True)
+    
+
 
 class Certificate(models.Model):
-    nik = models.ForeignKey(UserC, on_delete=models.CASCADE)
+    userc = models.ForeignKey(UserC, on_delete=models.CASCADE)
     cert_type = models.CharField(max_length=10, blank=False)
     note = models.CharField(max_length=250, blank=True)
+    date = models.DateField(default=date.today, blank=True)

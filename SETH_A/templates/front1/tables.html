@@ -115,8 +115,10 @@ The above copyright notice and this permission notice shall be included in all c
                 </div>
                 <div class="card-body">
                   <div class="input-group no-border">
-                    <input type="text" value="" class="form-control" placeholder="Search...">
-                    <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                    <form method="POST">
+                      <input type="text" name="name_nik" value="" class="form-control" placeholder="Search...">
+                      <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                    </form>
                     <i class="material-icons">search</i>
                     <div class="ripple-container"></div>
                   </button>
@@ -126,196 +128,12 @@ The above copyright notice and this permission notice shall be included in all c
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header card-header-success">
-                  <h4>PCR</h4>
-                  <p class="card-category"> Newest Certificate Made</p>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class=" text-primary">
-                        <th class="text-center">
-                          Date
-                        </th>
-                        <th class="text-center">
-                          Name
-                        </th>
-                        <th class="text-center">
-                          Certificate ID
-                        </th>
-                      </thead>
-
-                      <tbody>
-                        <tr>
-                          <td class="text-center">
-                            1/12/20
-                          </td>
-                          <td class="text-center">
-                            Dakota Rice
-                          </td>
-                          <td class="text-center">
-                            123456789
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="text-center">
-                            23/12/20
-                          </td>
-                          <td class="text-center">
-                            Minerva Hooper
-                          </td>
-                          <td class="text-center">
-                            123456789
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="text-center">
-                            3/9/20
-                          </td>
-                          <td class="text-center">
-                            Sage Rodriguez
-                          </td>
-                          <td class="text-center">
-                            123456789
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="text-center">
-                            5/5/20
-                          </td>
-                          <td class="text-center">
-                            Philip Chaney
-                          </td>
-                          <td class="text-center">
-                            123456789
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="text-center">
-                            2/4/20
-                          </td>
-                          <td class="text-center">
-                            Doris Greene
-                          </td>
-                          <td class="text-center">
-                            123456789
-                          </td>
-                        </tr>
-                        <tr>
-                          <td></td><td></td>
-                          <td class="text-center">
-                            <a href="./tablesPCR.html">See more >></a>
-                          </td>
-                        </tr>
-
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card">
-                  <div class="card-header card-header-warning">
-                    <h4>Rapid Antigen</h4>
-                    <p class="card-category"> Newest Certificate Made</p>
-                  </div>
-                  <div class="card-body">
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead class=" text-primary">
-                          <th class="text-center">
-                            Date
-                          </th>
-                          <th class="text-center">
-                            Name
-                          </th>
-                          <th class="text-center">
-                            Certificate ID
-                          </th>
-                        </thead>
-
-                        <tbody>
-                          <tr>
-                            <td class="text-center">
-                              1/12/20
-                            </td>
-                            <td class="text-center">
-                              Dakota Rice
-                            </td>
-                            <td class="text-center">
-                              123456789
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">
-                              23/12/20
-                            </td>
-                            <td class="text-center">
-                              Minerva Hooper
-                            </td>
-                            <td class="text-center">
-                              123456789
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">
-                              3/9/20
-                            </td>
-                            <td class="text-center">
-                              Sage Rodriguez
-                            </td>
-                            <td class="text-center">
-                              123456789
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">
-                              5/5/20
-                            </td>
-                            <td class="text-center">
-                              Philip Chaney
-                            </td>
-                            <td class="text-center">
-                              123456789
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">
-                              2/4/20
-                            </td>
-                            <td class="text-center">
-                              Doris Greene
-                            </td>
-                            <td class="text-center">
-                              123456789
-                            </td>
-                          </tr>
-                          <tr>
-                            <td></td><td></td>
-                            <td class="text-center">
-                              <a href=".\tablesRapid.html">See more >></a>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              </div>
 
               <div class="row">
                 <div class="col-md-12">
                   <div class="card">
                     <div class="card-header card-header-info">
-                      <h4>Swab</h4>
+                      <h4>History</h4>
                       <p class="card-category"> Newest Certificate Made</p>
                     </div>
                     <div class="card-body">
@@ -323,79 +141,37 @@ The above copyright notice and this permission notice shall be included in all c
                         <table class="table">
                           <thead class=" text-primary">
                             <th class="text-center">
-                              Date
+                              NIK
                             </th>
                             <th class="text-center">
                               Name
                             </th>
                             <th class="text-center">
-                              Certificate ID
+                              Date
                             </th>
+                            <th class="text-center">
+                              Certificate Types
+                            </th>                            
                           </thead>
 
                           <tbody>
-                            <tr>
-                              <td class="text-center">
-                                1/12/20
-                              </td>
-                              <td class="text-center">
-                                Dakota Rice
-                              </td>
-                              <td class="text-center">
-                                123456789
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="text-center">
-                                23/12/20
-                              </td>
-                              <td class="text-center">
-                                Minerva Hooper
-                              </td>
-                              <td class="text-center">
-                                123456789
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="text-center">
-                                3/9/20
-                              </td>
-                              <td class="text-center">
-                                Sage Rodriguez
-                              </td>
-                              <td class="text-center">
-                                123456789
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="text-center">
-                                5/5/20
-                              </td>
-                              <td class="text-center">
-                                Philip Chaney
-                              </td>
-                              <td class="text-center">
-                                123456789
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="text-center">
-                                2/4/20
-                              </td>
-                              <td class="text-center">
-                                Doris Greene
-                              </td>
-                              <td class="text-center">
-                                123456789
-                              </td>
-                            </tr>
-                            <tr>
-                              <td></td><td></td>
-                              <td class="text-center">
-                                <a href="./tablesSwabAntigen.html">See more >></a>
-                              </td>
-                            </tr>
+                            {% for cert in history %}
+                              <tr>
+                                <td class="text-center">
+                                  {{cert.userc.nik}}
+                                </td>
+                                <td class="text-center">
+                                  {{cert.userc.name}}
+                                </td>
+                                <td class="text-center">
+                                  {{cert.date}}
+                                </td>
+                                <td class="text-center">
+                                  {{cert.cert_type}}
+                                </td>                                
+                              </tr>
 
+                            {% endfor %}
                           </tbody>
                         </table>
                       </div>

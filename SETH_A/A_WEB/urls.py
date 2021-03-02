@@ -9,7 +9,8 @@ from django.conf import settings
 app_name = 'a_web'
 
 urlpatterns = [
-    path('dashboard/', TemplateView.as_view(template_name='front1/dashboard.html'), name='dashboard'), 
+    path('dashboard/', dashboard, name='dashboard'), 
+    path('history/', history, name='history'), 
     path('makecert/', TemplateView.as_view(template_name='front1/makecert.html'), name='makecert'), 
     re_path('find_user_c', find_user_c, name='find_user_c'), 
     re_path('makecertun/', make_cert, name='makecertun'),

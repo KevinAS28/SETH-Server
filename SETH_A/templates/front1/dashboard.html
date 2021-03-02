@@ -59,7 +59,7 @@ The above copyright notice and this permission notice shall be included in all c
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="{% url 'a_web:dashboard' %}">
+            <a class="nav-link" href="{% url 'a_web:history' %}">
               <i class="material-icons">content_paste</i>
               <p>Certificate Made</p>
             </a>
@@ -225,39 +225,18 @@ The above copyright notice and this permission notice shall be included in all c
                     <thead class="text-warning">
                       <th>ID</th>
                       <th>Name</th>
-                      <th>Age</th>
                       <th class="text-center">Type of Certificate</th>
-                      <th class="text-center">Schedule</th>
                     </thead>
                     <tbody>
+                    {% for c in today %}
                       <tr>
-                        <td>1</td>
-                        <td>Dakota Rice</td>
-                        <td>28</td>
+                        <td>{{c.userc.nik}}</td>
+                        <td>{{c.userc.name}}</td>
+                        <td>{{c.cert_type}}</td>
                         <td class="text-center">PCR</td>
-                        <td class="text-center">13:00</td>
                       </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Minerva Hooper</td>
-                        <td>29</td>
-                        <td class="text-center">Swab</td>
-                        <td class="text-center">14:00</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Sage Rodriguez</td>
-                        <td>45</td>
-                        <td class="text-center">PCR</td>
-                        <td class="text-center">15:00</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Philip Chaney</td>
-                        <td>20</td>
-                        <td class="text-center">Rapid</td>
-                        <td class="text-center">16:00</td>
-                      </tr>
+
+                    {% endfor %}
                     </tbody>
                   </table>
                 </div>
