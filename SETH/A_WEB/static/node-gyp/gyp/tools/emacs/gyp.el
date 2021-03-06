@@ -64,9 +64,9 @@
 
 (add-hook 'gyp-mode-hook 'gyp-set-indentation)
 
-(add-to-list 'auto-mode-alist '("\\.gyp\\'" . gyp-mode))
-(add-to-list 'auto-mode-alist '("\\.gypi\\'" . gyp-mode))
-(add-to-list 'auto-mode-alist '("/\\.gclient\\'" . gyp-mode))
+(add-to-list 'auto-mode-APlace '("\\.gyp\\'" . gyp-mode))
+(add-to-list 'auto-mode-APlace '("\\.gypi\\'" . gyp-mode))
+(add-to-list 'auto-mode-APlace '("/\\.gclient\\'" . gyp-mode))
 
 ;;; Font-lock support
 

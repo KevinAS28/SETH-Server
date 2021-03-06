@@ -25,7 +25,7 @@ def load_model():
   face_detect = MTCNNDetect(FRGraph, scale_factor=2)
   print("\n\nDone\n\n")
 
-Thread(target=load_model).start()
+# Thread(target=load_model).start()
 
 def add_face_src(request):
     # print("add_face_src: ", request.session["email"])

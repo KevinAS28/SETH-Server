@@ -1,15 +1,15 @@
 # Create your views here.
 
+from SETH.models import *
 import os
 
 
 from django.contrib.auth.decorators import login_required as django_login
-from .models import *
-from User.models import *
 from django.shortcuts import render, redirect
 from django.contrib import messages 
 from django.db.models import Q
 from datetime import date
+from django.conf import settings
 # from facial_simple import Add as face_add
 
 def test_frontend(request, file):
@@ -24,24 +24,11 @@ def register_c(request):
         data = dict()
         for col in to_get:
             data[col] = form.get(col)
-
-        # print("name: ", form.get("name_nik"))
-        # print("by_nik: ", form.get("by_nik"))
-        # print("by_name: ", form.get("by_name"))
-
-        # users = []
-        # if form.get("by_nik")!=None:
-        #     users = list(CUser.objects.filter(nik=form.get("name_nik")))
-        # elif form.get("by_name")!=None:
-        #     users = list(CUser.objects.filter(name__icontains=form.get("name_nik")))
-        # print("result: ", users)
-
+            
         CUser(**data).save()
         messages.success(request, f' Data {data["name"]} sucessfully registered !!') 
         return redirect("a_web:cuser")
-        # else:
-        #     print("not a valid form")
-        #     return render(request, "")
+
     elif request.method=='GET':
         print("GET register_c")
         return render(request, "front1/user.html", {"data": []})
@@ -72,13 +59,14 @@ def find_user_c(request):
 def make_cert(request):
     cert = request.GET["cert"]
     nik = request.GET["nik"]
+    a_place = APlace.objects.filter(name=settings.A_PLACE_NAME)[0]
     if request.method=="POST":
         user = list(CUser.objects.filter(nik=nik))
         if len(user)==0:
             print(f"No user with NIK: {nik}")
             return None
         the_user = user[0]
-        Certificate(cuser=the_user, cert_type=cert, note=request.POST.get("note"), date=date.today()).save()
+        Certificate(cuser=the_user, cert_type=cert, note=request.POST.get("note"), date=date.today(), a_place=a_place).save()
         # return render(request, "front1/template_cert1.html", )
         messages.success(request, f' Data {the_user.nik} sucessfully registered !!') 
         return redirect("a_web:makecert")

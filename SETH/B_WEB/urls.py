@@ -1,22 +1,17 @@
-"""WebSethB URL Configuration
+from django.urls import path
+from . import views
+# from face_core import views as face_view
+from django.shortcuts import render
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from django.urls import path,include
+app_name = "b_web"
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('', include('home.urls')),
+    # path('', views.HomePageView.as_view(), name='home'),
+    # path('History',views.history_view),
+    # path('results', views.SearchResultsView.as_view(),name='results'),
+    # path('profile',views.profile_view),
+    # path('registration',views.registration),
+    path('history', views.history),
+    path('face_add', lambda r: render(r, "front2/dashboard.html")),
+    # path('face_add_src', face_view.add_face_src, name="b_face_add")
 ]

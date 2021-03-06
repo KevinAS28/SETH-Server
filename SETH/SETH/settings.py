@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # 'django.contrib.staticfiles',
     'django_node_assets',
     'A_WEB',        
+    'B_WEB',        
     'SETH',
     'User',
     'face_core'
@@ -140,7 +141,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #Custom
 LOGIN_REDIRECT_URL = '/'
 
-AUTH_USER_MODEL = 'User.AUser'
+# AUTH_USER_MODEL = 'User.AUser'
 
 AUTHENTICATION_BACKENDS = ('User.backends.AuthenticationBackend.AuthenticationBackend','django.contrib.auth.backends.ModelBackend',)
 
@@ -149,4 +150,8 @@ LOGOUT_REDIRECT_URL = '/login/'
 NODE_PACKAGE_JSON = os.path.join(BASE_DIR, 'package.json')
 
 NODE_MODULES_ROOT = os.path.join(BASE_DIR, 'node_modules')
+
+A_PLACE_NAME = 'Bogor Hospital Center'
+
+B_PLACE_NAME = 'Bogor Hospital Center'
 
