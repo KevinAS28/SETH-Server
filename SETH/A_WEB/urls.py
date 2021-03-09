@@ -17,7 +17,7 @@ urlpatterns = [
     path('registered', register_c, name='regist_c_registered'), 
     path('not_registered', register_c, name='regist_c_notregistered'), 
     path('register_face', register_face, name="register_face"),
-    path('login/', auser_login, name="login"),
+    path('login/', common_user_login, name="login"),
     path('logout/', auth.LogoutView.as_view(template_name ='index.html'), name ='logout'), 
     re_path(r'^file/(?P<file>.+)/$', test_frontend, name="test_frontend"),
     

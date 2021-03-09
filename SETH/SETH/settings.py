@@ -141,7 +141,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #Custom
 LOGIN_REDIRECT_URL = '/'
 
-# AUTH_USER_MODEL = 'User.AUser'
+AUTH_USER_MODEL = 'SETH.CommonUser'
 
 AUTHENTICATION_BACKENDS = ('User.backends.AuthenticationBackend.AuthenticationBackend','django.contrib.auth.backends.ModelBackend',)
 

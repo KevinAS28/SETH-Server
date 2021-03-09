@@ -10,11 +10,16 @@ from django.contrib import messages
 from django.db.models import Q
 from datetime import date
 from django.conf import settings
+from django.contrib.auth.decorators import REDIRECT_FIELD_NAME
 # from facial_simple import Add as face_add
 
 def test_frontend(request, file):
     return render(request, os.path.join("front1", file+".html"))
 
+def login_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url="/a_web/login"):
+    return django_login(function, redirect_field_name, login_url)
+
+@login_required
 def register_c(request):
     if (request.method=='POST'):
         #if (request.POST.is_valid()):
@@ -25,7 +30,7 @@ def register_c(request):
         for col in to_get:
             data[col] = form.get(col)
             
-        CUser(**data).save()
+        CommonUser(**data).save()
         messages.success(request, f' Data {data["name"]} sucessfully registered !!') 
         return redirect("a_web:cuser")
 
@@ -35,20 +40,21 @@ def register_c(request):
     else:
         print("invalid method")
 
+@login_required
 def register_face(request):
     if request.method=="GET":
         pass
     else:
         print("Invalid method")
 
-
+@login_required
 def find_user_c(request):
     cert = request.GET["cert"]
     if request.method=="POST":
         
         form = request.POST
         name_nik = form.get("name_nik")
-        data = list(CUser.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 
+        data = list(CommonUser.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 
         print(data)
         return render(request, "front1/find_user_c.html", {"users": data, "cert": cert})
     elif request.method=="GET":
@@ -56,12 +62,13 @@ def find_user_c(request):
     else:
         print("invalid method")
 
+@login_required
 def make_cert(request):
     cert = request.GET["cert"]
     nik = request.GET["nik"]
     a_place = APlace.objects.filter(name=settings.A_PLACE_NAME)[0]
     if request.method=="POST":
-        user = list(CUser.objects.filter(nik=nik))
+        user = list(CommonUser.objects.filter(nik=nik))
         if len(user)==0:
             print(f"No user with NIK: {nik}")
             return None
@@ -71,25 +78,27 @@ def make_cert(request):
         messages.success(request, f' Data {the_user.nik} sucessfully registered !!') 
         return redirect("a_web:makecert")
     elif request.method=="GET":
-        user = list(CUser.objects.filter(nik=nik))[0]
+        user = list(CommonUser.objects.filter(nik=nik))[0]
         return render(request, "front1/template_cert1.html", {"user": user})
     else:
         print("invalid method")
     
-
+@login_required
 def dashboard(request):
+    print(request.user.is_authenticated)
     if request.method=="GET":
-        return render(request, 'front1/dashboard.html', {"today": list(Certificate.objects.filter(date=date.today()))})
+        return render(request, 'front1/dashboard.html', {"today": list(Certificate.objects.filter(date=date.today())), 'len_all': len(list(Certificate.objects.all()))},  )
     else:
         print("Invalid method")
 
+@login_required
 def history(request):
     if request.method=="GET":
         return render(request, 'front1/tables.html', {"history": list(Certificate.objects.all().order_by("-date"))})
     elif request.method=="POST":
         form = request.POST
         name_nik = form.get("name_nik")
-        users = list(CUser.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 
+        users = list(CommonUser.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 
         certs = []
         for u in users:
             certs += (list(Certificate.objects.filter(cuser=u)))

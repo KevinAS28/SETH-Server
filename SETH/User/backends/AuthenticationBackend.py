@@ -1,11 +1,11 @@
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
-from User.models import *
+from SETH.models import *
 
 
 class AuthenticationBackend:
     def authenticate(self, request, username=None, password=None):
-        auser = AUser.objects.filter(username=username, password=password)
+        auser = CommonUser.objects.filter(username=username, password=password)
         if len(auser)==0:
             print("Not exist")
             return None
@@ -13,8 +13,10 @@ class AuthenticationBackend:
             print("Login success")
             return auser[0]
 
-    def get_user(self, user_id):
+    def get_user(self, username):
         try:
-            return AUser.objects.get(pk=user_id)
-        except AUser.DoesNotExist:
+            print(f'Get user {username} success')
+            return CommonUser.objects.get(pk=username)
+        except CommonUser.DoesNotExist:
+            print(f'Not found user {username}')
             return None

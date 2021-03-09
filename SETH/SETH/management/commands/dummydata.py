@@ -11,6 +11,7 @@ class Command(BaseCommand):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.to_generate = {
+            'common': self.generate_common,
             'genA': self.generateA,
             'genB': self.generateB,
             'genC': self.generateC,
@@ -41,26 +42,27 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS('Done'))
 
 
-        
+    def generate_common(self):
+        pass
 
     def generateA(self):
         self.stdout.write(self.style.NOTICE("Generate A..."))
         
-        #APlace AUser
+        #APlace CommonUser
         cities = 'Bogor Jakarta Bandung Jogja Tangerang Depok Bali Semarang'.split()
         index = 0
         for city in cities:
             print(city)
             aplace = SETHModels.APlace(name=f"{city} Hospital Center")
             aplace.save()
-            SETHModels.AUser(username=f'auser{index}', password=f'12345{index}', aplace=aplace).save()
+            SETHModels.CommonUser(username=f'auser{index}', password=f'12345{index}', usertype=SETHModels.CommonUser.A_TYPE, aplace=aplace).save()
             index += 1            
         
         #Certificates
         aplace_list = list(SETHModels.APlace.objects.all())
         print(len(aplace_list))
         index = 0
-        for cuser in list(SETHModels.CUser.objects.all()):
+        for cuser in list(SETHModels.CommonUser.objects.all()):
             print(index)
             SETHModels.Certificate(cuser=cuser, cert_type='PCR', note='No Problems', date=datetime.date.today(), a_place=random.choice(aplace_list), result=False).save()
             index += 1
@@ -71,14 +73,15 @@ class Command(BaseCommand):
         self.stdout.write(self.style.NOTICE("Generate B..."))
         cert_list = list(SETHModels.Certificate.objects.all())
 
-        #BPlace BUser
+        #BPlace CommonUser
         cities = 'Bogor Jakarta Bandung Jogja Tangerang Depok Bali Semarang'.split()
         index = 0
         for city in cities:
             print(index)
             bplace = SETHModels.BPlace(name=f"{city} Hospital Center" , supported_certs=random.choice(cert_list))
             bplace.save()
-            SETHModels.BUser(username=f'auser{index}', password=f'12345{index}', bplace=bplace).save()
+
+            SETHModels.CommonUser(username=f'buser{index}', password=f'12345{index}', usertype=SETHModels.CommonUser.B_TYPE, bplace=bplace).save()
             index += 1            
 
         #History
@@ -96,7 +99,10 @@ class Command(BaseCommand):
 
         for i in range(10):
             print(i)
-            SETHModels.CUser(
+            SETHModels.CommonUser(
+                username=f'cuser{i}',
+                password=f'12345{i}',
+                usertype=SETHModels.CommonUser.C_TYPE,
                 nik = f'{i}',
                 name = f'cuser{i}',
                 email = f'a{i}@a.com',
@@ -105,7 +111,6 @@ class Command(BaseCommand):
                 address = f'street {i}',
                 country = 'Indonesia',
                 postalcode = f'{i}',
-                password = f'12345{i}',
             ).save()
         self.stdout.write(self.style.SUCCESS('generateC'))
 

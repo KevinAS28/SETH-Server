@@ -6,7 +6,7 @@ from User import models as UserModels
 from SETH import models as SETHModels
 
 # class Certificate(models.Model):
-#     cuser = models.ForeignKey(UserModels.CUser, on_delete=models.CASCADE)
+#     cuser = models.ForeignKey(UserModels.CommonUser, on_delete=models.CASCADE)
 #     cert_type = models.CharField(max_length=10, blank=False)
 #     note = models.CharField(max_length=250, blank=True)
 #     date = models.DateField(default=date.today, blank=True)
