@@ -4,7 +4,7 @@ from SETH.models import *
 import os
 
 
-from django.contrib.auth.decorators import login_required as django_login
+from django.contrib.auth.decorators import user_passes_test, login_required as django_login
 from django.shortcuts import render, redirect
 from django.contrib import messages 
 from django.db.models import Q
@@ -16,10 +16,28 @@ from django.contrib.auth.decorators import REDIRECT_FIELD_NAME
 def test_frontend(request, file):
     return render(request, os.path.join("front1", file+".html"))
 
+def auser_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='/a_web/login'):
+    '''
+    Decorator for views that checks that the logged in user is a student,
+    redirects to the log-in page if necessary.
+    '''
+    actual_decorator = user_passes_test(
+        lambda u: u.is_active and u.usertype==UserAuthentication.A_TYPE,
+        login_url=login_url,
+        redirect_field_name=redirect_field_name
+    )
+    if function:
+        return actual_decorator(
+            function,
+        )
+    return actual_decorator
+
 def login_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url="/a_web/login"):
     return django_login(function, redirect_field_name, login_url)
 
+
 @login_required
+@auser_required
 def register_c(request):
     if (request.method=='POST'):
         #if (request.POST.is_valid()):
@@ -30,7 +48,7 @@ def register_c(request):
         for col in to_get:
             data[col] = form.get(col)
             
-        CommonUser(**data).save()
+        CUser(**data).save()
         messages.success(request, f' Data {data["name"]} sucessfully registered !!') 
         return redirect("a_web:cuser")
 
@@ -41,6 +59,7 @@ def register_c(request):
         print("invalid method")
 
 @login_required
+@auser_required
 def register_face(request):
     if request.method=="GET":
         pass
@@ -48,13 +67,14 @@ def register_face(request):
         print("Invalid method")
 
 @login_required
+@auser_required
 def find_user_c(request):
     cert = request.GET["cert"]
     if request.method=="POST":
         
         form = request.POST
         name_nik = form.get("name_nik")
-        data = list(CommonUser.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 
+        data = list(CUser.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 
         print(data)
         return render(request, "front1/find_user_c.html", {"users": data, "cert": cert})
     elif request.method=="GET":
@@ -63,12 +83,13 @@ def find_user_c(request):
         print("invalid method")
 
 @login_required
+@auser_required
 def make_cert(request):
     cert = request.GET["cert"]
     nik = request.GET["nik"]
     a_place = APlace.objects.filter(name=settings.A_PLACE_NAME)[0]
     if request.method=="POST":
-        user = list(CommonUser.objects.filter(nik=nik))
+        user = list(CUser.objects.filter(nik=nik))
         if len(user)==0:
             print(f"No user with NIK: {nik}")
             return None
@@ -78,12 +99,13 @@ def make_cert(request):
         messages.success(request, f' Data {the_user.nik} sucessfully registered !!') 
         return redirect("a_web:makecert")
     elif request.method=="GET":
-        user = list(CommonUser.objects.filter(nik=nik))[0]
+        user = list(CUser.objects.filter(nik=nik))[0]
         return render(request, "front1/template_cert1.html", {"user": user})
     else:
         print("invalid method")
     
 @login_required
+@auser_required
 def dashboard(request):
     print(request.user.is_authenticated)
     if request.method=="GET":
@@ -92,13 +114,14 @@ def dashboard(request):
         print("Invalid method")
 
 @login_required
+@auser_required
 def history(request):
     if request.method=="GET":
         return render(request, 'front1/tables.html', {"history": list(Certificate.objects.all().order_by("-date"))})
     elif request.method=="POST":
         form = request.POST
         name_nik = form.get("name_nik")
-        users = list(CommonUser.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 
+        users = list(CUser.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 
         certs = []
         for u in users:
             certs += (list(Certificate.objects.filter(cuser=u)))
