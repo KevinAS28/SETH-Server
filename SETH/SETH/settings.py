@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'B_WEB',        
     'SETH',
     'User',
-    'face_core'
+    # 'face_core'
 
 ]
 
