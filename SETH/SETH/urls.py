@@ -28,6 +28,7 @@ urlpatterns = [
     path('', lambda r:  redirect('a_web:dashboard'), name='home'), # new
     path('a_web/', include('A_WEB.urls')),
     path('b_web/', include('B_WEB.urls')),
+    # path('face_core/', include('face_core.urls')),
     re_path(r'^staticfiles/(?P<path>.+)/$', static_serve, name="test_frontend"),
 
     # path("user/", include('User.urls', namespace='user') ),
