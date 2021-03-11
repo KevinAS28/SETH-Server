@@ -131,13 +131,13 @@ The above copyright notice and this permission notice shall be included in all c
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">NIK</label>
-                          <input type="text" class="form-control" name="nik">
+                          <input type="text" class="form-control" name="nik" value="{{nik}}">
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Email address</label>
-                          <input type="email" class="form-control" name="email">
+                          <input type="email" class="form-control" name="email" value="{{email}}">
                         </div>
                       </div>
                     </div>
@@ -145,7 +145,7 @@ The above copyright notice and this permission notice shall be included in all c
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Full Name</label>
-                          <input type="text" class="form-control" name="name">
+                          <input type="text" class="form-control" name="name" value="{{name}}">
                         </div>
                       </div>
                     </div>
@@ -153,13 +153,13 @@ The above copyright notice and this permission notice shall be included in all c
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Phone Number</label>
-                          <input type="number" class="form-control" name="phone">
+                          <input type="number" class="form-control" name="phone" value="{{phone}}">
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Birth Date</label>
-                          <input type="text" class="form-control" name="bday">
+                          <input type="text" class="form-control" name="bday" value="{{bday}}">
                         </div>
                       </div>
                     </div>
@@ -167,7 +167,7 @@ The above copyright notice and this permission notice shall be included in all c
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Address</label>
-                          <input type="text" class="form-control" name="address">
+                          <input type="text" class="form-control" name="address" value="{{address}}">
                         </div>
                       </div>
                     </div>
@@ -175,19 +175,19 @@ The above copyright notice and this permission notice shall be included in all c
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">City</label>
-                          <input type="text" class="form-control" name="city">
+                          <input type="text" class="form-control" name="city" value="{{city}}">
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">Country</label>
-                          <input type="text" class="form-control" name="country">
+                          <input type="text" class="form-control" name="country" value="{{country}}">
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">Postal Code</label>
-                          <input type="text" class="form-control" name="postalcode">
+                          <input type="text" class="form-control" name="postalcode" value="{{postalcode}}">
                         </div>
                       </div>
                     </div>
@@ -243,7 +243,9 @@ The above copyright notice and this permission notice shall be included in all c
             </div>
             </div>
             </div>
-            {% comment %} <button type="submit" class="btn btn-primary pull-right">FINISH</button> {% endcomment %}
+            {% if able_to_complete %}
+              <button type="submit" class="btn btn-primary pull-right">FINISH</button>
+            {% endif %}
             <div class="clearfix"></div>
             </form>
         </div>

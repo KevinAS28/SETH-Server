@@ -16,7 +16,6 @@ from django.conf import settings
 from django.urls import reverse
 from django.contrib.auth.decorators import REDIRECT_FIELD_NAME
 from django.contrib.sessions.backends.db import SessionStore
-from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 
 import configparser
@@ -69,28 +68,61 @@ def login_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login
 
 def process_c_registration(request):
     if request.method == 'GET':
-        print('From process')
+        print('GET process_c_registration')
         print(request.GET)
         request.session = dict_to_session(json.loads(json.loads(request.GET['params'])['session']))
+        request.session['params'] = request.GET['params']
+
+        if not ('register_score' in request.session):
+            request.session['register_score'] = 1
+        else:
+            request.session['register_score'] += 1
+
         return render(request, 'redirect.html', {'url': reverse('a_web:regist_c_notregistered')})
 
     elif request.method == 'POST':
-        print('process_c_registration')
-        print(request.POST)
-        print(dict(request.POST))
-        request.session = dict_to_session(json.loads(request.POST['session']))
-        return render(request, 'redirect.html', {'url': reverse('a_web:regist_c_notregistered')})
+        print('POST process_c_registration')
+        face_data = json.loads(request.POST['person_face_data'])
+        # print('FACE_DATA:', face_data)
+
+        face_file_name = os.path.join(settings.BASE_DIR, 'face_data')
+        if not os.path.isdir(face_file_name):
+            os.makedirs(face_file_name)
+        face_file_name = os.path.join(face_file_name, request.POST['user_id'])
+        if not os.path.isfile(face_file_name):
+            open(face_file_name, 'w+').close()
+        
+
+        print('face_file_name:', face_file_name)
+        with open(face_file_name, 'r+') as face_file:
+            face_file_content = face_file.read()
+            try:
+                json.loads(face_file_content)
+            except:
+                face_file_content = '{"face_list": []}'
+
+        with open(face_file_name, 'w+') as face_file:
+            to_write = json.loads(face_file_content)
+            if not ('face_list' in to_write):
+                print('new face list')
+                to_write['face_list'] = [face_data]
+            else:
+                if not (type(to_write['face_list']) == list):
+                    print('new face list 2')
+                    to_write['face_list'] = [face_data]                    
+                else:
+                    print('append face')
+                    to_write['face_list'] = to_write['face_list'] + [face_data]
+            # to_write = {'face_list': [face_data]}
+            # print('to_write:', to_write)
+            face_file.write(json.dumps(to_write, indent=4, sort_keys=True))
+
+        # return render(request, 'redirect.html', {'url': reverse('a_web:regist_c_notregistered')})
+        return JsonResponse({'success': True})
     else:   
         return HttpResponseBadRequest('Invalid method')
 
         
-def save_face_data(request):
-    if (request.method == 'POST'):
-        print('save_face_data:', request.POST)
-        return JsonResponse({'success': True})
-    else:
-        return HttpResponseBadRequest('Invalid method')
-
 def register_face(request, data=dict()):
     config = configparser.ConfigParser()
     config.read(os.path.join(settings.BASE_DIR, 'face_core.ini'))       
@@ -119,11 +151,8 @@ def register_c(request):
         for col in to_get:
             data[col] = form.get(col)
         
-        # CUser(**data).save()
-        # messages.success(request, f' Data {data["name"]} sucessfully registered !!') 
-        # return redirect("a_web:cuser")
 
-        action_list = ['fingerprint', 'face_recog', 'idcard']
+        action_list = ['face_recog']#['fingerprint', 'face_recog', 'idcard']
 
         actions = {
             'face_recog': register_face
@@ -134,10 +163,48 @@ def register_c(request):
                 print('Action:', al)
                 return actions[al](request, data)
         
+        CUser(**data).save()
+        to_get = "nik email name phone bday address city country postalcode".split()
+        params = json.loads(request.session['params'])
+        for col in to_get:
+            try:
+                del params[col]
+            except:
+                print(f'delete {col}')
+        messages.success(request, f' Data {data["name"]} sucessfully registered !!') 
+        request.session['params'] = json.dumps(params)
+        request.session['register_score'] = 0
+        return render(request, 'redirect.html', {'url': 'http://127.0.0.1:8000/a_web/not_registered'})        
+        
 
     elif request.method=='GET':
         print("GET register_c")
-        return render(request, "front1/user.html", {"data": []})
+
+        minimum_user_registration_score = 1
+        able_to_complete = False
+        if not ('register_score' in request.session):
+            request.session['register_score'] = 0
+        else:
+            if int(request.session['register_score']) >= minimum_user_registration_score:
+                able_to_complete = True 
+        print('score:', request.session['register_score'])
+        
+        data_return = {"data": [], 'able_to_complete': able_to_complete}
+
+        
+        if 'params' in list(request.session.keys()):
+            print('auto fill')
+            params = json.loads(request.session['params'])
+            if 'nik' in list(params.keys()):
+                to_get = "nik email name phone bday address city country postalcode".split()
+                for col in to_get:
+                    data_return[col] = params[col]
+        else:
+            print('not auto fill')
+            print(list(request.session.keys()))
+        print('data_return:', data_return)
+
+        return render(request, "front1/user.html", data_return)
     else:
         print("invalid method")
 
