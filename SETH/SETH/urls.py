@@ -17,9 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.urls.conf import re_path
 from django.conf import settings
-from .views import static_serve
-from django.contrib.auth import views as auth 
-import User.views as user_views
+from .views import *
+from django.views.generic.base import TemplateView 
 from django.shortcuts import redirect
 
 urlpatterns = [
@@ -28,8 +27,13 @@ urlpatterns = [
     path('', lambda r:  redirect('a_web:dashboard'), name='home'), # new
     path('a_web/', include('A_WEB.urls')),
     path('b_web/', include('B_WEB.urls')),
-    # path('face_core/', include('face_core.urls')),
+    
+
+    path('qr_code/', include('qr_code.urls', namespace="qr_code")),
     re_path(r'^staticfiles/(?P<path>.+)/$', static_serve, name="test_frontend"),
+
+
+    # path('face_core/', include('face_core.urls')),
 
     # path("user/", include('User.urls', namespace='user') ),
     # path('logout/', auth.LogoutView.as_view(template_name ='index.html'), name ='logout'), 

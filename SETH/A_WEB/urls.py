@@ -8,6 +8,7 @@ from User.views import *
 app_name = 'a_web'
 
 urlpatterns = [
+    path('', dashboard, name='dashboard'), 
     path('dashboard/', dashboard, name='dashboard'), 
     path('history/', history, name='history'), 
     path('makecert/', TemplateView.as_view(template_name='front1/makecert.html'), name='makecert'), 
@@ -18,7 +19,7 @@ urlpatterns = [
     path('not_registered', register_c, name='regist_c_notregistered'), 
     path('register_face', register_face, name="register_face"),
     path('login/', common_user_login, name="login"),
-    path('logout/', auth.LogoutView.as_view(template_name ='index.html'), name ='logout'), 
+    path('logout/', auser_logout, name ='auser_logout'), 
     path('process_c_registration/', process_c_registration, name ='process_c_registration'), 
     re_path(r'^file/(?P<file>.+)/$', test_frontend, name="test_frontend"),
     

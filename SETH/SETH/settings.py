@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'qr_code',
     # 'django.contrib.staticfiles',
     'django_node_assets',
     'A_WEB',        
@@ -151,7 +152,9 @@ NODE_PACKAGE_JSON = os.path.join(BASE_DIR, 'package.json')
 
 NODE_MODULES_ROOT = os.path.join(BASE_DIR, 'node_modules')
 
+SERVE_QR_CODE_IMAGE_PATH = 'qr-code-image/'
+
 A_PLACE_NAME = 'Bogor Hospital Center'
 
-B_PLACE_NAME = 'Bogor Hospital Center'
+B_PLACE_NAME = 'Soekarno Hatta Airport'
 

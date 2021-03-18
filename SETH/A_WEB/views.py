@@ -18,6 +18,7 @@ from django.contrib.auth.decorators import REDIRECT_FIELD_NAME
 from django.contrib.sessions.backends.db import SessionStore
 from django.views.decorators.csrf import csrf_exempt
 
+
 import configparser
 import json
 from urllib.parse import quote, unquote
@@ -251,16 +252,16 @@ def make_cert(request):
 @login_required
 @auser_required
 def dashboard(request):
-    print(request.user.is_authenticated)
+    print('Authenticated:', request.user.is_authenticated)
     if request.method=="GET":
         # XMLSerializer = serializers.get_serializer("xml")
         # xml_serializer = XMLSerializer()
         # print('1:', xml_serializer.serialize(request.session))
         # data = xml_serializer.getvalue()
         # print(data)
-        print(dir(request.session))
+        # print(dir(request.session))
         request.session = dict_to_session(session_to_dict(request.session))
-        print(dict(request.session))
+        # print(dict(request.session))
         return render(request, 'front1/dashboard.html', {"today": list(Certificate.objects.filter(date=date.today())), 'len_all': len(list(Certificate.objects.all()))},  )
     else:
         print("Invalid method")
@@ -281,4 +282,5 @@ def history(request):
         return render(request, 'front1/tables.html', {"history": certs})
     else:
         print("Invalid method")
-        
+
+
