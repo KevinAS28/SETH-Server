@@ -48,14 +48,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   String _lastSelected = 'TAB: 0';
 
   void _selectedTab(int index) {
+    print("lastSelected: $_lastSelected");
     setState(() {
       _lastSelected = 'TAB: $index';
+      
     });
   }
 
   void _selectedFab(int index) {
+    print("fab lastSelected: $index");
     setState(() {
       _lastSelected = 'FAB: $index';
+      
     });
   }
 
@@ -279,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         );
       },
       child: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {print('Floating Action Button Pressed');},
         tooltip: 'Info',
         child: Icon(Icons.info),
         elevation: 2.0,

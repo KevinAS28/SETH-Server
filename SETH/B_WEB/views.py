@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, ListView
+from django.http.response import HttpResponse, HttpResponseNotAllowed, JsonResponse
+from django.shortcuts import render
 from django.db.models import Q
-from django.contrib.auth.decorators import user_passes_test, login_required
+from django.contrib.auth.decorators import user_passes_test, login_required as django_login
 from django.contrib.auth.decorators import REDIRECT_FIELD_NAME
 from django.conf import settings
 from django.urls import reverse
+from django.contrib.sessions.backends.db import SessionStore
 
 from SETH.models import *
 
@@ -12,6 +13,12 @@ import os
 import configparser
 import json
 from urllib.parse import quote, unquote
+
+user_id_received = []
+
+def login_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url="/a_web/login"):
+    return django_login(function, redirect_field_name, login_url)
+
 
 def session_to_dict(session):
     to_return = dict()
@@ -21,6 +28,16 @@ def session_to_dict(session):
             to_return[k] = session[k]
         except:
             print('Error 1:', k)
+    return to_return
+
+def dict_to_session(dictionary):
+    to_return = SessionStore()
+    keys = list(dictionary.keys())
+    for k in keys:
+        try:
+            to_return[k] = dictionary[k]
+        except:
+            print('Error 2:', k)
     return to_return
 
 def buser_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='/b_web/login'):
@@ -61,27 +78,45 @@ def history(request):
     else:
         print("Invalid method")
 
-# def auth_result(request)
 
-@login_required
-@buser_required
-def auth_face(request, data=dict()):
-    config = configparser.ConfigParser()
-    config.read(os.path.join(settings.BASE_DIR, 'face_core.ini'))       
-    redirect_url = config['face_core']['auth_face_page_url']
-    data['success_url'] = 'http://127.0.0.1:8000'+reverse('b_web:process_c_registration')#'http://127.0.0.1:8000'+reverse('a_web:regist_c_notregistered')
-    data['send_data_only_url'] = 'http://127.0.0.1:8000'+reverse('a_web:process_c_registration')
-    # data['send_data_only_url']
-    data['session'] = json.dumps(session_to_dict(request.session))
-    print(data)
-    data_quoted = quote(json.dumps(data))
-    redirect_url = f'{redirect_url}?params={data_quoted}'
-    print('redirect_url:', '|'+redirect_url+'|')
-    # return render(request, 'new_window.html', {'url': f'{redirect_url}?params={data_quoted}'})
-    return redirect(redirect_url)
+def receive_qr(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        user_id_received.append(data['username'])
+        return HttpResponse()
+    else:
+        return HttpResponseNotAllowed('Invalid method')
 
-    
-@login_required
-@buser_required
+def auth_face_result(request):
+    if request.method == 'GET':
+        params = json.loads(request.GET['params'])
+        request.session = dict_to_session(json.loads(params['session']))
+        return render(request, 'front2/face_success.html', {'user_id': params['user_id']})
+    else:
+        return HttpResponseNotAllowed('Invalid method')
+
+def check_qr(request):
+    global user_id_received
+    if request.method == 'POST':
+        if len(user_id_received) > 0:
+            user_id = user_id_received[0]
+
+            data = {'redirect': True}
+            config = configparser.ConfigParser()
+            config.read(os.path.join(settings.BASE_DIR, 'face_core.ini'))       
+            redirect_url = config['face_core']['auth_face_page_url']
+            data['user_id'] = user_id
+            data['success_url'] = 'http://127.0.0.1:8000'+reverse('b_web:auth_face_result')#'http://127.0.0.1:8000'+reverse('a_web:regist_c_notregistered')
+            data['session'] = json.dumps(session_to_dict(request.session))
+            data['redirect_url'] = f'{redirect_url}?params={quote(json.dumps(data))}'
+            print(data)
+            del user_id_received[0]
+            return JsonResponse(data)
+        else:
+            return JsonResponse({'redirect': False})
+    else:
+        return HttpResponseNotAllowed('Invalid method')
+
+
 def qr_page(request):
-    return render(request, 'front2/faceRecog.html')
+    return render(request, 'front2/show_qr.html')

@@ -114,32 +114,15 @@ The above copyright notice and this permission notice shall be included in all c
           <div class="card-header card-header-warning">
             <h4 class="card-title">Face Recognition</h4>
           </div>
-          <div class="row" id="face_recognition" >
-            <div class="col-md-12">
-              <div class="card-body">
-                <div class="iframe-container d-none d-lg-block">
-                  <div class="col-md-8 ml-auto mr-auto">
-                    <div class="card card-profile">
-                      <div class="card">
-                      <img src="{% url 'b_web:qr_src' %}" ></img>
-                      </div>
-                   </div>
-                  </div>
-                </div>
-                <div class="col-md-12 d-none d-sm-block d-md-block d-lg-none d-block d-sm-none text-center ml-auto mr-auto">
-                  <h5>Use full screen to enable feature</h5>
-               </div>
-              </div>
-            </div>
-          </div>
+         
 
-          <div class="row" id="success" style='visibility: hidden;'>
+          <div class="row" id="success" >
             <div class="col-md-8 ml-auto mr-auto">
               <div class="card card-profile">
                 <div class="card-body">
-                  <h5 class="card-category text-gray">FACE RECOGNITION</h5>
-                  <h2 class="card-description text-success" id="success-text">SUCCESS</h2>
-                  <a href=".\user.html" class="btn btn-success">Finish</a>
+                  <h2 class="card-category">{{user_id}}</h2>
+                  <h2 class="card-description text-success" id="success-text">Face Authentication SUCCESS</h2>
+                  <h2 class="card-description" id="description">Redirect in 5 seconds...</h2>
                 </div>
               </div>
             </div>
@@ -384,6 +367,10 @@ The above copyright notice and this permission notice shall be included in all c
       // Javascript method's body can be found in assets/js/demos.js
       md.initDashboardPageCharts();
 
+
+      setTimeout(function() {
+                  window.location = "{% url 'b_web:qr_page' %}";
+        },6000);                   
 
       });
   </script>
