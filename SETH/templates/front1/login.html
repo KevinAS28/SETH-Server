@@ -213,7 +213,9 @@
 
 
 <body>
-  <form action="" method="POST">
+  <form action="{% url 'authenticate' %}" method="POST">
+  <input type="hidden" name="login_origin" value="{{login_origin}}" />
+  <input type="hidden" name="next" value="{{next}}" />
   <div class="cont">
     <div class="form sign-in">
       <h2>Sign In</h2>

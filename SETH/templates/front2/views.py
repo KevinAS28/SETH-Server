@@ -215,6 +215,7 @@ def register_c(request):
 def find_user_c(request):
     cert = request.GET["cert"]
     if request.method=="POST":
+        
         form = request.POST
         name_nik = form.get("name_nik")
         data = list(CUser.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 

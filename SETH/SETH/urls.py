@@ -14,10 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth.models import User
 from django.urls import path, include
 from django.urls.conf import re_path
 from django.conf import settings
 from .views import *
+from User import views as UserViews
 from django.views.generic.base import TemplateView 
 from django.shortcuts import redirect
 
@@ -28,7 +30,7 @@ urlpatterns = [
     path('a_web/', include('A_WEB.urls')),
     path('b_web/', include('B_WEB.urls')),
     
-
+    path('authenticate', UserViews.common_user_login, name='authenticate'),
     path('qr_code/', include('qr_code.urls', namespace="qr_code")),
     re_path(r'^staticfiles/(?P<path>.+)/$', static_serve, name="test_frontend"),
 
