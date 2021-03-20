@@ -132,18 +132,41 @@ def register_face(request, data=dict()):
     data['send_data_only_url'] = 'http://127.0.0.1:8000'+reverse('a_web:process_c_registration')
     # data['send_data_only_url']
     data['session'] = json.dumps(session_to_dict(request.session))
+    data['user_id'] = data['nik']
+
     print(data)
     data_quoted = quote(json.dumps(data))
     redirect_url = f'{redirect_url}?params={data_quoted}'
     print('redirect_url:', '|'+redirect_url+'|')
+
+    cuser = CUser.objects.filter(nik=data['nik'])[0]
+    cuser.face_data = True
+    cuser.save()
     # return render(request, 'new_window.html', {'url': f'{redirect_url}?params={data_quoted}'})
     return redirect(redirect_url)
+
+@login_required
+@auser_required
+def find_user_c_any(request):
+    if request.method=="POST":
+        form = request.POST
+        name_nik = form.get("name_nik")
+        data = list(CUser.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 
+        print(data)
+        return render(request, "front1/find_user_c_any.html", {"users": data})
+    elif request.method=="GET":
+        return render(request, "front1/find_user_c_any.html")
+    else:
+        print("invalid method")
 
 @login_required
 @auser_required
 @csrf_exempt
 def register_c(request):
     if (request.method=='POST'):
+        if ('find_user_c' in request.POST):
+            return redirect('a_web:find_user_c_any')
+
         #if (request.POST.is_valid()):
         form = request.POST
 
@@ -200,6 +223,15 @@ def register_c(request):
                 to_get = "nik email name phone bday address city country postalcode".split()
                 for col in to_get:
                     data_return[col] = params[col]
+        if 'nik' in request.GET:
+            print('auto fill GET')
+            cuser = list(CUser.objects.filter(nik=request.GET['nik']))[0].__dict__
+            to_get = "nik email name phone bday address city country postalcode".split()
+            for col in to_get:
+                data_return[col] = cuser[col]
+            
+
+
         else:
             print('not auto fill')
             print(list(request.session.keys()))
@@ -212,7 +244,7 @@ def register_c(request):
 
 @login_required
 @auser_required
-def find_user_c(request):
+def find_user_c_cert(request):
     cert = request.GET["cert"]
     if request.method=="POST":
         form = request.POST

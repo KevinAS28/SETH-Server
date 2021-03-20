@@ -119,9 +119,12 @@ def receive_qr(request):
 def auth_face_result(request):
     if request.method == 'GET':
         params = json.loads(request.GET['params'])
+        if not 'result_msg' in params:
+            params['result_msg'] = 'Face Authentication SUCCESS'
+
         request.session = dict_to_session(json.loads(params['session']))
         cuser = list(CUser.objects.filter(nik=params['user_id']))[0]
-        return render(request, 'front2/face_success.html', {'user_id': params['user_id'], 'name': cuser.name})
+        return render(request, 'front2/face_result.html', {'user_id': params['user_id'], 'name': cuser.name, 'result_msg': params['result_msg']})
     else:
         return HttpResponseNotAllowed('Invalid method')
 
@@ -131,10 +134,17 @@ def check_qr(request):
     if request.method == 'POST':
         if len(user_id_received) > 0:
             user_id = user_id_received[0]
+            del user_id_received[0]
+
+            cuser = list(CUser.objects.filter(nik=user_id))[0]
+            if not cuser.face_data:
+                params = {'session': json.dumps(session_to_dict(request.session)), 'user_id': user_id, 'result_msg': 'Face not Registered Yet'}
+                return JsonResponse({'redirect': True, 'redirect_url': f'/b_web/auth_face_result?params={quote(json.dumps(params))}'})
+
 
             data = face_auth_data(request, user_id)
             print(data)
-            del user_id_received[0]
+
             return JsonResponse(data)
         else:
             return JsonResponse({'redirect': False})

@@ -36,8 +36,8 @@ class CUser(models.Model):
     country = models.CharField(max_length=50, blank=False)
     postalcode = models.CharField(max_length=50, blank=False)
     password = models.CharField(max_length=50, blank=False, default='12345')
-    face_data = models.CharField(max_length=25, blank=True, null=True)
-    fingerprint = models.CharField(max_length=25, blank=True, null=True)
+    face_data = models.BooleanField(blank=False, default=False)
+    fingerprint = models.BooleanField(blank=False, default=False)
 
 
 class APlace(models.Model):
