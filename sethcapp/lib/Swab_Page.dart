@@ -1,8 +1,8 @@
 import 'package:sethcapp/constant.dart';
-import 'package:sethcapp/search_rs.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sethcapp/info_rs.dart';
 
 class Swab_Page extends StatefulWidget {
   @override
@@ -52,36 +52,6 @@ class _Swab_PageState extends State<Swab_Page> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  /*
-                  Text(
-                    "Jenis Sertifikat",
-                    style: kTitleTextstyle,
-                  ),
-                  SizedBox(height: 20),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                   */
-                  /*
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        SymptomCard(
-                          image: "assets/images/headache.png",
-                          title: "PCR",
-                          isActive: true,
-                        ),
-                        SymptomCard(
-                          image: "assets/images/caugh.png",
-                          title: "Swab",
-                        ),
-                        SymptomCard(
-                          image: "assets/images/fever.png",
-                          title: "Rapid",
-                        ),
-                      ],
-                    ),
-                  ),
-                  */
                   Text("What is Swab test?", style: kTitleTextstyle),
                   InfoCard(
                     text:
@@ -113,7 +83,7 @@ class _Swab_PageState extends State<Swab_Page> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return search_rs();
+                            return info_rs();
                           },
                         ),
                       );
@@ -283,11 +253,9 @@ class PreventCard extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {},
-                          ),
-                        );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => new info_rs()));
                       },
                       child: SvgPicture.asset(""),
                     ),

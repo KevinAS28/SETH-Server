@@ -1,5 +1,5 @@
 import 'package:sethcapp/constant.dart';
-import 'package:sethcapp/search_rs.dart';
+import 'package:sethcapp/info_rs.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -113,7 +113,7 @@ class _PCR_PageState extends State<PCR_Page> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return search_rs();
+                            return info_rs();
                           },
                         ),
                       );
@@ -285,7 +285,7 @@ class PreventCard extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => new search_rs()));
+                                builder: (context) => new info_rs()));
                       },
                       child: SvgPicture.asset(""),
                     ),

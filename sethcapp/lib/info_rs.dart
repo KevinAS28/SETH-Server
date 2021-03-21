@@ -1,15 +1,16 @@
-import 'package:sethcapp/cert_template.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sethcapp/pages/dashboard.dart';
 import 'package:sethcapp/cert_made.dart';
 import 'package:sethcapp/qr_code.dart';
 import 'package:sethcapp/pages/place.dart';
 import 'package:sethcapp/info_screen.dart';
 import 'package:sethcapp/history_pass.dart';
+import 'package:dio/dio.dart';
+import 'package:sethcapp/user_model.dart';
 
 class info_rs extends StatefulWidget {
   @override
@@ -78,6 +79,82 @@ class _info_rsState extends State<info_rs> {
     });
   }
 
+  Future<List<UserModel>> getData(filter) async {
+    var response = await Dio().get(
+      "http://5d85ccfb1e61af001471bf60.mockapi.io/user",
+      queryParameters: {"filter": filter},
+    );
+
+    var models = UserModel.fromJsonList(response.data);
+    return models;
+  }
+
+  Widget _customDropDownExample(
+      BuildContext context, UserModel item, String itemDesignation) {
+    return Container(
+      child: (item?.avatar == null)
+          ? ListTile(
+              contentPadding: EdgeInsets.all(0),
+              leading: CircleAvatar(),
+              title: Text("No item selected"),
+            )
+          : ListTile(
+              contentPadding: EdgeInsets.all(0),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(item.avatar),
+              ),
+              title: Text(item.name),
+              subtitle: Text(
+                item.createdAt.toString(),
+              ),
+            ),
+    );
+  }
+
+  Widget _customPopupItemBuilderExample2(
+      BuildContext context, UserModel item, bool isSelected) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 8),
+      decoration: !isSelected
+          ? null
+          : BoxDecoration(
+              border: Border.all(color: Theme.of(context).primaryColor),
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.white,
+            ),
+      child: ListTile(
+        selected: isSelected,
+        title: Text(item.name),
+        subtitle: Text(item.createdAt.toString()),
+        leading: CircleAvatar(
+          backgroundImage: NetworkImage(item.avatar),
+        ),
+      ),
+    );
+  }
+
+  Widget _customPopupItemBuilderExample(
+      BuildContext context, UserModel item, bool isSelected) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 8),
+      decoration: !isSelected
+          ? null
+          : BoxDecoration(
+              border: Border.all(color: Theme.of(context).primaryColor),
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.white,
+            ),
+      child: ListTile(
+        selected: isSelected,
+        title: Text(item.name),
+        subtitle: Text(item.createdAt.toString()),
+        leading: CircleAvatar(
+          backgroundImage: NetworkImage(item.avatar),
+        ),
+      ),
+    );
+  }
+
   Center LayoutRS(List<Map> RSData, Function detailRS) {
     return new Center(
         child: ListView.builder(
@@ -108,6 +185,43 @@ class _info_rsState extends State<info_rs> {
 
   @override
   Widget build(BuildContext context) {
+    var listItems = <Widget>[
+      SizedBox(height: 20),
+      Text("Result", style: kTitleTextstyle),
+    ];
+    var text = [
+      'PCR/Rapid/Swab test available',
+      'PCR/Rapid/Swab test available',
+      'PCR/Swab test available',
+      'PCR test available',
+      'Rapid test available',
+      'Swab test available',
+      'PCR/Rapid test available',
+      'Rapid/Swab/PCR test available',
+      'Swab/PCR test available',
+      'PCR/Rapid test available',
+    ];
+
+    var title = [
+      'RS Cilandak',
+      'RS Fatmawati',
+      'Puskesmas Pondok Indah',
+      'RSUD Pasar Minggu',
+      'RS Pondok Indah',
+      'RS Fatmawati',
+      'Puskesmas Pondok Indah',
+      'RSUD Pasar Minggu',
+      'Puskesmas Pondok Indah',
+      'RSUD Pasar Minggu',
+    ];
+    for (var i = 0; i < 10; i++) {
+      listItems.add(PreventCard(
+        text: text[i],
+        image: "assets/images/place.png",
+        title: title[i],
+      ));
+      listItems.add(SizedBox(height: 20));
+    }
     return Scaffold(
       body: SingleChildScrollView(
         controller: controller,
@@ -136,24 +250,30 @@ class _info_rsState extends State<info_rs> {
                 children: <Widget>[
                   SizedBox(width: 20),
                   Expanded(
-                    child: DropdownButton(
-                      isExpanded: true,
-                      underline: SizedBox(),
-                      icon: SvgPicture.asset("assets/icons/search.svg"),
-                      value: "Search hospital",
-                      items: [
-                        'Search hospital',
-                        'Yogyakarta',
-                        'DKI Jakarta',
-                        'Banten',
-                        'Listprovinsi'
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      onChanged: (value) {},
+                    child: DropdownSearch<UserModel>(
+                      searchBoxController: TextEditingController(text: 'Mrs'),
+                      mode: Mode.BOTTOM_SHEET,
+                      isFilteredOnline: true,
+                      showClearButton: true,
+                      showSearchBox: true,
+                      label: 'User *',
+                      dropdownSearchDecoration: InputDecoration(
+                        filled: true,
+                        fillColor:
+                            Theme.of(context).inputDecorationTheme.fillColor,
+                      ),
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (UserModel u) =>
+                          u == null ? "user field is required " : null,
+                      onFind: (String filter) {
+                        print("Filter2: $filter");
+                        return getData(filter);
+                      },
+                      onChanged: (UserModel data) {
+                        print(data);
+                      },
+                      dropdownBuilder: _customDropDownExample,
+                      popupItemBuilder: _customPopupItemBuilderExample,
                     ),
                   ),
                 ],
@@ -162,57 +282,9 @@ class _info_rsState extends State<info_rs> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(height: 20),
-                  //Text("Result", style: kTitleTextstyle),
-                  PreventCard(
-                    text: "PCR / Rapid / Swab tests available",
-                    image: "assets/images/place.png",
-                    title: "RS Cilandak",
-                  ),
-                  SizedBox(height: 20),
-                  Text("Recommended hospitals", style: kTitleTextstyle),
-                  PreventCard(
-                    text: "PCR / Rapid / Swab tests available",
-                    image: "assets/images/place.png",
-                    title: "RS Fatmawati",
-                  ),
-                  PreventCard(
-                    text: "PCR " + "/ Swab tests available",
-                    image: "assets/images/place.png",
-                    title: "Puskesmas Pondok Indah",
-                  ),
-                  PreventCard(
-                    text: "PCR test available",
-                    image: "assets/images/place.png",
-                    title: "RSUD Pasar Minggu",
-                  ),
-                  Text("Maps View", style: kTitleTextstyle),
-                  SizedBox(height: 20),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return cert_template();
-                          },
-                        ),
-                      );
-                    },
-                    child: Text(
-                      "See Maps",
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 120),
-                ],
-              ),
-            )
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: listItems),
+            ),
           ],
         ),
       ),
@@ -306,52 +378,6 @@ class PreventCard extends StatelessWidget {
     );
   }
 }
-
-/*
-class SymptomCard extends StatelessWidget {
-  final String image;
-  final String title;
-  final bool isActive;
-  const SymptomCard({
-    Key key,
-    this.image,
-    this.title,
-    this.isActive = false,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
-        boxShadow: [
-          isActive
-              ? BoxShadow(
-            offset: Offset(0, 10),
-            blurRadius: 20,
-            color: kActiveShadowColor,
-          )
-              : BoxShadow(
-            offset: Offset(0, 3),
-            blurRadius: 6,
-            color: kShadowColor,
-          ),
-        ],
-      ),
-      child: Column(
-        children: <Widget>[
-          Image.asset(image, height: 90),
-          Text(
-            title,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
-    );
-  }
-}
-*/
 
 class MapsCard extends StatelessWidget {
   final String image;

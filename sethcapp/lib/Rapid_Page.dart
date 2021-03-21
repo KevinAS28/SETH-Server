@@ -1,5 +1,5 @@
 import 'package:sethcapp/constant.dart';
-import 'package:sethcapp/info_screen.dart';
+import 'package:sethcapp/info_rs.dart';
 import 'package:sethcapp/search_rs.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +36,45 @@ class _Rapid_PageState extends State<Rapid_Page> {
 
   @override
   Widget build(BuildContext context) {
+    var listItems = <Widget>[
+      SizedBox(height: 20),
+      Text("Result", style: kTitleTextstyle),
+    ];
+    var text = [
+      "1.2 kilometers from you",
+      "1.8 kilometers from you",
+      "2 kilometers from you",
+      "2.2 kilometers from you",
+      "2.7 kilometers from you",
+      "3 kilometers from you",
+      "3.2 kilometers from you",
+      "3.6 kilometers from you",
+      "7.8 kilometers from you",
+      "6.6 kilometers from you",
+      "9.3 kilometers from you",
+      "4.5 kilometers from you",
+    ];
+
+    var title = [
+      'RS Pondok Indah',
+      'RS Fatmawati',
+      'RSUD Pasar Minggu',
+      'RS Pondok Indah',
+      'RS Fatmawati',
+      'RSUD Pasar Minggu',
+      'RS Pondok Indah',
+      'RS Fatmawati',
+      'RSUD Pasar Minggu',
+      'RS Pondok Indah',
+    ];
+    for (var i = 0; i < 10; i++) {
+      listItems.add(PreventCard(
+        text: text[i],
+        image: "assets/images/place.png",
+        title: title[i],
+      ));
+      listItems.add(SizedBox(height: 20));
+    }
     return Scaffold(
       body: SingleChildScrollView(
         controller: controller,
@@ -53,36 +92,6 @@ class _Rapid_PageState extends State<Rapid_Page> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  /*
-                  Text(
-                    "Jenis Sertifikat",
-                    style: kTitleTextstyle,
-                  ),
-                  SizedBox(height: 20),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                   */
-                  /*
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        SymptomCard(
-                          image: "assets/images/headache.png",
-                          title: "PCR",
-                          isActive: true,
-                        ),
-                        SymptomCard(
-                          image: "assets/images/caugh.png",
-                          title: "Swab",
-                        ),
-                        SymptomCard(
-                          image: "assets/images/fever.png",
-                          title: "Rapid",
-                        ),
-                      ],
-                    ),
-                  ),
-                  */
                   Text("What is Rapid test?", style: kTitleTextstyle),
                   InfoCard(
                     text:
@@ -90,50 +99,33 @@ class _Rapid_PageState extends State<Rapid_Page> {
                     image: "assets/images/pcr.png",
                     title: "",
                   ),
-                  SizedBox(height: 20),
-                  Text("Recommended hospitals for you", style: kTitleTextstyle),
-                  SizedBox(height: 20),
-                  PreventCard(
-                    text: "1.2 kilometers from you",
-                    image: "assets/images/place.png",
-                    title: "RS Pondok Indah",
-                  ),
-                  PreventCard(
-                    text: "1.8 kilometers from you",
-                    image: "assets/images/place.png",
-                    title: "RS Fatmawati",
-                  ),
-                  PreventCard(
-                    text: "2 kilometers from you",
-                    image: "assets/images/place.png",
-                    title: "RSUD Pasar Minggu",
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return search_rs();
-                          },
-                        ),
-                      );
-                    },
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: Text(
-                        "See all >>",
-                        style: TextStyle(
-                          color: kPrimaryColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 30),
                 ],
               ),
+              // child: Column(children: listItems),
             ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return info_rs();
+                    },
+                  ),
+                );
+              },
+              child: Align(
+                alignment: Alignment.topRight,
+                child: Text(
+                  "See all >>",
+                  style: TextStyle(
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 30),
           ],
         ),
       ),
@@ -284,11 +276,9 @@ class PreventCard extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {},
-                          ),
-                        );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => new info_rs()));
                       },
                       child: SvgPicture.asset(""),
                     ),

@@ -19,6 +19,8 @@ class history_pass extends StatefulWidget {
 class _history_passState extends State<history_pass> {
   String _lastSelected = 'TAB: 0';
 
+  var subtitle;
+
   void _selectedTab(int index) {
     if (index == 0) {
       Navigator.push(context,
@@ -81,6 +83,87 @@ class _history_passState extends State<history_pass> {
 
   @override
   Widget build(BuildContext context) {
+    var listItems = <Widget>[
+      SizedBox(height: 20),
+      Text("Result", style: kTitleTextstyle),
+    ];
+    var text = [
+      'Pass Date: 26-02-2020',
+      'Pass Date: 27-02-2020',
+      'Pass Date: 28-02-2020',
+      'Pass Date: 01-03-2020',
+      'Pass Date: 02-03-2020',
+      'Pass Date: 03-03-2020',
+      'Pass Date: 04-03-2020',
+      'Pass Date: 05-03-2020',
+      'Pass Date: 06-03-2020',
+      'Pass Date: 07-03-2020',
+      'Pass Date: 08-03-2020',
+      'Pass Date: 09-03-2020',
+    ];
+
+    var title = [
+      'Pondok Indah Mall',
+      'Rempah Asia',
+      'Soekarno Hatta Airport',
+      'Mall Grand Indonesia',
+      'PCR4',
+      'PCR5',
+      'PCR6',
+      'PCR',
+      'PCR',
+      'PCR'
+    ];
+
+    var subtitle = [
+      'Test Type : PCR',
+      'Test Type : PCR',
+      'Test Type : Swab',
+      'Test Type : Rapid',
+      'Test Type : PCR',
+      'Test Type : Swab',
+      'Test Type : Rapid',
+      'Test Type : Swab',
+      'Test Type : Rapid',
+      'Test Type : PCR',
+    ];
+
+    var image = [
+      "assets/images/place.png",
+      "assets/images/food.png",
+      "assets/images/airport.png",
+      "assets/images/place.png",
+      "assets/images/place.png",
+      "assets/images/place.png",
+      "assets/images/place.png",
+      "assets/images/place.png",
+      "assets/images/place.png",
+      "assets/images/place.png",
+    ];
+
+    var id = [
+      'ID Certificate : 12345678',
+      'ID Certificate : 23456781',
+      'ID Certificate : 12567852',
+      'ID Certificate : 12756782',
+      'ID Certificate : 12223678',
+      'ID Certificate : 23645678',
+      'ID Certificate : 62354978',
+      'ID Certificate : 78232948',
+      'ID Certificate : 47432978',
+      'ID Certificate : 63685678',
+    ];
+
+    for (var i = 0; i < 10; i++) {
+      listItems.add(PreventCard(
+        text: text[i],
+        subtitle: subtitle[i],
+        image: image[i],
+        title: title[i],
+        id: id[i],
+      ));
+      listItems.add(SizedBox(height: 20));
+    }
     return Scaffold(
       body: SingleChildScrollView(
         controller: controller,
@@ -96,9 +179,9 @@ class _history_passState extends State<history_pass> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  /*
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: listItems),
+              /*
                   Text(
                     "Jenis Sertifikat",
                     style: kTitleTextstyle,
@@ -107,7 +190,7 @@ class _history_passState extends State<history_pass> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                    */
-                  /*
+              /*
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -127,7 +210,7 @@ class _history_passState extends State<history_pass> {
                       ],
                     ),
                   ),
-                  */
+                  
                   PreventCard(
                     text: "Pass Date: 26-02-2020" +
                         "\n" +
@@ -149,6 +232,7 @@ class _history_passState extends State<history_pass> {
                   SizedBox(height: 50),
                 ],
               ),
+            */
             )
           ],
         ),
@@ -173,11 +257,15 @@ class PreventCard extends StatelessWidget {
   final String image;
   final String title;
   final String text;
+  final String subtitle;
+  final String id;
   const PreventCard({
     Key key,
     this.image,
     this.title,
     this.text,
+    this.subtitle,
+    this.id,
   }) : super(key: key);
 
   @override
@@ -224,6 +312,26 @@ class PreventCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         text,
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        subtitle,
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        id,
                         maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
