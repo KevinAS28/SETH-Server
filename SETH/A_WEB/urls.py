@@ -11,7 +11,7 @@ urlpatterns = [
     path('', dashboard, name='dashboard'), 
     path('dashboard/', dashboard, name='dashboard'), 
     path('history/', history, name='history'), 
-    path('makecert/', TemplateView.as_view(template_name='front1/makecert.html'), name='makecert'), 
+    path('makecert/', choose_cert, name='makecert'), 
     path('find_user_c', find_user_c_cert, name='find_user_c'), 
     path('find_user_c_any', find_user_c_any, name='find_user_c_any'), 
     path('makecertun/', make_cert, name='makecertun'),

@@ -47,7 +47,7 @@ def dict_to_session(dictionary):
     return to_return
 
 def test_frontend(request, file):
-    return render(request, os.path.join("front1", file+".html"))
+    return render(request, os.path.join("front1", file+".html"), {'aplace_name': settings.A_PLACE_NAME})
 
 def auser_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='/a_web/login'):
     '''
@@ -83,7 +83,7 @@ def process_c_registration(request):
         else:
             request.session['register_score'] += 1
 
-        return render(request, 'redirect.html', {'url': reverse('a_web:regist_c_notregistered')})
+        return render(request, 'redirect.html', {'url': reverse('a_web:regist_c_notregistered'), 'aplace_name': settings.A_PLACE_NAME})
 
     elif request.method == 'POST':
         print('POST process_c_registration')
@@ -155,9 +155,9 @@ def find_user_c_any(request):
         name_nik = form.get("name_nik")
         data = list(CUser.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 
         print(data)
-        return render(request, "front1/find_user_c_any.html", {"users": data})
+        return render(request, "front1/find_user_c_any.html", {"users": data, 'aplace_name': settings.A_PLACE_NAME})
     elif request.method=="GET":
-        return render(request, "front1/find_user_c_any.html")
+        return render(request, "front1/find_user_c_any.html", {'aplace_name': settings.A_PLACE_NAME})
     else:
         print("invalid method")
 
@@ -211,7 +211,7 @@ def register_c(request):
         messages.success(request, f' Data {data["name"]} sucessfully registered !!') 
         request.session['params'] = json.dumps(params)
         request.session['register_score'] = 0
-        return render(request, 'redirect.html', {'url': 'http://127.0.0.1:8000/a_web/not_registered'})        
+        return render(request, 'redirect.html', {'url': 'http://127.0.0.1:8000/a_web/not_registered', 'aplace_name': settings.A_PLACE_NAME})        
         
 
     elif request.method=='GET':
@@ -250,6 +250,8 @@ def register_c(request):
             print(list(request.session.keys()))
         print('data_return:', data_return)
 
+        data_return['aplace_name'] = settings.A_PLACE_NAME
+
         return render(request, "front1/user.html", data_return)
     else:
         print("invalid method")
@@ -264,11 +266,16 @@ def find_user_c_cert(request):
         name_nik = form.get("name_nik")
         data = list(CUser.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 
         print(data)
-        return render(request, "front1/find_user_c.html", {"users": data, "cert": cert})
+        return render(request, "front1/find_user_c.html", {"users": data, "cert": cert, 'aplace_name': settings.A_PLACE_NAME})
     elif request.method=="GET":
-        return render(request, "front1/find_user_c.html")
+        return render(request, "front1/find_user_c.html", {'aplace_name': settings.A_PLACE_NAME})
     else:
         print("invalid method")
+
+@login_required
+@auser_required
+def choose_cert(request):
+    return render(request, 'front1/makecert.html', {'aplace_name': settings.A_PLACE_NAME})
 
 @login_required
 @auser_required
@@ -288,7 +295,7 @@ def make_cert(request):
         return redirect("a_web:makecert")
     elif request.method=="GET":
         user = list(CUser.objects.filter(nik=nik))[0]
-        return render(request, "front1/template_cert1.html", {"user": user})
+        return render(request, "front1/template_cert1.html", {"user": user, 'aplace_name': settings.A_PLACE_NAME})
     else:
         print("invalid method")
 
@@ -306,7 +313,7 @@ def dashboard(request):
         # print(dir(request.session))
         request.session = dict_to_session(session_to_dict(request.session))
         # print(dict(request.session))
-        return render(request, 'front1/dashboard.html', {"today": list(Certificate.objects.filter(date=date.today())), 'len_all': len(list(Certificate.objects.all()))},  )
+        return render(request, 'front1/dashboard.html', {"today": list(Certificate.objects.filter(date=date.today())), 'len_all': len(list(Certificate.objects.all())), 'aplace_name': settings.A_PLACE_NAME},  )
     else:
         print("Invalid method")
 
@@ -314,7 +321,7 @@ def dashboard(request):
 @auser_required
 def history(request):
     if request.method=="GET":
-        return render(request, 'front1/tables.html', {"history": list(Certificate.objects.all().order_by("-date"))})
+        return render(request, 'front1/tables.html', {"history": list(Certificate.objects.all().order_by("-date")), 'aplace_name': settings.A_PLACE_NAME})
     elif request.method=="POST":
         form = request.POST
         name_nik = form.get("name_nik")
@@ -323,7 +330,7 @@ def history(request):
         for u in users:
             certs += (list(Certificate.objects.filter(cuser=u)))
 
-        return render(request, 'front1/tables.html', {"history": certs})
+        return render(request, 'front1/tables.html', {"history": certs, 'aplace_name': settings.A_PLACE_NAME})
     else:
         print("Invalid method")
 

@@ -62,20 +62,20 @@ def buser_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login
 # @login_required
 @buser_required
 def registration(request):
-    return render(request, 'registration.html')
+    return render(request, 'registration.html', {'bplace_name': settings.B_PLACE_NAME})
 
 @login_required
 @buser_required
 def history(request):
     if request.method=="GET":
         passed = (History.objects.filter(b_place__name__contains=settings.B_PLACE_NAME, )) 
-        return render(request, 'front2/history.html', {"history": passed.order_by("-datetime")})
+        return render(request, 'front2/history.html', {"history": passed.order_by("-datetime"), 'bplace_name': settings.B_PLACE_NAME})
     elif request.method=="POST":
         form = request.POST
         name_nik = form.get("name_nik")
-        passed = list(History.objects.filter(b_place__name__contains=settings.B_PLACE_NAME, cuser__nik__contains=name_nik)) 
+        passed = list(History.objects.filter(b_place__name__contains=settings.B_PLACE_NAME, cuser__name__contains=name_nik)) 
 
-        return render(request, 'front2/history.html', {"history": passed})
+        return render(request, 'front2/history.html', {"history": passed, 'bplace_name': settings.B_PLACE_NAME})
     else:
         print("Invalid method")
 
@@ -99,9 +99,9 @@ def find_user_c(request):
         name_nik = form.get("name_nik")
         data = list(CUser.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 
         print(data)
-        return render(request, "front2/find_user_c.html", {"users": data})
+        return render(request, "front2/find_user_c.html", {"users": data, 'bplace_name': settings.B_PLACE_NAME})
     elif request.method=="GET":
-        return render(request, "front2/find_user_c.html")
+        return render(request, "front2/find_user_c.html", {'bplace_name': settings.B_PLACE_NAME})
     else:
         print("invalid method")
 
@@ -127,7 +127,7 @@ def auth_face_result(request):
             pass
 
         
-        return render(request, 'front2/face_success.html', {'user_id': params['user_id'], 'name': name, 'result_msg': params['result_msg']})
+        return render(request, 'front2/face_success.html', {'user_id': params['user_id'], 'name': name, 'result_msg': params['result_msg'], 'bplace_name': settings.B_PLACE_NAME})
     else:
         return HttpResponseNotAllowed('Invalid method')
 
@@ -201,4 +201,4 @@ def check_qr(request):
 
 
 def qr_page(request):
-    return render(request, 'front2/show_qr.html')
+    return render(request, 'front2/show_qr.html', {'bplace_name': settings.B_PLACE_NAME})
