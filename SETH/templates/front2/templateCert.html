@@ -67,13 +67,19 @@ The above copyright notice and this permission notice shall be included in all c
     <!-- SIDEBAR -->
     <div class="sidebar-wrapper">
       <ul class="nav">
-        <li class="nav-item ">
+        <li class="nav-item  ">
           <a class="nav-link" href="./dashboard.html">
             <i class="material-icons">dashboard</i>
             <p>Scan</p>
           </a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item ">
+          <a class="nav-link" href="./show_qr.html">
+            <i class="material-icons">contact_page</i>
+            <p>Verification</p>
+          </a>
+        </li>
+        <li class="nav-item active ">
           <a class="nav-link" href="./searchCert.html">
             <i class="material-icons">content_paste</i>
             <p>History</p>
@@ -111,7 +117,7 @@ The above copyright notice and this permission notice shall be included in all c
                   <a class="dropdown-item" href="#">Profile</a>
                   <div class="dropdown-divider"></div>
                   -->
-                  <a class="dropdown-item" href=".\login.html">Log out</a>
+                  <a class="dropdown-item" href="{% url 'b_web:buser_logout'  %}">Log out</a>
                 </div>
               </li>
             </ul>

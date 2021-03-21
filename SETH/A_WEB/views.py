@@ -1,6 +1,7 @@
 # Create your views here.
 
 
+from django.contrib.auth.models import User
 from SETH.models import *
 import os
 
@@ -17,6 +18,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import REDIRECT_FIELD_NAME
 from django.contrib.sessions.backends.db import SessionStore
 from django.views.decorators.csrf import csrf_exempt
+from django.db.utils import IntegrityError
 
 
 import configparser
@@ -71,8 +73,10 @@ def process_c_registration(request):
     if request.method == 'GET':
         print('GET process_c_registration')
         print(request.GET)
+
         request.session = dict_to_session(json.loads(json.loads(request.GET['params'])['session']))
         request.session['params'] = request.GET['params']
+        # params = json.loads(request.GET['params'])
 
         if not ('register_score' in request.session):
             request.session['register_score'] = 1
@@ -139,9 +143,7 @@ def register_face(request, data=dict()):
     redirect_url = f'{redirect_url}?params={data_quoted}'
     print('redirect_url:', '|'+redirect_url+'|')
 
-    cuser = CUser.objects.filter(nik=data['nik'])[0]
-    cuser.face_data = True
-    cuser.save()
+
     # return render(request, 'new_window.html', {'url': f'{redirect_url}?params={data_quoted}'})
     return redirect(redirect_url)
 
@@ -175,6 +177,17 @@ def register_c(request):
         for col in to_get:
             data[col] = form.get(col)
         
+        if 'finish' in form:
+            print(f'Saving data {data["name"]}...')
+            cuser = CUser(**data, face_data=True)
+            cuser.save()
+            print('Saved')
+
+            try:
+                UserAuthentication(username=data['nik'], password=data['phone'], usertype=UserAuthentication.C_TYPE, cuser=cuser).save()
+            except IntegrityError:
+                print(f'Username {data["nik"]} already exist, skipping')
+
 
         action_list = ['face_recog']#['fingerprint', 'face_recog', 'idcard']
 
@@ -187,7 +200,7 @@ def register_c(request):
                 print('Action:', al)
                 return actions[al](request, data)
         
-        CUser(**data).save()
+
         to_get = "nik email name phone bday address city country postalcode".split()
         params = json.loads(request.session['params'])
         for col in to_get:

@@ -13,8 +13,11 @@ import os
 import configparser
 import json
 from urllib.parse import quote, unquote
+import traceback
 
 user_id_received = []
+cert_not_supported = []
+failed_msg = []
 
 def login_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url="/b_web/login"):
     return django_login(function, redirect_field_name, login_url)
@@ -65,16 +68,14 @@ def registration(request):
 @buser_required
 def history(request):
     if request.method=="GET":
-        return render(request, 'front2/searchCert.html', {"history": list(Certificate.objects.all().order_by("-date"))})
+        passed = (History.objects.filter(b_place__name__contains=settings.B_PLACE_NAME, )) 
+        return render(request, 'front2/history.html', {"history": passed.order_by("-datetime")})
     elif request.method=="POST":
         form = request.POST
         name_nik = form.get("name_nik")
-        users = list(CUser.objects.filter(Q(name__iregex=rf".*{name_nik}.*")|Q(nik__iregex=rf".*{name_nik}.*"))) 
-        certs = []
-        for u in users:
-            certs += (list(Certificate.objects.filter(cuser=u)))
+        passed = list(History.objects.filter(b_place__name__contains=settings.B_PLACE_NAME, cuser__nik__contains=name_nik)) 
 
-        return render(request, 'front2/searchCert.html', {"history": certs})
+        return render(request, 'front2/history.html', {"history": passed})
     else:
         print("Invalid method")
 
@@ -104,33 +105,73 @@ def find_user_c(request):
     else:
         print("invalid method")
 
-
-def receive_qr(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        user_id_received.append(data['user_id'])
-        return HttpResponse()
-    elif request.method == 'GET':
-        data = face_auth_data(request, request.GET['user_id'])
-        return redirect(data['redirect_url'])
-    else:
-        return HttpResponseNotAllowed('Invalid method')
-
 def auth_face_result(request):
+    global failed_msg
     if request.method == 'GET':
         params = json.loads(request.GET['params'])
         if not 'result_msg' in params:
             params['result_msg'] = 'Face Authentication SUCCESS'
 
         request.session = dict_to_session(json.loads(params['session']))
-        cuser = list(CUser.objects.filter(nik=params['user_id']))[0]
-        return render(request, 'front2/face_result.html', {'user_id': params['user_id'], 'name': cuser.name, 'result_msg': params['result_msg']})
+
+        name = 'Unknown'
+
+        try:
+            b_place = list(BPlace.objects.filter(name=settings.B_PLACE_NAME))[0]
+            cuser = list(CUser.objects.filter(nik=params['user_id']))[0]
+            name = cuser.name
+            History(cuser=cuser, passed=True, b_place=b_place).save()
+            print('History saved')
+        except:
+            # params['result_msg'] = failed_msg[0]
+            pass
+
+        
+        return render(request, 'front2/face_success.html', {'user_id': params['user_id'], 'name': name, 'result_msg': params['result_msg']})
     else:
         return HttpResponseNotAllowed('Invalid method')
 
+def receive_qr(request):
+    global user_id_received, cert_not_supported, failed_msg
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        user_id = data['user_id']
+
+    
+        try:
+            cuser = list(CUser.objects.filter(nik=user_id))[0]
+            certs = Certificate.objects.filter(cuser=cuser)
+            b_place = BPlace.objects.filter(name=settings.B_PLACE_NAME)
+            for c_cert in certs:
+                for b in b_place:
+                    cmp = b.supported_certs == c_cert.cert_type
+                    print(f'{b.supported_certs} == {c_cert.cert_type}: {cmp}')
+                    if cmp:
+                        user_id_received.append(user_id)
+                        return HttpResponse()
+
+        except Exception as e:
+            print(traceback.format_exc())
+            print('User not registered yet')
+            cert_not_supported.append(user_id)
+            failed_msg.append('User not registered yet')
+            return HttpResponse('No cert supported')
+
+
+        
+        print('No cert supported')
+        cert_not_supported.append(user_id)
+        failed_msg.append('No cert supported')
+        return HttpResponse('No cert supported')
+
+    elif request.method == 'GET':
+        data = face_auth_data(request, request.GET['user_id'])
+        return redirect(data['redirect_url'])
+    else:
+        return HttpResponseNotAllowed('Invalid method')
 
 def check_qr(request):
-    global user_id_received
+    global user_id_received, cert_not_supported, failed_msg
     if request.method == 'POST':
         if len(user_id_received) > 0:
             user_id = user_id_received[0]
@@ -146,6 +187,13 @@ def check_qr(request):
             print(data)
 
             return JsonResponse(data)
+        elif len(cert_not_supported) > 0:
+            user_id = cert_not_supported[0]
+            params = {'session': json.dumps(session_to_dict(request.session)), 'user_id': user_id, 'result_msg': failed_msg[0]}
+            del cert_not_supported[0]
+            del failed_msg[0]
+            return JsonResponse({'redirect': True, 'redirect_url': f'/b_web/auth_face_result?params={quote(json.dumps(params))}'})            
+            
         else:
             return JsonResponse({'redirect': False})
     else:

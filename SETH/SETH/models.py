@@ -56,7 +56,7 @@ class Certificate(models.Model):
 
 class BPlace(models.Model):
     name = models.CharField(max_length=50, blank=False)
-    supported_certs = models.ForeignKey(Certificate, on_delete=models.CASCADE)
+    supported_certs = models.CharField(max_length=50, blank=False, default='Genose')
     
 
 class AUser(models.Model):
@@ -71,10 +71,10 @@ class BUser(models.Model):
     
 
 class History(models.Model):
-    cert = models.ForeignKey(Certificate, on_delete=models.CASCADE)
+    cuser = models.ForeignKey(CUser, on_delete=models.CASCADE)
     datetime = models.DateTimeField(default=datetime.now, blank=True, null=True)
     passed = models.BooleanField(default=False)
-
+    b_place = models.ForeignKey(BPlace, on_delete=models.CASCADE, blank=True, null=True)
 
 
 

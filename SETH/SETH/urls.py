@@ -29,6 +29,7 @@ urlpatterns = [
     path('', lambda r:  redirect('a_web:dashboard'), name='home'), # new
     path('a_web/', include('A_WEB.urls')),
     path('b_web/', include('B_WEB.urls')),
+    path('c_api/', include('C_API.urls')),
     
     path('authenticate', UserViews.common_user_login, name='authenticate'),
     path('qr_code/', include('qr_code.urls', namespace="qr_code")),

@@ -37,44 +37,38 @@ The above copyright notice and this permission notice shall be included in all c
       </a>
     </div>
 
-    <!-- SIDEBAR -->
+      <!-- SIDEBAR -->
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
-            <a class="nav-link" href="{% url 'a_web:dashboard' %}">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'b_web:qr_page' %}">
               <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
+              <p>Scan QR</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{% url 'a_web:makecert' %}">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'b_web:find_user_c' %}">
               <i class="material-icons">contact_page</i>
-              <p>Make Certificate</p>
+              <p>Input user</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="{% url 'a_web:regist_c_notregistered' %}">
-              <i class="material-icons">person</i>
-              <p>User Registration</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{% url 'a_web:dashboard' %}">
+            <a class="nav-link" href="{% url 'b_web:history' %}">
               <i class="material-icons">content_paste</i>
-              <p>Certificate Made</p>
+              <p>History</p>
             </a>
           </li>
         </ul>
       </div>
     </div>
-  <!-- END OF SIDEBAR -->
+    <!-- END OF SIDEBAR -->
 
     <div class="main-panel">
       <!-- NAVBAR ATAS KANAN -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">PCR Registration</a>
+            <a class="navbar-brand" href="javascript:;">Input Name / NIK instead of scanning QR</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -84,14 +78,6 @@ The above copyright notice and this permission notice shall be included in all c
           </button>
           <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="javascript:;">
-                  <i class="material-icons">dashboard</i>
-                  <p class="d-lg-none d-md-block">
-                    Stats
-                  </p>
-                </a>
-              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">person</i>
@@ -104,7 +90,7 @@ The above copyright notice and this permission notice shall be included in all c
                   <a class="dropdown-item" href="#">Profile</a>
                   <div class="dropdown-divider"></div>
                   -->
-                  <a class="dropdown-item" href="#">Log out</a>
+                  <a class="dropdown-item" href="{% url 'b_web:buser_logout'  %}">Log out</a>
                 </div>
               </li>
             </ul>
@@ -116,7 +102,6 @@ The above copyright notice and this permission notice shall be included in all c
 
       <div class="content">
         <div class="container-fluid">
-          <a href=".\makecert.html"> << Back</a>
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
               <div class="card">

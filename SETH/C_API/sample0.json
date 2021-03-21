@@ -1,0 +1,609 @@
+{
+    "result": {
+        "geocoded_waypoints": [
+            {
+                "geocoder_status": "OK",
+                "place_id": "ChIJw9y-m9vDaS4R6bFTYOiAUh8",
+                "types": [
+                    "establishment",
+                    "point_of_interest"
+                ]
+            },
+            {
+                "geocoder_status": "OK",
+                "place_id": "ChIJLbFk59L1aS4RyLzp4OHWKj0",
+                "types": [
+                    "establishment",
+                    "point_of_interest",
+                    "tourist_attraction"
+                ]
+            }
+        ],
+        "routes": [
+            {
+                "bounds": {
+                    "northeast": {
+                        "lat": -6.1667216,
+                        "lng": 106.8587108
+                    },
+                    "southwest": {
+                        "lat": -6.5218798,
+                        "lng": 106.7946784
+                    }
+                },
+                "copyrights": "Map data ©2021",
+                "fare": {
+                    "currency": "IDR",
+                    "text": "IDR 14,000.00",
+                    "value": 14000
+                },
+                "legs": [
+                    {
+                        "arrival_time": {
+                            "text": "2:27pm",
+                            "time_zone": "Asia/Jakarta",
+                            "value": 1616225233
+                        },
+                        "departure_time": {
+                            "text": "12:23pm",
+                            "time_zone": "Asia/Jakarta",
+                            "value": 1616217813
+                        },
+                        "distance": {
+                            "text": "45.4 km",
+                            "value": 45394
+                        },
+                        "duration": {
+                            "text": "2 hours 4 mins",
+                            "value": 7420
+                        },
+                        "end_address": "Gambir, Central Jakarta City, Jakarta, Indonesia",
+                        "end_location": {
+                            "lat": -6.1731155,
+                            "lng": 106.829197
+                        },
+                        "start_address": "Jl. Karadenan No.7, Karadenan, Cibinong, Bogor, Jawa Barat 16111, Indonesia",
+                        "start_location": {
+                            "lat": -6.5218798,
+                            "lng": 106.8080909
+                        },
+                        "steps": [
+                            {
+                                "distance": {
+                                    "text": "0.5 km",
+                                    "value": 496
+                                },
+                                "duration": {
+                                    "text": "6 mins",
+                                    "value": 361
+                                },
+                                "end_location": {
+                                    "lat": -6.518701,
+                                    "lng": 106.8088551
+                                },
+                                "html_instructions": "Walk to Jl. Bumi Keradenan Asri",
+                                "polyline": {
+                                    "points": "vxxf@q}{jSm@DW@]?i@@O?o@B[@uAJwAHQAUC[Ee@I_AMy@KYCg@EUEVm@FMFEHENIFGDIDQ@I"
+                                },
+                                "start_location": {
+                                    "lat": -6.5218798,
+                                    "lng": 106.8080909
+                                },
+                                "steps": [
+                                    {
+                                        "distance": {
+                                            "text": "0.4 km",
+                                            "value": 408
+                                        },
+                                        "duration": {
+                                            "text": "5 mins",
+                                            "value": 285
+                                        },
+                                        "end_location": {
+                                            "lat": -6.5182585,
+                                            "lng": 106.8082216
+                                        },
+                                        "html_instructions": "Head <b>north</b> on <b>Jl. Karadenan</b> toward <b>Gg. H. Mantik</b>",
+                                        "polyline": {
+                                            "points": "vxxf@q}{jSm@DW@]?i@@O?o@B[@uAJwAHQAUC[Ee@I_AMy@KYCg@EUE"
+                                        },
+                                        "start_location": {
+                                            "lat": -6.5218798,
+                                            "lng": 106.8080909
+                                        },
+                                        "travel_mode": "WALKING"
+                                    },
+                                    {
+                                        "distance": {
+                                            "text": "88 m",
+                                            "value": 88
+                                        },
+                                        "duration": {
+                                            "text": "1 min",
+                                            "value": 76
+                                        },
+                                        "end_location": {
+                                            "lat": -6.518701,
+                                            "lng": 106.8088551
+                                        },
+                                        "html_instructions": "Turn <b>right</b> onto <b>Jl. Mandala Raya</b>/<wbr/><b>Jl. Raya Pomad-Karadenan</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                                        "maneuver": "turn-right",
+                                        "polyline": {
+                                            "points": "bbxf@k~{jSVm@FMFEHENIFGDIDQ@I"
+                                        },
+                                        "start_location": {
+                                            "lat": -6.5182585,
+                                            "lng": 106.8082216
+                                        },
+                                        "travel_mode": "WALKING"
+                                    }
+                                ],
+                                "travel_mode": "WALKING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "4.6 km",
+                                    "value": 4626
+                                },
+                                "duration": {
+                                    "text": "16 mins",
+                                    "value": 943
+                                },
+                                "end_location": {
+                                    "lat": -6.49498,
+                                    "lng": 106.79475
+                                },
+                                "html_instructions": "Bus towards Bojong Gede",
+                                "polyline": {
+                                    "points": "~dxf@ib|jSCAAHEPEHGDA@MHIDGFGJWl@c@Bc@@aBBkCBW?E?WB}AH_@Fg@JODC?c@J{A\\o@PyCh@gAPUB[FK@IBaANE@w@DsAHG?E?c@DE@q@DQ@u@@e@DcAFcADc@?I?WAc@AIAwCI]A_@AA?KAWA_AGUAa@CU?I?O?E@ODC@E@IBWLKHEBWPIFk@\\GDQBG?U?e@CQCi@CEA[EIACAUGOGOCWGMGWKk@QKGYOe@YWQIGo@a@IGaAs@]YsAeAKGk@c@UO}@w@OMa@]KIIPa@l@CDCD?DAB?F@N@PBR?FFTFV@D?LBTG\\A@[dBg@`@iA|@A@A@cAjAGLUZGFA@q@~@a@f@_@d@IJU^GJa@d@Y^`@^INCBA@CBCBCBE@C?I?SCMCYIa@IMCKAK?O?Y?K?g@?I?aABK?IAKAOAYGa@IWGm@I_BOK?E?C?C?C?GBIDKDQFGBOD[JIBSHA@_@LCFKZAJCRELCLABGNEHEHCDCFABAFAF?D?F@B@FFR@DDPDT@H?F?L?JAFADAD?D?D@B@D@BBDBBFFHFTJHBB@B@B@LDJDJDHDPFLDD@DBH@F@FBJHLLLJDD?@eAlAeAx@GDCDMLIFa@l@Q\\ILQl@Sh@M`@HBXFB@f@Np@Tn@Tn@Rr@Nn@PDBB@DBTF@?@@@@@@?@?@?DEJgA`Dg@zAQp@CJCTOhAEXEb@CPKLGJIL?BCHAJ?H@J@H?J@F?B?D?DAD?@AB?@CBADCBCDEBCBCBCDCBCDAJ?JAJFj@Hz@?F@J@JBp@YDQ?M?MAUAGAQAOCQCOAQCUAE??H"
+                                },
+                                "start_location": {
+                                    "lat": -6.51872,
+                                    "lng": 106.80885
+                                },
+                                "transit_details": {
+                                    "arrival_stop": {
+                                        "location": {
+                                            "lat": -6.49498,
+                                            "lng": 106.79475
+                                        },
+                                        "name": "Stasiun Bojong Gede"
+                                    },
+                                    "arrival_time": {
+                                        "text": "12:55pm",
+                                        "time_zone": "Asia/Jakarta",
+                                        "value": 1616219717
+                                    },
+                                    "departure_stop": {
+                                        "location": {
+                                            "lat": -6.51872,
+                                            "lng": 106.80885
+                                        },
+                                        "name": "Jl. Bumi Keradenan Asri"
+                                    },
+                                    "departure_time": {
+                                        "text": "12:39pm",
+                                        "time_zone": "Asia/Jakarta",
+                                        "value": 1616218774
+                                    },
+                                    "headsign": "Bojong Gede",
+                                    "headway": 600,
+                                    "line": {
+                                        "agencies": [
+                                            {
+                                                "name": "Dinas Perhubungan Kabupaten Bogor",
+                                                "url": "https://dishub.bogorkab.go.id/"
+                                            }
+                                        ],
+                                        "color": "#2689b2",
+                                        "name": "Bojong Gede - Jembatan Hitam Ciluar",
+                                        "short_name": "31",
+                                        "text_color": "#000000",
+                                        "vehicle": {
+                                            "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                                            "name": "Bus",
+                                            "type": "BUS"
+                                        }
+                                    },
+                                    "num_stops": 13
+                                },
+                                "travel_mode": "TRANSIT"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.2 km",
+                                    "value": 190
+                                },
+                                "duration": {
+                                    "text": "3 mins",
+                                    "value": 163
+                                },
+                                "end_location": {
+                                    "lat": -6.493248299999999,
+                                    "lng": 106.7948957
+                                },
+                                "html_instructions": "Walk to Bojong Gede Station",
+                                "polyline": {
+                                    "points": "rpsf@ojyjSQAQ?M?Y?}@DSAa@AGe@qCP"
+                                },
+                                "start_location": {
+                                    "lat": -6.4949846,
+                                    "lng": 106.7948025
+                                },
+                                "steps": [
+                                    {
+                                        "distance": {
+                                            "text": "0.1 km",
+                                            "value": 108
+                                        },
+                                        "duration": {
+                                            "text": "1 min",
+                                            "value": 80
+                                        },
+                                        "end_location": {
+                                            "lat": -6.4940181,
+                                            "lng": 106.7947959
+                                        },
+                                        "html_instructions": "Head <b>north</b> on <b>Jl. Raya Bojong Gede</b> toward <b>Gg. Sonta</b>",
+                                        "polyline": {
+                                            "points": "rpsf@ojyjSQAQ?M?Y?}@DSAa@A"
+                                        },
+                                        "start_location": {
+                                            "lat": -6.4949846,
+                                            "lng": 106.7948025
+                                        },
+                                        "travel_mode": "WALKING"
+                                    },
+                                    {
+                                        "distance": {
+                                            "text": "82 m",
+                                            "value": 82
+                                        },
+                                        "duration": {
+                                            "text": "1 min",
+                                            "value": 83
+                                        },
+                                        "end_location": {
+                                            "lat": -6.493248299999999,
+                                            "lng": 106.7948957
+                                        },
+                                        "html_instructions": "Take entrance <span class=\"location\">Bojong Gede</span>",
+                                        "polyline": {
+                                            "points": "jjsf@ukyjSqCP"
+                                        },
+                                        "start_location": {
+                                            "lat": -6.49398,
+                                            "lng": 106.79499
+                                        },
+                                        "travel_mode": "WALKING"
+                                    }
+                                ],
+                                "travel_mode": "WALKING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "38.8 km",
+                                    "value": 38821
+                                },
+                                "duration": {
+                                    "text": "1 hour 8 mins",
+                                    "value": 4080
+                                },
+                                "end_location": {
+                                    "lat": -6.1667216,
+                                    "lng": 106.830473
+                                },
+                                "html_instructions": "Train towards Jakarta Kota",
+                                "polyline": {
+                                    "points": "xesf@ckyjS?YQ?uBCgA?kAEo@C}@GQ?m@Cq@E{AOIC{@MaAO{@MYI_Ce@{@SaA[w@W}@[]OKEeAg@o@]g@WGGu@c@s@i@OKq@g@_@]WSo@g@w@k@a@]yAkAa@_@{AkAo@g@_@YeA{@MKo@g@_@YIGs@k@i@a@_@Y}@m@{@i@c@Ww@a@q@[u@[i@S]Kg@Qs@S_AW{A[mAQeCYkAI}CGsH@mC?_C@gC@u@?gH?eA@s@@gADY@UBcBFcBNQ@m@Fi@FqFj@uBT{BVE@aBNoD`@aBNi@FmBTc@DeALUBM@iBPQB{BViBTYDgCXQ@K@sBLkBDuABk@BE?e@?}BE{DSmAKeD_@_AMiDg@}PaCcD_@mEo@CAqB]cAQaCk@qA_@aBm@}B}@gHiCwCgAKCo@UiA_@w@Ye@QSI{@[oBs@UKiAa@mBs@cBo@}@_@oBs@c@Qm@Us@Ye@Q{Am@OGsAg@mAe@_@OIC_A_@gA_@uAa@_@Ka@Ka@MiAY_Ba@GA}A_@KCKCWG}@UUGKCcEaAgCm@yA_@GA}Cu@eBc@WGuD{@y@SuA]q@Qg@M[IeAWaAUk@MqDy@aCi@SGmA[k@McCk@w@Qq@Q}Bo@sCw@}Aa@WGwA]qA[iD}@gB]o^{Ec@GcEg@uEk@mAQyFw@kDc@kAIcCe@oEm@eBSkEm@[E_BUoDc@_Ec@uEe@qGeAIAw@OUEMCs@KqAUgBa@kA[w@SeA[s@SYKu@UmAa@cBg@u@WaBg@wAe@qAa@{@YgA]sBo@]E}@YuAc@_A[s@Sm@Q_@O[I]Ko@Si@Sq@S{@Wi@Si@Qi@UeA_@mDkA{@U[Mc@OWI_@O[M[M_@SgAg@e@WYQ[Qm@_@c@[]UUSg@_@o@i@yAqAgAaAk@i@wBgBw@i@yAaAc@YQKk@]g@[_@W[QWMeAg@{@[gAa@cBi@_@KmBe@sD}@uBg@uEeAa@KqCo@y@SaB]iAYa@KAAyEiAiB_@sA[[GkBe@UGaB_@oE_AwD{@ICgAWm@Ms@IkBSkAEkBGqDDqBHoCP{E^{Ih@_EVs@FcCNe@Ba@BsAHa@@qAByB@kBCuAC{@Ec@CmBK_@EuAK_CQOAu@GqAKYAc@Eu@Es@GcAGg@EgAGiCScCOoCQeCQyBQcF]aEYoCUoBQsCQG?cDWkCSmCQmBQuAQuB[mAQgAQ_BUwB[ICk@K[EmAScC[uCe@wCe@u@Ki@Kg@Ic@Gs@Ke@Em@Gg@Ea@Ag@CoAAg@?w@?c@B[@g@Ds@Ha@FsATIByA^cAZMDk@TeCdAqBt@e@Nw@Ri@Lu@Nc@Dk@Hi@D]BoA@q@?g@Aw@GwAOk@Im@Ow@S_A]y@]CA]QQIm@a@_BaACAYQi@]{@g@KGoAs@GE}@e@q@[eAc@y@YaA[aBc@{A[u@M_AKkCWaBQqBSiD]cCSsBQcD[kCYkBQeCW_DYwC[sEc@sD[yD_@u@Iu@GIAWEe@Ea@Cy@IeAKMA}AOKA}AO_@CSCwGq@c@GiBOg@G[CA?a@EA?uD]aAIw@GqDSuCKgACk@AaBEo@CmBMyD[{ASsCc@}AWiBa@aCm@c@MeBe@eBi@{Ae@eAYmBm@eBi@}Ae@_Bg@yAe@MEgA][Iu@Uk@QA?KCICAAMEKCSEAAC?u@Uu@SKCs@Q}Bg@{B_@k@K}ASeAKGAI?WAIAKASCe@CKAg@G{@Mm@GsI{@kD_@_@A}BUiBS}AQsBUcBQ]Ey@GuBUmBS_BW}AWgB_@}@S{Bk@{Bo@qAa@k@QMEk@SgBm@wBw@cBi@uBs@oBq@eA_@oAc@y@YiA_@u@WoAe@qAc@w@WgAa@qAa@}@]gA_@gA]qAe@wAe@gBo@kA_@aA]_@Me@Q[MYKeA]AAiA_@y@YWKgA_@A?}@[gA_@sAc@_A]}@[_A]}@[uAe@y@Y{@[}@Y{DuAaA[MEMGUI]Kq@UeC{@cDgAwAg@qC_AyAg@_Bk@eBm@}Bw@cCy@{DqAaCu@_@Iu@QqB]eCYeBMaBCmDCqA?kB?kBBeDFe@@o@Ac@AgAAyE?}DBmGBkEBwDBcDBy@?{C@oF@kFBkC@{B@qE@sDDeD@uDBqCB_@?_A?O?[?aA?}B@iBBeAD{AHeCXaC`@sBd@mBl@yAj@u@^u@ZmAr@kAt@_C`BaBfAoBxAmAx@]TeAt@o@f@m@`@m@`@s@d@aAp@y@l@_An@s@f@i@^}@l@o@b@i@ZQJKBIDo@\\[T_@Tg@^YRg@\\m@`@qA~@cAt@aAn@kBpAGDQWGFe@XkA~@eAz@SNq@j@_@Zi@b@KHCBGDC@IHMHEDEBKHEBk@`@s@h@g@ZkAv@a@Z}@j@o@d@_@T_Aj@aBbAaAn@sA|@{BzA[RIHKFwA`A{AdAUN_Ap@kAx@KDIFIH}@l@UPm@`@KHSNSLYPGFWNWNQLWPC@A?i@^YRg@^OJ[Ty@h@mBpAYNUP]ReBlAs@f@a@ZEBEDw@h@EBOHe@\\WPSLCB}@l@ULSPGBm@b@e@ZA@]TYRe@ZUNIFGFKFm@`@C@WRa@Ve@ZSNGDa@XMJIDIFA@YPe@\\WP[R[TUPw@h@GDa@Vs@f@?@OHKHQJqAbACBu@d@{CtB{CrBwBxAGDsAt@yAx@SHOF_@Lu@XOD_@DG@c@Lg@LI@m@LK@KBQBMBa@FC?q@Fo@DG@a@Fm@Fo@D_@@M@WB{@FUB]B_AFM@_AFi@DYBU@G@g@B]DS@O@o@DUBs@Dm@DI@s@Di@Do@FA?UBE@K@WBSDUFI@[Fw@PSDWHYHq@NQDYHUHQFk@Lo@Na@JcAVi@Jm@Ng@Lu@Pm@J_ANiBXiBXG?SDuAPu@JmAP[BQDc@DG?WBQ@e@BWBm@@U@a@AO?Y?YAA?YCYAo@GWCg@G_@Gw@OeCe@gB[GA[EWE_@CMASCk@Ck@A]?O?W?qA?{@?_@?Y?[?I?G??C"
+                                },
+                                "start_location": {
+                                    "lat": -6.493248299999999,
+                                    "lng": 106.7948957
+                                },
+                                "transit_details": {
+                                    "arrival_stop": {
+                                        "location": {
+                                            "lat": -6.1667216,
+                                            "lng": 106.830473
+                                        },
+                                        "name": "Stasiun Juanda"
+                                    },
+                                    "arrival_time": {
+                                        "text": "2:09pm",
+                                        "time_zone": "Asia/Jakarta",
+                                        "value": 1616224140
+                                    },
+                                    "departure_stop": {
+                                        "location": {
+                                            "lat": -6.493248299999999,
+                                            "lng": 106.7948957
+                                        },
+                                        "name": "Bojong Gede Station"
+                                    },
+                                    "departure_time": {
+                                        "text": "1:01pm",
+                                        "time_zone": "Asia/Jakarta",
+                                        "value": 1616220060
+                                    },
+                                    "headsign": "Jakarta Kota",
+                                    "line": {
+                                        "agencies": [
+                                            {
+                                                "name": "Kereta Commuter Indonesia",
+                                                "url": "http://www.krl.co.id/"
+                                            }
+                                        ],
+                                        "color": "#eb1a23",
+                                        "name": "Jakarta Kota - Bogor",
+                                        "short_name": "Central line",
+                                        "text_color": "#ffffff",
+                                        "vehicle": {
+                                            "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+                                            "name": "Train",
+                                            "type": "HEAVY_RAIL"
+                                        }
+                                    },
+                                    "num_stops": 17
+                                },
+                                "travel_mode": "TRANSIT"
+                            },
+                            {
+                                "distance": {
+                                    "text": "1.3 km",
+                                    "value": 1261
+                                },
+                                "duration": {
+                                    "text": "16 mins",
+                                    "value": 955
+                                },
+                                "end_location": {
+                                    "lat": -6.1731155,
+                                    "lng": 106.829197
+                                },
+                                "html_instructions": "Walk to Gambir, Central Jakarta City, Jakarta, Indonesia",
+                                "polyline": {
+                                    "points": "~lsd@mi`kShBH?Ld@?f@@~@@@S?I?G?GAIAOC[COAICOCUKm@Gi@ISIOGIMODKTBD?H@HAXKHCTGp@UFJS\\GNOZOd@?B?@?@?@?B?P?LHv@L`ADZ@L@L@H@FFRBJDABAB?@?BAB?B?B?D?D?F?H?T?P?L@H?H@H?H@J@dAPrAPf@J^H@@l@Pn@VRFRHHFJ@R@b@?b@?Z?JEFAJCn@?RAN@H??NDDBB?B?DAFADCFABC@A@ALx@JL@B@J@L@L?HAFAFEJGFE@A"
+                                },
+                                "start_location": {
+                                    "lat": -6.1667216,
+                                    "lng": 106.830473
+                                },
+                                "steps": [
+                                    {
+                                        "distance": {
+                                            "text": "59 m",
+                                            "value": 59
+                                        },
+                                        "duration": {
+                                            "text": "1 min",
+                                            "value": 60
+                                        },
+                                        "end_location": {
+                                            "lat": -6.16725,
+                                            "lng": 106.83042
+                                        },
+                                        "html_instructions": "Take exit <span class=\"location\">Juanda</span>",
+                                        "polyline": {
+                                            "points": "~lsd@mi`kShBH"
+                                        },
+                                        "start_location": {
+                                            "lat": -6.1667216,
+                                            "lng": 106.830473
+                                        },
+                                        "travel_mode": "WALKING"
+                                    },
+                                    {
+                                        "distance": {
+                                            "text": "83 m",
+                                            "value": 83
+                                        },
+                                        "duration": {
+                                            "text": "1 min",
+                                            "value": 59
+                                        },
+                                        "end_location": {
+                                            "lat": -6.167962900000001,
+                                            "lng": 106.8303327
+                                        },
+                                        "html_instructions": "Head <b>south</b> on <b>Jl. Ir. H. Juanda 1</b> toward <b>Jl. Ir. H. Juanda</b>",
+                                        "polyline": {
+                                            "points": "hpsd@uh`kSd@?f@@~@@"
+                                        },
+                                        "start_location": {
+                                            "lat": -6.1672492,
+                                            "lng": 106.8303508
+                                        },
+                                        "travel_mode": "WALKING"
+                                    },
+                                    {
+                                        "distance": {
+                                            "text": "0.2 km",
+                                            "value": 191
+                                        },
+                                        "duration": {
+                                            "text": "2 mins",
+                                            "value": 140
+                                        },
+                                        "end_location": {
+                                            "lat": -6.1675792,
+                                            "lng": 106.8319644
+                                        },
+                                        "html_instructions": "Turn <b>left</b> onto <b>Jl. Ir. H. Juanda</b><div style=\"font-size:0.9em\">Pass by Money Changer, Haji La Tunrung (on the left in 54&nbsp;m)</div>",
+                                        "maneuver": "turn-left",
+                                        "polyline": {
+                                            "points": "vtsd@qh`kS@S?I?G?GAIAOC[COAICOCUKm@Gi@ISIOGIMODK"
+                                        },
+                                        "start_location": {
+                                            "lat": -6.167962900000001,
+                                            "lng": 106.8303327
+                                        },
+                                        "travel_mode": "WALKING"
+                                    },
+                                    {
+                                        "distance": {
+                                            "text": "0.1 km",
+                                            "value": 95
+                                        },
+                                        "duration": {
+                                            "text": "1 min",
+                                            "value": 79
+                                        },
+                                        "end_location": {
+                                            "lat": -6.1683977,
+                                            "lng": 106.832111
+                                        },
+                                        "html_instructions": "Sharp <b>right</b> onto <b>Jl. Katedral</b>",
+                                        "maneuver": "turn-sharp-right",
+                                        "polyline": {
+                                            "points": "jrsd@wr`kSTBD?H@HAXKHCTGp@UFJ"
+                                        },
+                                        "start_location": {
+                                            "lat": -6.1675792,
+                                            "lng": 106.8319644
+                                        },
+                                        "travel_mode": "WALKING"
+                                    },
+                                    {
+                                        "distance": {
+                                            "text": "0.2 km",
+                                            "value": 234
+                                        },
+                                        "duration": {
+                                            "text": "3 mins",
+                                            "value": 184
+                                        },
+                                        "end_location": {
+                                            "lat": -6.1683508,
+                                            "lng": 106.8301821
+                                        },
+                                        "html_instructions": "Sharp <b>right</b> onto <b>Jl. Ir. H. Juanda</b>/<wbr/><b>Jl. Veteran</b>",
+                                        "maneuver": "turn-sharp-right",
+                                        "polyline": {
+                                            "points": "nwsd@us`kSS\\GNOZOd@?B?@?@?@?B?P?LHv@L`ADZ@L@L@H@FFRBJ"
+                                        },
+                                        "start_location": {
+                                            "lat": -6.1683977,
+                                            "lng": 106.832111
+                                        },
+                                        "travel_mode": "WALKING"
+                                    },
+                                    {
+                                        "distance": {
+                                            "text": "0.4 km",
+                                            "value": 391
+                                        },
+                                        "duration": {
+                                            "text": "5 mins",
+                                            "value": 280
+                                        },
+                                        "end_location": {
+                                            "lat": -6.1717092,
+                                            "lng": 106.8295097
+                                        },
+                                        "html_instructions": "Turn <b>left</b> onto <b>Jl. Veteran I</b>",
+                                        "maneuver": "turn-left",
+                                        "polyline": {
+                                            "points": "dwsd@sg`kSDABAB?@?BAB?B?B?D?D?F?H?T?P?L@H?H@H?H@J@dAPrAPf@J^H@@l@Pn@VRFRHHFJ@R@b@?b@?Z?"
+                                        },
+                                        "start_location": {
+                                            "lat": -6.1683508,
+                                            "lng": 106.8301821
+                                        },
+                                        "travel_mode": "WALKING"
+                                    },
+                                    {
+                                        "distance": {
+                                            "text": "72 m",
+                                            "value": 72
+                                        },
+                                        "duration": {
+                                            "text": "1 min",
+                                            "value": 51
+                                        },
+                                        "end_location": {
+                                            "lat": -6.1723371,
+                                            "lng": 106.8294945
+                                        },
+                                        "html_instructions": "Continue onto <b>Jl. Medan Merdeka Utara</b>",
+                                        "polyline": {
+                                            "points": "dltd@mc`kSJEFAJCn@?RAN@H??N"
+                                        },
+                                        "start_location": {
+                                            "lat": -6.1717092,
+                                            "lng": 106.8295097
+                                        },
+                                        "travel_mode": "WALKING"
+                                    },
+                                    {
+                                        "distance": {
+                                            "text": "44 m",
+                                            "value": 44
+                                        },
+                                        "duration": {
+                                            "text": "1 min",
+                                            "value": 35
+                                        },
+                                        "end_location": {
+                                            "lat": -6.1722958,
+                                            "lng": 106.8291699
+                                        },
+                                        "html_instructions": "Turn <b>right</b> toward <b>Jl. Medan Merdeka Utara</b>",
+                                        "maneuver": "turn-right",
+                                        "polyline": {
+                                            "points": "bptd@ic`kSDDBB?B?DAFADCFABC@A@AL"
+                                        },
+                                        "start_location": {
+                                            "lat": -6.1723371,
+                                            "lng": 106.8294945
+                                        },
+                                        "travel_mode": "WALKING"
+                                    },
+                                    {
+                                        "distance": {
+                                            "text": "92 m",
+                                            "value": 92
+                                        },
+                                        "duration": {
+                                            "text": "1 min",
+                                            "value": 67
+                                        },
+                                        "end_location": {
+                                            "lat": -6.1731155,
+                                            "lng": 106.829197
+                                        },
+                                        "html_instructions": "Turn <b>left</b> onto <b>Jl. Medan Merdeka Utara</b><div style=\"font-size:0.9em\">Destination will be on the left</div>",
+                                        "maneuver": "turn-left",
+                                        "polyline": {
+                                            "points": "zotd@ia`kSx@JL@B@J@L@L?HAFAFEJGFE@A"
+                                        },
+                                        "start_location": {
+                                            "lat": -6.1722958,
+                                            "lng": 106.8291699
+                                        },
+                                        "travel_mode": "WALKING"
+                                    }
+                                ],
+                                "travel_mode": "WALKING"
+                            }
+                        ],
+                        "traffic_speed_entry": [],
+                        "via_waypoint": []
+                    }
+                ],
+                "overview_polyline": {
+                    "points": "vxxf@q}{jSmCHqDPiBFq@IyDg@}@K^{@h@]Pc@Qb@a@Vg@`AuHLsCL{AXiIdBeC^iCZeGZqERoAEqI[qAC_@JiC|AYB{@C}AOaCs@qAi@wBuAkGwE{BmBs@jA?`@LbAL`AI^[dBg@`@kA~@eAlAg@r@}BxCyApB`@^INEDQLo@GuAYaEBgGy@o@HqBr@c@TKZOz@a@`A?XPr@Ft@E^BTPTnAh@rAb@n@f@DFeAlAeAx@KJWTs@jA[z@a@jAb@JlC|@zDfADFEReCzH_@|CO^QXEb@Dx@Q`@QPI`@NzBBVBp@YD_@?c@C{@K}@G?H?Ic@AyBBa@AGe@qCP?YgCCsCEmDOsEg@wGmAsFcB_D{AyCmByBeBqLkJkHyFyBwA{Ay@oDwAwFyAsEk@iFQiUDwMB{ERmE`@g[dDsN|A}Gv@aIXuEAiG_@eFm@gViDqJoA{H}AsDmAeLgE}GaCkNgFyOeGqEeBgFeB_KgCiP}D{e@cLuHgBaL{CkJ_CgB]o^{EgFo@iUyCkAIcCe@uHaAwNmBuKiA{GgAoCe@}HgBsO{EmH_CqCu@}@YwFeBiCy@aEsAgIsCsC}@wB_AcDcBeCeByF}EcDqCqCkBiC_ByC_BcC}@cCu@mRqEwS_FeYmGqA[aBWwDYkBGqDDaGZwPhA}Kr@iFReFAqCIgGa@wGg@eN_AsOeAeT_BkM}@{Fc@kEm@mJuA_Di@qS}C}CUwEE{CTyE`AcG|BwCdAaB`@oDd@mBDyAAoCWyAYuDqAaIyEaDgBwB_A{Bu@}D_AuBYiO{Aqa@{Dmc@aEaP_BqHo@{Le@qCIgHi@oFw@gEy@qJkCuJwCkNiEiA[{Bm@yIeBkDa@w@EkPcBgWkC}JiAeEw@yD_AgGiBoJcDeSaHcQaGuXoJo^cMeZcK_QyFuA[wFw@gEQ_GCcLLuJEoYNoh@PmXNoJJaFb@uFfAgExAkBz@yChBaFhDaH~E_EpCqLdIwAr@}B~AkFtDmD`CGDQWm@`@qCzBoCzB_Ar@eItFqFjDmH|EwJzGiEzC{M|IsNvJuUdP}EjDqJrG_C~AmDnByBx@{AZyDr@mFd@cG`@qN`AoD^kFlAuGbBuDz@aInAgIdA}CNqDGoC[mHsAaBQiCIuG?GChBH?LlA@~@@@S?QAQKeA[}Bi@}@DKTBN@bAYp@UFJ[l@_@fA?X\\bDFl@J^HCLAR?dBBnDf@vBh@`Bp@fBBz@K|A?H\\GZITvAPl@A\\U"
+                },
+                "summary": "",
+                "warnings": [
+                    "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+                ],
+                "waypoint_order": []
+            }
+        ],
+        "status": "OK"
+    },
+    "success": true,
+    "msg": "OK",
+    "user": "[{\"model\": \"SETH.userauthentication\", \"pk\": 1, \"fields\": {\"last_login\": null, \"username\": \"cuser0\", \"password\": \"123450\", \"usertype\": 3, \"auser\": null, \"buser\": null, \"cuser\": 1}}]"
+}

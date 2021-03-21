@@ -46,22 +46,12 @@ The above copyright notice and this permission notice shall be included in all c
               <p>Scan</p>
             </a>
           </li>
-          <!--
           <li class="nav-item ">
-            <a class="nav-link" href="./makecert.html">
+            <a class="nav-link" href="./show_qr.html">
               <i class="material-icons">contact_page</i>
-              <p>Make Certificate</p>
+              <p>Verification</p>
             </a>
           </li>
-          -->
-          <!--
-          <li class="nav-item ">
-            <a class="nav-link" href="./user.html">
-              <i class="material-icons">person</i>
-              <p>User Registration</p>
-            </a>
-          </li>
-          -->
           <li class="nav-item ">
             <a class="nav-link" href="./searchCert.html">
               <i class="material-icons">content_paste</i>
@@ -102,7 +92,7 @@ The above copyright notice and this permission notice shall be included in all c
                   <a class="dropdown-item" href="#">Profile</a>
                   <div class="dropdown-divider"></div>
                   -->
-                  <a class="dropdown-item" href=".\login.html">Log out</a>
+                  <a class="dropdown-item" href="{% url 'b_web:buser_logout'  %}">Log out</a>
                 </div>
               </li>
             </ul>

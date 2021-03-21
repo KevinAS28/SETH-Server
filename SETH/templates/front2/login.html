@@ -19,7 +19,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: -webkit-linear-gradient(bottom, #52C8FA, #FFFFFF, #092F5A);
+    background: #E7E7DE;
     font-family: 'Gotham', sans-serif;
   }
 
@@ -138,7 +138,7 @@
     top: 0;
     width: 900px;
     height: 100%;
-    background-image: url(logo.png);
+    background-image: url(/staticfiles/assets/img/logo.png);
     background-size: cover;
     transition: -webkit-transform 1.2s ease-in-out;
     transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
@@ -151,7 +151,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.3);
+    background: rgba(25, 43, 76);
   }
 
 
@@ -199,7 +199,7 @@
     height: 100px;
   }
 </style>
-{% if messages %}
+{% comment %} {% if messages %}
   {% for message in messages %}
 
   <script>
@@ -207,10 +207,9 @@
   </script>
 
   {% endfor %}
-  {% endif %}
+  {% endif %} {% endcomment %}
 
 </head>
-
 
 <body>
   <form action="{% url 'authenticate' %}" method="POST">
@@ -220,7 +219,7 @@
     <div class="form sign-in">
       <h2>Sign In</h2>
       <label>
-        <span>Institution</span>
+        <span>Username</span>
         <input type="text" name="username">
       </label>
       <label>
@@ -233,7 +232,7 @@
     <div class="sub-cont">
       <div class="img">
         <div class="img-text m-up">
-					<img src="/static/assets/img/logo.png" class="logo"></img>
+					<img src="/staticfiles/assets/img/logo.png" class="logo"></img>
           <h3>Safe Electronic Ticket for Health</h3>
       </div>
 		</div>

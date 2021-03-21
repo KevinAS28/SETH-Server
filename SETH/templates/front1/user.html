@@ -50,7 +50,7 @@ The above copyright notice and this permission notice shall be included in all c
     <!-- SIDEBAR -->
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
+          <li class="nav-item  ">
             <a class="nav-link" href="{% url 'a_web:dashboard' %}">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
@@ -62,7 +62,7 @@ The above copyright notice and this permission notice shall be included in all c
               <p>Make Certificate</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item active">
             <a class="nav-link" href="{% url 'a_web:regist_c_notregistered' %}">
               <i class="material-icons">person</i>
               <p>User Registration</p>
@@ -106,7 +106,7 @@ The above copyright notice and this permission notice shall be included in all c
                   <a class="dropdown-item" href="#">Profile</a>
                   <div class="dropdown-divider"></div>
                   -->
-                  <a class="dropdown-item" href="#">Log out</a>
+                  <a class="dropdown-item" href="{% url 'a_web:auser_logout'  %}">Log out</a>
                 </div>
               </li>
             </ul>
@@ -127,13 +127,6 @@ The above copyright notice and this permission notice shall be included in all c
                 </div>
                 <div class="card-body">
                   <form method="POST" action="">
-                    <div class="row">
-                      <div class="col-md-12 ">
-                        <div class="form-group">
-                          <button name="find_user_c" class="btn btn-primary btn-round">Find User</button>
-                        </div>
-                      </div>
-                    </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
@@ -251,7 +244,7 @@ The above copyright notice and this permission notice shall be included in all c
             </div>
             </div>
             {% if able_to_complete %}
-              <button type="submit" class="btn btn-primary pull-right">FINISH</button>
+              <button name="finish" type="submit" class="btn btn-primary pull-right">FINISH</button>
             {% endif %}
             <div class="clearfix"></div>
             </form>

@@ -40,28 +40,22 @@ The above copyright notice and this permission notice shall be included in all c
       <!-- SIDEBAR -->
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item ">
-            <a class="nav-link" href="./dashboard.html">
-              <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./makecert.html">
-              <i class="material-icons">contact_page</i>
-              <p>Make Certificate</p>
-            </a>
-          </li>
           <li class="nav-item active">
-            <a class="nav-link" href="./user.html">
-              <i class="material-icons">person</i>
-              <p>User Registration</p>
+            <a class="nav-link" href="{% url 'b_web:qr_page' %}">
+              <i class="material-icons">dashboard</i>
+              <p>Scan QR</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'b_web:find_user_c' %}">
+              <i class="material-icons">contact_page</i>
+              <p>Input user</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./tables.html">
+            <a class="nav-link" href="{% url 'b_web:history' %}">
               <i class="material-icons">content_paste</i>
-              <p>Certificate Made</p>
+              <p>History</p>
             </a>
           </li>
         </ul>
@@ -98,7 +92,7 @@ The above copyright notice and this permission notice shall be included in all c
                   <a class="dropdown-item" href="#">Profile</a>
                   <div class="dropdown-divider"></div>
                   -->
-                  <a class="dropdown-item" href=".\login.html">Log out</a>
+                  <a class="dropdown-item" href="{% url 'b_web:buser_logout'  %}">Log out</a>
                 </div>
               </li>
             </ul>
@@ -402,12 +396,12 @@ The above copyright notice and this permission notice shall be included in all c
             else{
               setTimeout(function() {
                   hitAPI();
-              }, 500);              
+              }, 500);
             }
           }
         });
       }
-      hitAPI();   
+      hitAPI();
       });
   </script>
 </body>
@@ -418,7 +412,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 
 
-  
+
 </script>
 
 

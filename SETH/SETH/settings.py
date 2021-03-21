@@ -156,5 +156,5 @@ SERVE_QR_CODE_IMAGE_PATH = 'qr-code-image/'
 
 A_PLACE_NAME = 'Bogor Hospital Center'
 
-B_PLACE_NAME = 'Soekarno Hatta Airport'
+B_PLACE_NAME = 'Jakarta Station'
 

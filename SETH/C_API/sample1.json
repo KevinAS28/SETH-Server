@@ -1,0 +1,1146 @@
+{
+    "result": {
+        "geocoded_waypoints": [
+            {
+                "geocoder_status": "OK",
+                "place_id": "ChIJCcusWmkCai4R5T_6WYHp3mE",
+                "types": [
+                    "airport",
+                    "establishment",
+                    "point_of_interest"
+                ]
+            },
+            {
+                "geocoder_status": "OK",
+                "place_id": "ChIJA5LATO4Z2jER111V-v6abAI",
+                "types": [
+                    "establishment",
+                    "lodging",
+                    "point_of_interest"
+                ]
+            }
+        ],
+        "routes": [
+            {
+                "bounds": {
+                    "northeast": {
+                        "lat": 1.2847325,
+                        "lng": 106.9779605
+                    },
+                    "southwest": {
+                        "lat": -6.1324062,
+                        "lng": 103.4365247
+                    }
+                },
+                "copyrights": "Map data ©2021",
+                "legs": [
+                    {
+                        "distance": {
+                            "text": "1,275 km",
+                            "value": 1274694
+                        },
+                        "duration": {
+                            "text": "2 days 15 hours",
+                            "value": 225061
+                        },
+                        "end_address": "10 Bayfront Ave, Singapore 018956",
+                        "end_location": {
+                            "lat": 1.2847325,
+                            "lng": 103.8610572
+                        },
+                        "start_address": "Soekarno-Hatta International Airport, Kota Tangerang, Banten 19120, Indonesia",
+                        "start_location": {
+                            "lat": -6.1205002,
+                            "lng": 106.6699297
+                        },
+                        "steps": [
+                            {
+                                "distance": {
+                                    "text": "26 m",
+                                    "value": 26
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 1
+                                },
+                                "end_location": {
+                                    "lat": -6.1205903,
+                                    "lng": 106.6697144
+                                },
+                                "html_instructions": "Head <b>southwest</b> on <b>Jl. C1</b> toward <b>Jl. P1</b><div style=\"font-size:0.9em\">Toll road</div>",
+                                "polyline": {
+                                    "points": "bljd@a~`jSPj@"
+                                },
+                                "start_location": {
+                                    "lat": -6.1205002,
+                                    "lng": 106.6699297
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.5 km",
+                                    "value": 536
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 31
+                                },
+                                "end_location": {
+                                    "lat": -6.1225738,
+                                    "lng": 106.6653265
+                                },
+                                "html_instructions": "Keep <b>right</b> to stay on <b>Jl. C1</b><div style=\"font-size:0.9em\">Toll road</div>",
+                                "maneuver": "keep-right",
+                                "polyline": {
+                                    "points": "tljd@u|`jSJ^DLl@rB`A`DFTDLf@dBJZ@DVx@ZhAFNf@`BJVR\\NVPTVVFH"
+                                },
+                                "start_location": {
+                                    "lat": -6.1205903,
+                                    "lng": 106.6697144
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.4 km",
+                                    "value": 362
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 30
+                                },
+                                "end_location": {
+                                    "lat": -6.123895999999999,
+                                    "lng": 106.6623513
+                                },
+                                "html_instructions": "Keep <b>right</b> to stay on <b>Jl. C1</b><div style=\"font-size:0.9em\">Toll road</div>",
+                                "maneuver": "keep-right",
+                                "polyline": {
+                                    "points": "`yjd@ia`jSv@nAZn@Z|@Pp@|@zCf@`BFVJ`@DJDN@N"
+                                },
+                                "start_location": {
+                                    "lat": -6.1225738,
+                                    "lng": 106.6653265
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "1.1 km",
+                                    "value": 1132
+                                },
+                                "duration": {
+                                    "text": "2 mins",
+                                    "value": 96
+                                },
+                                "end_location": {
+                                    "lat": -6.120291099999999,
+                                    "lng": 106.6696984
+                                },
+                                "html_instructions": "At the roundabout, take the <b>4th</b> exit onto <b>Jl. C2</b><div style=\"font-size:0.9em\">Toll road</div>",
+                                "maneuver": "roundabout-left",
+                                "polyline": {
+                                    "points": "jakd@un_jS@@BB@BBB@B@B@B@DDP@RAREPGPMNMJOHC@A?C@A?A@E@S@QAQCOEMIMKIMIMAEACAE?GAC?E?CMUM]Ss@[cAu@iC_@qASu@GUCGAGCKAIAMAKAOAM?G?KAE?I?Q?_@?IAW?KAOCQAIAGCMEQI[K]CMa@sAGUYaAM_@Ma@i@_BI[uAuEMa@a@sA"
+                                },
+                                "start_location": {
+                                    "lat": -6.123895999999999,
+                                    "lng": 106.6623513
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "1.8 km",
+                                    "value": 1839
+                                },
+                                "duration": {
+                                    "text": "2 mins",
+                                    "value": 119
+                                },
+                                "end_location": {
+                                    "lat": -6.1139886,
+                                    "lng": 106.6850547
+                                },
+                                "html_instructions": "Continue onto <b>Jl. Raya Bandara Soekarno-Hatta</b><div style=\"font-size:0.9em\">Toll road</div>",
+                                "polyline": {
+                                    "points": "xjjd@s|`jSi@eB[aAeCuIOe@CKaBqFu@eCu@qCm@{BEOa@sAGWe@yA}@wCq@mCKa@WcAeCwHWeA[cAWaAWs@{@_Dq@aCw@cCUg@Wk@c@}@cAuB"
+                                },
+                                "start_location": {
+                                    "lat": -6.120291099999999,
+                                    "lng": 106.6696984
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "4.1 km",
+                                    "value": 4096
+                                },
+                                "duration": {
+                                    "text": "3 mins",
+                                    "value": 209
+                                },
+                                "end_location": {
+                                    "lat": -6.096946099999999,
+                                    "lng": 106.7161243
+                                },
+                                "html_instructions": "Continue onto <b>Jl. Tol Airport Prof. Sedyatmo</b><div style=\"font-size:0.9em\">Toll road</div>",
+                                "polyline": {
+                                    "points": "lcid@q|cjSc@_AWk@Yk@s@{AACa@{@{B_Ee@aAOWk@eAACCCAAsAgBm@w@o@q@}@{@m@k@m@g@aByAqAeAOMw@s@QOMOOM[_@_@g@SW[e@y@uA{@}AgAwBy@{As@wAaAmBKQe@q@cAgAi@{@a@s@S_@KWO_@Wm@COQu@Ws@We@O]k@gAo@kASe@o@oAaAiBYe@[k@cAeBACiB_DmDgGe@{@S]eB{COY{@uAcAeBy@qAS_@Wa@m@eAYc@MUkAmBi@_AWi@a@y@e@}@i@iAYm@]s@k@iASa@oBoDc@y@Yk@c@}Ag@cCIkAC}@EmAHgBBYDg@XuAF[Rk@bAcC\\i@DIDIJOXW"
+                                },
+                                "start_location": {
+                                    "lat": -6.1139886,
+                                    "lng": 106.6850547
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "7.1 km",
+                                    "value": 7051
+                                },
+                                "duration": {
+                                    "text": "6 mins",
+                                    "value": 344
+                                },
+                                "end_location": {
+                                    "lat": -6.121678999999999,
+                                    "lng": 106.7695187
+                                },
+                                "html_instructions": "Keep <b>right</b> to continue on <b>Jl. Tol Prof. DR. Sedyatmo</b><div style=\"font-size:0.9em\">Toll road</div>",
+                                "maneuver": "keep-right",
+                                "polyline": {
+                                    "points": "|xed@w~ijSf@a@vCsC`BwAFGhC}B~@y@h@c@\\]f@c@POdB{ATSt@q@jB_BRQ\\YTSxAqATUl@g@pAgAp@k@\\[l@k@TSx@s@t@o@~@w@\\Wd@c@XWrBiB~@u@`@_@`@_@|@y@lBaBPOBALKBCjAgAlAcAdA_Af@_@DETQVSxAoAx@s@xBoBzDkDXWbByAt@q@tBiBbHcGhB_B~DmDBELKxBkBnAmA|AcBp@y@`AuAFIBEFGBEhAoBdAuBVo@Xw@Ne@X}@L_@d@{AdAeDLa@h@cBjAkD|@wCx@aCv@aCp@sBBKh@iBRw@Lk@Lk@DU@ENaAP}ADg@D_A@c@H{B?A@uABoA?iBDuB@_B@Q?c@@[@_ADcE@cCBuA?U?C@mABqA?A?U?Q@g@BmBBeC?a@?QBq@?W?A@_BBmAAK@_@@uB?g@BoB?WAeC?S?E?E?A?QCu@?IAa@?O?EA_@?]?_@?ECM?O?UA[?a@AU?QAS?KASAO?QAUAO?WAM?E?KCQ?IAe@AMASAc@Cq@Ea@?IC]Cg@Ci@Cg@Eq@Cq@Ee@Cg@?GCUC_@A_@Ca@C[A]?CCe@@a@E_@AWAQEo@Gq@A]Ec@KcAGe@CKIg@COEq@GiAAm@KiBCa@Ci@"
+                                },
+                                "start_location": {
+                                    "lat": -6.096946099999999,
+                                    "lng": 106.7161243
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "1.7 km",
+                                    "value": 1672
+                                },
+                                "duration": {
+                                    "text": "2 mins",
+                                    "value": 110
+                                },
+                                "end_location": {
+                                    "lat": -6.1294605,
+                                    "lng": 106.7808322
+                                },
+                                "html_instructions": "Keep <b>left</b> at the fork to stay on <b>Jl. Tol Prof. DR. Sedyatmo</b><div style=\"font-size:0.9em\">Toll road</div>",
+                                "maneuver": "fork-left",
+                                "polyline": {
+                                    "points": "nsjd@oltjS@w@Ac@Aa@Ac@Am@ASK_BGoAE_AE{@EmA@mAHsAD_@LiA`@uATq@p@sAj@y@p@u@|@s@t@e@ROd@Q~@Wh@W@?@ApEsBjAk@dAi@fDsBrBcBlB_B`AgAlD}D~AiB"
+                                },
+                                "start_location": {
+                                    "lat": -6.121678999999999,
+                                    "lng": 106.7695187
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "4.6 km",
+                                    "value": 4551
+                                },
+                                "duration": {
+                                    "text": "4 mins",
+                                    "value": 242
+                                },
+                                "end_location": {
+                                    "lat": -6.131819600000001,
+                                    "lng": 106.8205571
+                                },
+                                "html_instructions": "Continue onto <b>Jl. Tol Pelabuhan</b><div style=\"font-size:0.9em\">Toll road</div>",
+                                "polyline": {
+                                    "points": "bdld@esvjSX[f@y@LW`@m@^m@Zo@N[LYFSP[x@yBf@qBJa@Lg@F]Ji@^gC@C?ADc@BQ?ABSHaAPqB\\oF`@mEN{ANcBTgDLqCFoD@q@?I?A?_@@[?A?O@_@AmCCiDC_BA]EcAE{@Eo@?EAU?GA[GyAGeC?KCiACkD?Y?m@?[A_@AiAAeBAk@AY?K?K?MC_AAc@Cc@AEEaACc@A[Eo@AWGgAEi@WsCQ_BGq@IaAAIIk@?ACSEi@AGAICOO_AWaBIk@Ia@AIKk@CQs@gEa@_CKm@Ko@E]G]Kw@G[CMIm@Ks@Im@Ia@Gc@QeAAEEUACAGG[AGOu@Ku@AMCMSmAIeAC}@?oA?EBeAHgA?CJk@Nq@@GFODOHa@@?@ENa@HOTi@Zm@h@cAh@aArBqDfAwCFSLs@DSFc@@KBS@W@i@Bm@?s@AMCW"
+                                },
+                                "start_location": {
+                                    "lat": -6.1294605,
+                                    "lng": 106.7808322
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.5 km",
+                                    "value": 471
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 39
+                                },
+                                "end_location": {
+                                    "lat": -6.1309248,
+                                    "lng": 106.8247027
+                                },
+                                "html_instructions": "Take the exit toward <b>Ancol - Senen</b>/<wbr/><b>Gn. Sahari</b>/<wbr/><b>Mangga Dua</b><div style=\"font-size:0.9em\">Toll road</div>",
+                                "maneuver": "ramp-left",
+                                "polyline": {
+                                    "points": "zrld@ok~jSMa@E_@?CE_@Ge@?AIe@GUOo@GUCOCQA?E_@AEAKEWGe@Ea@CWGg@Ge@Gs@E_@Io@AMCUG]Ei@AQ@O"
+                                },
+                                "start_location": {
+                                    "lat": -6.131819600000001,
+                                    "lng": 106.8205571
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.5 km",
+                                    "value": 542
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 52
+                                },
+                                "end_location": {
+                                    "lat": -6.130054400000001,
+                                    "lng": 106.8295272
+                                },
+                                "html_instructions": "Merge onto <b>Jl. Lodan Raya</b><div style=\"font-size:0.9em\">Pass by Marina Mediterania (on the left in 500&nbsp;m)</div>",
+                                "maneuver": "merge",
+                                "polyline": {
+                                    "points": "fmld@ke_kSKeA?CO}AAAGm@o@qGSkBKiAGa@Kw@AEGs@COMyAGg@"
+                                },
+                                "start_location": {
+                                    "lat": -6.1309248,
+                                    "lng": 106.8247027
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.2 km",
+                                    "value": 188
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 39
+                                },
+                                "end_location": {
+                                    "lat": -6.1304263,
+                                    "lng": 106.8309162
+                                },
+                                "html_instructions": "Turn <b>right</b> to stay on <b>Jl. Lodan Raya</b>",
+                                "maneuver": "turn-right",
+                                "polyline": {
+                                    "points": "xgld@qc`kSZIXMXOTU@A?A@A?E?C?O]wD"
+                                },
+                                "start_location": {
+                                    "lat": -6.130054400000001,
+                                    "lng": 106.8295272
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "1.6 km",
+                                    "value": 1591
+                                },
+                                "duration": {
+                                    "text": "2 mins",
+                                    "value": 143
+                                },
+                                "end_location": {
+                                    "lat": -6.1273965,
+                                    "lng": 106.8444826
+                                },
+                                "html_instructions": "Continue onto <b>Jl. R. E. Martadinata</b>",
+                                "polyline": {
+                                    "points": "djld@gl`kSCOMwBu@sHcBcQa@cEkAyKiAaK?QIs@EU]oD{@yHQuA?ACGAECCCCQQa@BSBO@E?QB"
+                                },
+                                "start_location": {
+                                    "lat": -6.1304263,
+                                    "lng": 106.8309162
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.6 km",
+                                    "value": 626
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 64
+                                },
+                                "end_location": {
+                                    "lat": -6.1260464,
+                                    "lng": 106.8499187
+                                },
+                                "html_instructions": "Turn <b>right</b> onto <b>Jl. Lodan Raya</b><div style=\"font-size:0.9em\">Toll road</div>",
+                                "maneuver": "turn-right",
+                                "polyline": {
+                                    "points": "fwkd@_ackSOMCCCCAAACCEWqA_@mBCK?ECK]uBG]QcAGa@Ii@I}@BqAAe@Ee@M_Ag@sCKm@Om@CO"
+                                },
+                                "start_location": {
+                                    "lat": -6.1273965,
+                                    "lng": 106.8444826
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.4 km",
+                                    "value": 438
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 36
+                                },
+                                "end_location": {
+                                    "lat": -6.124856299999999,
+                                    "lng": 106.8536922
+                                },
+                                "html_instructions": "Keep <b>right</b> to stay on <b>Jl. Lodan Raya</b>",
+                                "maneuver": "keep-right",
+                                "polyline": {
+                                    "points": "xnkd@_cdkSQiAEWCMa@aCiAkFWeACIiAcE"
+                                },
+                                "start_location": {
+                                    "lat": -6.1260464,
+                                    "lng": 106.8499187
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "85 m",
+                                    "value": 85
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 12
+                                },
+                                "end_location": {
+                                    "lat": -6.1254443,
+                                    "lng": 106.8541258
+                                },
+                                "html_instructions": "Turn <b>right</b> onto <b>Jl. R. E. Martadinata</b>",
+                                "maneuver": "turn-right",
+                                "polyline": {
+                                    "points": "jgkd@qzdkSDULOFE@?BADCbA_@FE"
+                                },
+                                "start_location": {
+                                    "lat": -6.124856299999999,
+                                    "lng": 106.8536922
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "2.6 km",
+                                    "value": 2562
+                                },
+                                "duration": {
+                                    "text": "4 mins",
+                                    "value": 241
+                                },
+                                "end_location": {
+                                    "lat": -6.113723999999999,
+                                    "lng": 106.8737162
+                                },
+                                "html_instructions": "Slight <b>left</b> to stay on <b>Jl. R. E. Martadinata</b>",
+                                "maneuver": "turn-slight-left",
+                                "polyline": {
+                                    "points": "~jkd@i}dkSJIBA@C@G@C?G?Cw@wBaF}M]eAEGGQaJiWQe@mAkDIYsEmM]q@aCyDqB{CMSoBkC}@mAkA}AiA}AGGqAaB]_@iB_Cy@aAe@m@]e@mCkDGIwAkBEG}AiB_@c@a@a@"
+                                },
+                                "start_location": {
+                                    "lat": -6.1254443,
+                                    "lng": 106.8541258
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.3 km",
+                                    "value": 278
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 72
+                                },
+                                "end_location": {
+                                    "lat": -6.111397600000001,
+                                    "lng": 106.8745837
+                                },
+                                "html_instructions": "Slight <b>left</b> onto <b>Jl. Pelabuhan Nusantara II</b><div style=\"font-size:0.9em\">Toll road</div>",
+                                "maneuver": "turn-slight-left",
+                                "polyline": {
+                                    "points": "vaid@wwhkSG@AAC?CACAGCOKUMIEICIEYMYMSI}Be@eCe@a@G"
+                                },
+                                "start_location": {
+                                    "lat": -6.113723999999999,
+                                    "lng": 106.8737162
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.2 km",
+                                    "value": 195
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 42
+                                },
+                                "end_location": {
+                                    "lat": -6.111689,
+                                    "lng": 106.8763221
+                                },
+                                "html_instructions": "Turn <b>right</b> onto <b>Pulau Payung</b>",
+                                "maneuver": "turn-right",
+                                "polyline": {
+                                    "points": "fshd@c}hkSD[PoAXmCFgA?I?G?G"
+                                },
+                                "start_location": {
+                                    "lat": -6.111397600000001,
+                                    "lng": 106.8745837
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.3 km",
+                                    "value": 303
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 39
+                                },
+                                "end_location": {
+                                    "lat": -6.110583,
+                                    "lng": 106.8788179
+                                },
+                                "html_instructions": "Continue onto <b>Jl. Paliat</b>",
+                                "polyline": {
+                                    "points": "`uhd@_hikS?ICICMc@mAOa@IWm@iByAkEEIEECC"
+                                },
+                                "start_location": {
+                                    "lat": -6.111689,
+                                    "lng": 106.8763221
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.4 km",
+                                    "value": 411
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 62
+                                },
+                                "end_location": {
+                                    "lat": -6.106970899999999,
+                                    "lng": 106.879266
+                                },
+                                "html_instructions": "Slight <b>left</b> to stay on <b>Jl. Paliat</b>",
+                                "maneuver": "turn-slight-left",
+                                "polyline": {
+                                    "points": "bnhd@swikSEEIEUIs@Wk@QYGUC_@A{NK"
+                                },
+                                "start_location": {
+                                    "lat": -6.110583,
+                                    "lng": 106.8788179
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.1 km",
+                                    "value": 104
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 18
+                                },
+                                "end_location": {
+                                    "lat": -6.10705,
+                                    "lng": 106.8802018
+                                },
+                                "html_instructions": "Turn <b>right</b> onto <b>Palma</b>",
+                                "maneuver": "turn-right",
+                                "polyline": {
+                                    "points": "pwgd@mzikSNyD"
+                                },
+                                "start_location": {
+                                    "lat": -6.106970899999999,
+                                    "lng": 106.879266
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.6 km",
+                                    "value": 632
+                                },
+                                "duration": {
+                                    "text": "2 mins",
+                                    "value": 90
+                                },
+                                "end_location": {
+                                    "lat": -6.1013699,
+                                    "lng": 106.880406
+                                },
+                                "html_instructions": "Turn <b>left</b> onto <b>Jl. Padamarang</b>",
+                                "maneuver": "turn-left",
+                                "polyline": {
+                                    "points": "`xgd@g`jkSoPGiEK{ACu@AcFO"
+                                },
+                                "start_location": {
+                                    "lat": -6.10705,
+                                    "lng": 106.8802018
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.1 km",
+                                    "value": 127
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 61
+                                },
+                                "end_location": {
+                                    "lat": -6.1014339,
+                                    "lng": 106.881553
+                                },
+                                "html_instructions": "Turn <b>right</b> toward <b>Jl. Panaitan</b>",
+                                "maneuver": "turn-right",
+                                "polyline": {
+                                    "points": "ptfd@qajkSByADeB@c@"
+                                },
+                                "start_location": {
+                                    "lat": -6.1013699,
+                                    "lng": 106.880406
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.1 km",
+                                    "value": 148
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 42
+                                },
+                                "end_location": {
+                                    "lat": -6.100101100000001,
+                                    "lng": 106.8815981
+                                },
+                                "html_instructions": "Turn <b>left</b> onto <b>Jl. Panaitan</b>",
+                                "maneuver": "turn-left",
+                                "polyline": {
+                                    "points": "|tfd@uhjkS}@AcCEQ?u@A"
+                                },
+                                "start_location": {
+                                    "lat": -6.1014339,
+                                    "lng": 106.881553
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "88 m",
+                                    "value": 88
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 19
+                                },
+                                "end_location": {
+                                    "lat": -6.1001096,
+                                    "lng": 106.8823957
+                                },
+                                "html_instructions": "Turn <b>right</b> toward <b>Jl. RE Soemantadiredja</b>",
+                                "maneuver": "turn-right",
+                                "polyline": {
+                                    "points": "rlfd@_ijkS@_D"
+                                },
+                                "start_location": {
+                                    "lat": -6.100101100000001,
+                                    "lng": 106.8815981
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.9 km",
+                                    "value": 885
+                                },
+                                "duration": {
+                                    "text": "3 mins",
+                                    "value": 182
+                                },
+                                "end_location": {
+                                    "lat": -6.106458,
+                                    "lng": 106.8838797
+                                },
+                                "html_instructions": "Turn <b>right</b> onto <b>Jl. RE Soemantadiredja</b>",
+                                "maneuver": "turn-right",
+                                "polyline": {
+                                    "points": "tlfd@_njkSxHNzDFN?jFHN?vGJ|CA^AD?BC@?BCBCBE@E@G@M?c@?I?S?wA?U?iA?i@"
+                                },
+                                "start_location": {
+                                    "lat": -6.1001096,
+                                    "lng": 106.8823957
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.3 km",
+                                    "value": 334
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 54
+                                },
+                                "end_location": {
+                                    "lat": -6.103457199999999,
+                                    "lng": 106.8839716
+                                },
+                                "html_instructions": "Turn <b>left</b>",
+                                "maneuver": "turn-left",
+                                "polyline": {
+                                    "points": "jtgd@gwjkSoCCiCEoCCmDC"
+                                },
+                                "start_location": {
+                                    "lat": -6.106458,
+                                    "lng": 106.8838797
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "1,120 km",
+                                    "value": 1120437
+                                },
+                                "duration": {
+                                    "text": "2 days 8 hours",
+                                    "value": 202884
+                                },
+                                "end_location": {
+                                    "lat": 1.1244065,
+                                    "lng": 103.9274068
+                                },
+                                "html_instructions": "Take the <b>Batam (Sekupang) - Tj. Priok</b>/<wbr/><b>Belawan - Tj. Priok</b>/<wbr/><b>Tj. Priok - Batam (Sekupang)</b>/<wbr/><b>Tj. Priok - Belawan</b> ferry<div style=\"font-size:0.9em\">Toll road</div>",
+                                "maneuver": "ferry",
+                                "polyline": {
+                                    "points": "ragd@ywjkSSLCBCBGFEBA?C@E?I?_@AM?wIOoMAkKIk@A]AYCMAOAa@Eo@GkCCoEGwp@tAmBDia@`BejFsCk{EuAwkP{EwkPyEwkP{EydHsBiDCmfPgFwkPkFayIqCuqEuBukP{HwkP{HukP{HwkP{HukP{HwkPyHukP{HwkP{HcgJkEocEkDskPgNqkPgNskPeNskPgNqkPgNskPeNqkPgNskPgNqkPeNskPgNa{KgJmoCkEikPkWgkPkWgkPiWikPkWgkPkWgkPkWikPkWgkPkWgkPkWikPkWavEmHotIaBykP_DwkP_DykP_DwkP_D_wBa@ikPhVikPjVikPhV_a@l@udOtgAmfPllA}dHfh@gzFvaAeyOxmCm}JndBwsC~|@_aOfuEgeEtqAocHhpDe{Mr_HuSpKmnIx|Ku}IroLm^xe@aqH`sK_cHp`Kif@x|@}iHxtMccD|`Ge`CjvEo}Gn|MuuApoCwfE~kI{eFv_K_j@fbBk|E|}Nsm@rjBmlBvhL{hBtzKwErbCo[bkPqKjtFha@ftHld@voItc@|uEt|A|cPbd@bxE|lAlfIrh@~mDvm@`uJ`XdgEdq@p~IldAzdNdFt`An{@phPp{@phPdf@leJpCfcE|KvkPlEzrGaLrwG{XfkP}G|~DySbkJ_ZhxMeFnqAug@xrMuPntAyoBh`P_L`~@ypDfjMilBlyGe`CtyEytDvrHcqCtfCy{DhnDoqFdnDm_EdpBu{Chk@u_DvUesJhr@ctD?wgN?acA?yaH?egGa^idPs_AuBI{iPgm@ymHgXo{FyMyjPu_@}zKgWeoC?ykP?qwA?asM~JapM|JqzAbAg{GtEkGJmdCdFwxA~JwuA|MwlA|YsgBx}@iZnOkuAfs@qeCvaBo`DlfDqe@~g@{tCj~CuvEhcGmbG|wHmhAlyByBpE__AfmBws@vdBmy@rfB{q@|qBaa@d|@_]vt@el@|`AybA|`Ae}@fl@uuAdl@}o@`NcnA`NgMp@cmClNqyFrU}`D~H}q@dBmjDz@_~DsBowAyBqu@mCk{@}CcnAuD{q@oFws@iJky@kYow@}`@_p@g[_jBs_AgAi@_aCwdBowA{bBybA{qAohA{bBiKiTc\\gq@{qAcpCij@udBsUkz@}Oao@kYutAwDaO_Nmh@eLg{@eLuu@eK}o@aFc]sDqSwB}PiB{\\KaR?aRJoRx@o_@jBw^nFya@`R_lAt@qEzTwrAtFm\\dGwg@xa@wkDx@mCfBiDvHaGzEqDpHkGvKcJh@}BPmFHuDG_CE}Au@sE}@oBKWOSe@i@]U"
+                                },
+                                "start_location": {
+                                    "lat": -6.103457199999999,
+                                    "lng": 106.8839716
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "59.5 km",
+                                    "value": 59484
+                                },
+                                "duration": {
+                                    "text": "3 hours 19 mins",
+                                    "value": 11913
+                                },
+                                "end_location": {
+                                    "lat": 0.9878273,
+                                    "lng": 103.4365346
+                                },
+                                "html_instructions": "Take the <b>Belawan - Tj. Priok</b>/<wbr/><b>Tj. Balai Karimun - Batam</b>/<wbr/><b>Tj. Priok - Belawan</b> ferry<div style=\"font-size:0.9em\">Toll road</div>",
+                                "maneuver": "ferry",
+                                "polyline": {
+                                    "points": "qrzEiiiyRf@h@Vf@|@fBLZLv@TvC@JJpDInGMlBIv@Qp@oDpMkE|OeM|n@}I~b@_L|i@{Yn_BkApGsTbiAiIl^mFvW}VvnAkJjv@m@tGa@re@?xh@hCjp@vJfjBvRbdDnUx`Cr@`K`Gzz@vIhkB~M`iArHlq@nFzZzYnr@bwAvtCb|Af}CvzDraIjxDn}HleB`}CdIvNra@vdArt@xxBfPle@de@d|@lYba@rMnRvEjIv@xAVd@bAhDdAvEj@~B~AtJThCv@xIb@vQZ|Km@dLMdAWbAa@dAi@z@c@t@"
+                                },
+                                "start_location": {
+                                    "lat": 1.1244065,
+                                    "lng": 103.9274068
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "55.2 km",
+                                    "value": 55164
+                                },
+                                "duration": {
+                                    "text": "1 hour 47 mins",
+                                    "value": 6434
+                                },
+                                "end_location": {
+                                    "lat": 1.2620846,
+                                    "lng": 103.8179137
+                                },
+                                "html_instructions": "Take the <b>Harbourfront, SG - Tanjung Balai, ID</b> ferry to Singapore<div style=\"font-size:0.9em\">Toll road</div><div style=\"font-size:0.9em\">Entering Singapore</div>",
+                                "maneuver": "ferry",
+                                "polyline": {
+                                    "points": "}|_EimivRn@@N?L?LCRCNENEPKRM\\]h@aA`@iAvDcQpCgRb@qDNeDHeCAcCC}Bc@mb@gB_s@{Deu@mB}McHe]oCaM{C}LgCwIgD}IqFoL_IaMuHyK}N{PcR}RehGgcGaxKsxJGEACCACCEC_lAgt@aAm@epBmkAa\\oTuZiU}PqMmqAshAyd@ob@mv@ws@}q@{o@inDqfDeh@}i@yy@}gA_IuMuEgJcHkNwJaS{KuW_JaXwEuPsCmM_HmZoBcLoB{OaBgOgHyq@oDyf@mAiZaB{d@uCqiAo@cTa@sHKaAGc@Km@Oq@W}@Wu@Wo@Uk@_@s@mA}BwPa[iBoCw_@_k@s@}Ai@iB]gBOgCOoJM_HsAw|@GmD?G@EBGDQr@eC"
+                                },
+                                "start_location": {
+                                    "lat": 0.9878273,
+                                    "lng": 103.4365346
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.4 km",
+                                    "value": 419
+                                },
+                                "duration": {
+                                    "text": "8 mins",
+                                    "value": 465
+                                },
+                                "end_location": {
+                                    "lat": 1.2640341,
+                                    "lng": 103.8196369
+                                },
+                                "html_instructions": "Continue straight",
+                                "maneuver": "straight",
+                                "polyline": {
+                                    "points": "_ouF}|sxR?_C?eB?CAu@?I?C?S?KAC?EAE?CACACAACACAEAM?w@?u@?I?C?E?E@GBED?@EBCDC?EBC?E?E@_@Ag@?a@?y@C"
+                                },
+                                "start_location": {
+                                    "lat": 1.2620846,
+                                    "lng": 103.8179137
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.1 km",
+                                    "value": 126
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 49
+                                },
+                                "end_location": {
+                                    "lat": 1.2651413,
+                                    "lng": 103.8196653
+                                },
+                                "html_instructions": "Continue onto <b>Maritime Square</b>",
+                                "polyline": {
+                                    "points": "e{uFwgtxRQJm@Gc@AoAGOAK?M@"
+                                },
+                                "start_location": {
+                                    "lat": 1.2640341,
+                                    "lng": 103.8196369
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.2 km",
+                                    "value": 188
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 52
+                                },
+                                "end_location": {
+                                    "lat": 1.2653766,
+                                    "lng": 103.818007
+                                },
+                                "html_instructions": "<b>Maritime Square</b> turns <b>left</b> and becomes <b>Harbourfront Pl</b>",
+                                "polyline": {
+                                    "points": "cbvF}gtxRCBEDADCD?HKnB?LCV?@OrC"
+                                },
+                                "start_location": {
+                                    "lat": 1.2651413,
+                                    "lng": 103.8196653
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.1 km",
+                                    "value": 140
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 42
+                                },
+                                "end_location": {
+                                    "lat": 1.2665015,
+                                    "lng": 103.8183859
+                                },
+                                "html_instructions": "Turn <b>right</b> onto <b>Harbourfront Ave</b>",
+                                "maneuver": "turn-right",
+                                "polyline": {
+                                    "points": "scvFq}sxRCLOG}Ag@w@SMESGSG"
+                                },
+                                "start_location": {
+                                    "lat": 1.2653766,
+                                    "lng": 103.818007
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.4 km",
+                                    "value": 366
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 64
+                                },
+                                "end_location": {
+                                    "lat": 1.2658196,
+                                    "lng": 103.8210946
+                                },
+                                "html_instructions": "Turn <b>right</b> onto <b>Telok Blangah Rd</b>",
+                                "maneuver": "turn-right",
+                                "polyline": {
+                                    "points": "sjvF}_txRcAEHQT[j@_Ad@w@FKHMTe@DONa@Hg@NsABa@?]@SAQA["
+                                },
+                                "start_location": {
+                                    "lat": 1.2665015,
+                                    "lng": 103.8183859
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "1.0 km",
+                                    "value": 990
+                                },
+                                "duration": {
+                                    "text": "2 mins",
+                                    "value": 119
+                                },
+                                "end_location": {
+                                    "lat": 1.269315,
+                                    "lng": 103.8287449
+                                },
+                                "html_instructions": "Continue straight to stay on <b>Telok Blangah Rd</b>",
+                                "maneuver": "straight",
+                                "polyline": {
+                                    "points": "kfvFyptxRA[?C?S?c@C[GuCAG?E@U@c@AgAGwAAMCWAa@@c@GeBAQE[I[GSGOGMIMIKCEEGEEAAKOUUEESQWa@OS[e@[W}@}@y@_AWYc@c@SUCCUYA?QSEEy@y@WYUYOSo@s@ACACAA?A?CAC?C"
+                                },
+                                "start_location": {
+                                    "lat": 1.2658196,
+                                    "lng": 103.8210946
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.3 km",
+                                    "value": 311
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 18
+                                },
+                                "end_location": {
+                                    "lat": 1.2712365,
+                                    "lng": 103.8307811
+                                },
+                                "html_instructions": "Merge onto <b>W Coast Hwy</b>/<wbr/><b>Keppel Rd</b>",
+                                "maneuver": "merge",
+                                "polyline": {
+                                    "points": "g|vFs`vxR[_@aBeBmAqAi@k@_@c@GIaBeB"
+                                },
+                                "start_location": {
+                                    "lat": 1.269315,
+                                    "lng": 103.8287449
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.5 km",
+                                    "value": 532
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 30
+                                },
+                                "end_location": {
+                                    "lat": 1.2724307,
+                                    "lng": 103.835134
+                                },
+                                "html_instructions": "Take the ramp on the <b>right</b> to <b>ECP</b>/<wbr/><b>Changi Airport</b>",
+                                "maneuver": "ramp-right",
+                                "polyline": {
+                                    "points": "ghwFkmvxRg@w@k@q@EEUYg@q@w@eAIOMWAGAGI]ACEc@AE?]?]?_@?Y@kB?Q?c@?S?O@c@?}@@Y?M@CHU"
+                                },
+                                "start_location": {
+                                    "lat": 1.2712365,
+                                    "lng": 103.8307811
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "1.6 km",
+                                    "value": 1599
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 75
+                                },
+                                "end_location": {
+                                    "lat": 1.2731481,
+                                    "lng": 103.8493447
+                                },
+                                "html_instructions": "Merge onto <b>Keppel Viaduct</b><div style=\"font-size:0.9em\">Toll road</div>",
+                                "maneuver": "merge",
+                                "polyline": {
+                                    "points": "uowFqhwxR?oA?YEuB?k@Ag@C{@?A?ECs@AyA?m@ASC{CEmCA}@AYAW?KC_ACaBA}AAcA?U?U?EC}AAoAAuC?S?QAU?WAc@?gA?_@?c@Bw@@e@@UBS@SVsDFaABc@B[?E@k@Ck@Ek@EUI_@GYACIUKSISSa@s@}A"
+                                },
+                                "start_location": {
+                                    "lat": 1.2724307,
+                                    "lng": 103.835134
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "1.0 km",
+                                    "value": 1009
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 48
+                                },
+                                "end_location": {
+                                    "lat": 1.2705605,
+                                    "lng": 103.8574431
+                                },
+                                "html_instructions": "Continue onto <b>MCE</b><div style=\"font-size:0.9em\">Toll road</div><div style=\"font-size:0.9em\">Parts of this road may be closed at certain times or days</div>",
+                                "polyline": {
+                                    "points": "etwFkazxRMWk@uAK[GOIa@I_@EYCQGm@Cq@Ay@@]Ho@JaA\\mAL]L]NY|@aB\\s@Xm@pBkD@AtBsDzAoCf@eAZw@\\iA"
+                                },
+                                "start_location": {
+                                    "lat": 1.2731481,
+                                    "lng": 103.8493447
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.7 km",
+                                    "value": 746
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 52
+                                },
+                                "end_location": {
+                                    "lat": 1.2733352,
+                                    "lng": 103.8622588
+                                },
+                                "html_instructions": "Take the <b>Central Blvd</b>/<wbr/><b>Marina Gardens Dr</b> exit",
+                                "maneuver": "ramp-left",
+                                "polyline": {
+                                    "points": "_dwF_t{xRCICE?EAG?G@E@MBMBM@QDc@?Y@S?I?E?O?S?OASCSCSKq@GYAGKa@CMESA?EMK[KWCIACMYs@sAq@gAKQS[S]GMGKWa@kAuC_@OSIEAG?I?M?SDQJQLGLQVA@C@MB"
+                                },
+                                "start_location": {
+                                    "lat": 1.2705605,
+                                    "lng": 103.8574431
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.8 km",
+                                    "value": 800
+                                },
+                                "duration": {
+                                    "text": "2 mins",
+                                    "value": 94
+                                },
+                                "end_location": {
+                                    "lat": 1.2772205,
+                                    "lng": 103.856208
+                                },
+                                "html_instructions": "Merge onto <b>Central Blvd</b>",
+                                "maneuver": "merge",
+                                "polyline": {
+                                    "points": "kuwFcr|xRq@tAkB`DMXmFhJWf@sA~BKPoA~BSZS^mBnDOV"
+                                },
+                                "start_location": {
+                                    "lat": 1.2733352,
+                                    "lng": 103.8622588
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "1.0 km",
+                                    "value": 1010
+                                },
+                                "duration": {
+                                    "text": "3 mins",
+                                    "value": 184
+                                },
+                                "end_location": {
+                                    "lat": 1.2849385,
+                                    "lng": 103.8606633
+                                },
+                                "html_instructions": "Turn <b>right</b> onto <b>Bayfront Ave</b>",
+                                "maneuver": "turn-right",
+                                "polyline": {
+                                    "points": "smxFil{xRQXUISKgAm@qAs@gBaASKgCyAKGkGmDyAy@[QWOOIyAy@SKQKMGOGiAo@MIgAm@_@QMIKGSK_@QMGUIMGSIGCQE}@Qm@K"
+                                },
+                                "start_location": {
+                                    "lat": 1.2772205,
+                                    "lng": 103.856208
+                                },
+                                "travel_mode": "DRIVING"
+                            },
+                            {
+                                "distance": {
+                                    "text": "0.1 km",
+                                    "value": 100
+                                },
+                                "duration": {
+                                    "text": "1 min",
+                                    "value": 49
+                                },
+                                "end_location": {
+                                    "lat": 1.2847325,
+                                    "lng": 103.8610572
+                                },
+                                "html_instructions": "Turn <b>right</b><div style=\"font-size:0.9em\">Destination will be on the left</div>",
+                                "maneuver": "turn-right",
+                                "polyline": {
+                                    "points": "{}yFch|xRBYBSBYBg@HC@AB?B?B?D@Cb@"
+                                },
+                                "start_location": {
+                                    "lat": 1.2849385,
+                                    "lng": 103.8606633
+                                },
+                                "travel_mode": "DRIVING"
+                            }
+                        ],
+                        "traffic_speed_entry": [],
+                        "via_waypoint": []
+                    }
+                ],
+                "overview_polyline": {
+                    "points": "bljd@a~`jShTln@e@bDmCeA_FwVm^ynAsSam@iSgZcUuZaLmTem@}fA{GcTfCyOjXeWvn@_j@bn@ki@vSqYvQgl@pA}\\l@}x@kCgr@oA}U[oPxGiNnLmFjZ}VtJ}UvEun@WwWkByo@mIyk@sB_RrCoMzHyX_BcJeFgl@iFiz@kH}`@cJmh@qCkPhBcAuf@qoA{e@qj@yH}Ax@aI{@kDgDgJkUsANyDoPGeHOyGQH_EqEk@s@aDtNVbPTfEGRmA?kCyG}BiJXuq@y@_}AtDa`p@_Tod_Bkj@e`dCmjAu{~B_oB{``A}w@gtw@mnA_l_CasD{z}@aQwcTaEswa@tm@imQvWcl`@buC}dHfh@gzFvaAsw[hsFwuSfsGgeEtqAocHhpD{oNdlHcmTlmYopIzyL_cHp`Kif@x|@anMvvUu~KzsTm}Gp|M{eFv_K_j@fbB_kGpiRivEldYgb@vnTqKjtFha@ftHld@voItc@|uExaC`}VpvBluNxfAf}PrvBldYtbAfjRvbB~n[nP~oVlEzrGaLrwGya@dkVyn@ldY{n@hePoaCxuR_L`~@ypDfjMilBlyGe`CtyEytDvrHcqCtfCy{DhnDoqFdnDm_EdpBu{Chk@{sO`iA{|S?{eJ?olXu~AqmPqm@ijPag@wf]}w@_|T?gxa@`YscH`FmdCdFwxA~JwuA|MwlA|Y}bChnAkuAfs@qeCvaBagEloE{tCj~CuvEhcGmbG|wHmhAlyBybAxsBenBjlE{q@|qBaa@d|@ejAtvBybA|`Ae}@fl@uuAdl@}o@`Nk|ArOugK`e@{sEdLmiJw@qyG{QsfByQ{qBi{@_{C{{AgcCafBi{CwuDytAexB_oBkbE}`Aa`Da_Ag~Dsl@_aEkHoe@uB}o@pDyeBbq@ciEns@kvFl\\iZ`MaNZcLaCaP_BkBjCtEAtZ_d@lrB{~@b}EwPdw@ib@bfCoAhn@hCdzAn^joGbWzlCxQdgDrWn{BnFzZzYnr@ftD~rHbtJb`SroBxlDfwAp~Dlv@rbBpp@xaAlEfPpEpl@wBfc@dCm@pNsx@qCo~AiHcdAsLgk@}Tcp@wu@u_AehGgcGaxKsxJIImlAqt@_kDuxBs`EmoDgaFmwE_cB{rBqd@k|@gb@{pAaRuhAgSyzCsFkjBaDgKgw@ooAkCwLmB}wAp@gMaDo@aFVaFA[rDaCpBmBi@tAkF`@aQ}@mPkRkTyOaReBaN_@ep@W{h@iDqT~Qq`@uAkP{JoMgUx_@cD`GcEwBiTyL_NgHyBmDCb@"
+                },
+                "summary": "Belawan - Tj. Priok/Tj. Priok - Belawan",
+                "warnings": [],
+                "waypoint_order": []
+            }
+        ],
+        "status": "OK"
+    },
+    "success": true,
+    "msg": "OK",
+    "user": "[{\"model\": \"SETH.userauthentication\", \"pk\": 2, \"fields\": {\"last_login\": null, \"username\": \"cuser1\", \"password\": \"123451\", \"usertype\": 3, \"auser\": null, \"buser\": null, \"cuser\": 2}}]"
+}

@@ -8,9 +8,10 @@ import B_WEB.qr_views as qr_views
 app_name = "b_web"
 
 urlpatterns = [
-    path('', views.history),
+    path('', views.qr_page),
     path('login', UserViews.buser_login, name='buser_login'),
-    path('history', views.history),
+    path('logout/', UserViews.buser_logout, name ='buser_logout'), 
+    path('history', views.history, name='history'),
     path('face_recog', lambda r: render(r, "front2/dashboard.html")),
     path('find_user_c', views.find_user_c, name='find_user_c'),
     path('auth_face_result', views.auth_face_result, name='auth_face_result'),

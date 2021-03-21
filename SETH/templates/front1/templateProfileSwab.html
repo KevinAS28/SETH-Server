@@ -67,13 +67,13 @@ The above copyright notice and this permission notice shall be included in all c
     <!-- SIDEBAR -->
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
+          <li class="nav-item   ">
             <a class="nav-link" href="{% url 'a_web:dashboard' %}">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item active">
             <a class="nav-link" href="{% url 'a_web:makecert' %}">
               <i class="material-icons">contact_page</i>
               <p>Make Certificate</p>
@@ -111,14 +111,6 @@ The above copyright notice and this permission notice shall be included in all c
           </button>
           <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="javascript:;">
-                  <i class="material-icons">dashboard</i>
-                  <p class="d-lg-none d-md-block">
-                    Stats
-                  </p>
-                </a>
-              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">person</i>
@@ -131,7 +123,7 @@ The above copyright notice and this permission notice shall be included in all c
                   <a class="dropdown-item" href="#">Profile</a>
                   <div class="dropdown-divider"></div>
                   -->
-                  <a class="dropdown-item" href="#">Log out</a>
+                  <a class="dropdown-item" href="{% url 'a_web:auser_logout'  %}">Log out</a>
                 </div>
               </li>
             </ul>

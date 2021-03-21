@@ -80,27 +80,31 @@ class Command(BaseCommand):
 
     def generateB(self):
         self.stdout.write(self.style.NOTICE("Generate B..."))
-        cert_list = list(SETHModels.Certificate.objects.all())
+        cert_types = ['PCR', 'Genose', 'Swab', 'Rapid']#list(SETHModels.Certificate.objects.all())
 
         #BPlace CommonUser
         cities = 'Bogor Jakarta Bandung Jogja Tangerang Depok Bali Semarang'.split()
         index = 0
         for city in cities:
-            print(index)
-            bplace = SETHModels.BPlace(name=f"{city} Hospital Center" , supported_certs=random.choice(cert_list))
-            bplace.save()
-            buser = SETHModels.BUser(bplace=bplace)
-            buser.save()
-            SETHModels.UserAuthentication(username=f'buser{index}', password=f'12345{index}', buser=buser, usertype=SETHModels.UserAuthentication.B_TYPE).save()            
-            index += 1            
+            for ct in cert_types:
+                print(f'{city} - {ct}')
+                bplace = SETHModels.BPlace(name=f"{city} Station" , supported_certs=ct)
+                bplace.save()
+                buser = SETHModels.BUser(bplace=bplace)
+                buser.save()
+                SETHModels.UserAuthentication(username=f'buser{index}', password=f'12345{index}', buser=buser, usertype=SETHModels.UserAuthentication.B_TYPE).save()            
+                index += 1            
 
         #History
+        cert_list = SETHModels.Certificate.objects.all()
+        b_places = SETHModels.BPlace.objects.all()
         print(len(cert_list))
         index = 0
         for cert in cert_list:
-            print(index)
-            SETHModels.History(cert=cert, datetime=datetime.datetime.now(), passed=True).save()
-            index += 1
+            for b in b_places:
+                print(index)
+                SETHModels.History(cert=cert, datetime=datetime.datetime.now(), passed=True, b_places=b).save()
+                index += 1
 
         self.stdout.write(self.style.SUCCESS('generateB'))
 
