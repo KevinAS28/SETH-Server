@@ -25,11 +25,13 @@ class AuthProvider with ChangeNotifier {
   Status get loggedInStatus => _loggedInStatus;
   Status get registeredInStatus => _registeredInStatus;
 
-  Future<Map<String, dynamic>> login(String email, String password) async {
+  Future<Map<String, dynamic>> login(String username, String password) async {
+    // print("username: $username");
+
     var result;
 
     final Map<String, dynamic> loginData = {
-      'user': {'email': email, 'password': password}
+      'username': username, 'password': password
     };
 
     _loggedInStatus = Status.Authenticating;
@@ -44,16 +46,31 @@ class AuthProvider with ChangeNotifier {
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = json.decode(response.body);
 
-      var userData = responseData['data'];
+      print('responseData: $responseData');
 
-      User authUser = User.fromJson(userData);
+      if (responseData['success'] == true){
+        var userData = responseData['data'];
 
-      UserPreferences().saveUser(authUser);
+        User authUser = User.fromJson(userData);
 
-      _loggedInStatus = Status.LoggedIn;
+        UserPreferences().saveUser(authUser);
+
+        _loggedInStatus = Status.LoggedIn;
+        notifyListeners();
+
+        result = {'status': true, 'message': 'Successful', 'user': authUser};
+      }
+    
+    else{
+      _loggedInStatus = Status.NotLoggedIn;
       notifyListeners();
+      result = {
+        'status': false,
+        'message': json.decode(response.body)['message']
+      };
+    }
 
-      result = {'status': true, 'message': 'Successful', 'user': authUser};
+
     } else {
       _loggedInStatus = Status.NotLoggedIn;
       notifyListeners();
@@ -66,10 +83,10 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<Map<String, dynamic>> register(
-      String email, String password, String passwordConfirmation) async {
+      String username, String password, String passwordConfirmation) async {
     final Map<String, dynamic> registrationData = {
       'user': {
-        'email': email,
+        'username': username,
         'password': password,
         'password_confirmation': passwordConfirmation
       }

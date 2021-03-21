@@ -61,14 +61,15 @@ class FabWithIconsState extends State<FabWithIcons>
   Widget _buildFab() {
     return FloatingActionButton(
       onPressed: () {
+        print('Floating Action Button Pressed');
         if (_controller.isDismissed) {
           _controller.forward();
         } else {
           _controller.reverse();
         }
       },
-      tooltip: 'Increment',
-      child: Icon(Icons.add),
+      tooltip: 'Info',
+      child: Icon(Icons.info),
       elevation: 2.0,
     );
   }

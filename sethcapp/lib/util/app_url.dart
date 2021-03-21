@@ -1,9 +1,9 @@
 class AppUrl {
-  static const String liveBaseURL = "https://remote-ur/api/v1";
-  static const String localBaseURL = "http://10.0.2.2:4000/api/v1";
+  static const String liveBaseURL = "http://192.168.100.9:8000/c_api";
+  static const String localBaseURL = "http://192.168.100.9:8000/c_api";
 
   static const String baseURL = liveBaseURL;
-  static const String login = baseURL + "/session";
-  static const String register = baseURL + "/registration";
+  static const String login = baseURL + "/get_user";
+  static const String register = baseURL + "/register";
   static const String forgotPassword = baseURL + "/forgot-password";
 }

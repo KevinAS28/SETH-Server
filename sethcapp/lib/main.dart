@@ -34,6 +34,8 @@ class MyApp extends StatelessWidget {
           home: FutureBuilder(
               future: getUserData(),
               builder: (context, snapshot) {
+                // print('snapshot.data: ${snapshot.data}');
+                // print('snapshot.data.password: ${snapshot.data.password}');
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
@@ -41,11 +43,12 @@ class MyApp extends StatelessWidget {
                   default:
                     if (snapshot.hasError)
                       return Text('Error: ${snapshot.error}');
-                    else if (snapshot.data.token == null)
+                    else if (snapshot.data.password == null)
                       return Login();
                     else
                       UserPreferences().removeUser();
-                    return Welcome(user: snapshot.data);
+                    // return Welcome(user: snapshot.data);
+                    return Login();
                 }
               }),
           routes: {

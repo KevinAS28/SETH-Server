@@ -1,17 +1,62 @@
 import 'package:sethcapp/constant.dart';
+import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sethcapp/PCR_Page.dart';
 import 'package:sethcapp/Rapid_Page.dart';
 import 'package:sethcapp/Swab_Page.dart';
+import 'package:sethcapp/cert_made.dart';
+import 'package:sethcapp/pages/dashboard.dart';
+import 'package:sethcapp/pages/place.dart';
+import 'package:sethcapp/history_pass.dart';
+import 'package:sethcapp/info_rs.dart';
+import 'package:sethcapp/qr_code.dart';
 
-class InfoScreen extends StatefulWidget {
+class info_screen extends StatefulWidget {
   @override
-  _InfoScreenState createState() => _InfoScreenState();
+  _info_screenState createState() => _info_screenState();
 }
 
-class _InfoScreenState extends State<InfoScreen> {
+class _info_screenState extends State<info_screen> {
+  String _lastSelected = 'TAB: 0';
+  void _selectedTab(int index) {
+    if (index == 0) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new DashBoard()));
+    } else if (index == 1) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new cert_made()));
+    } else if (index == 2) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new qr_code()));
+    }
+    print("selectedTab: $index");
+    setState(() {
+      _lastSelected = 'TAB: $index';
+    });
+  }
+
+  void _selectedFab(int index) {
+    if (index == 0) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new Place()));
+    } else if (index == 1) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new info_screen()));
+    } else if (index == 3) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new history_pass()));
+    } else if (index == 2) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new info_rs()));
+    }
+    print("selectedFab: $index");
+    setState(() {
+      _lastSelected = 'FAB: $index';
+    });
+  }
+
   final controller = ScrollController();
   double offset = 0;
 
@@ -117,6 +162,18 @@ class _InfoScreenState extends State<InfoScreen> {
             )
           ],
         ),
+      ),
+      bottomNavigationBar: FABBottomAppBar(
+        centerItemText: 'Info',
+        color: Colors.grey,
+        selectedColor: Colors.red,
+        onTabSelected: _selectedTab,
+        items: [
+          FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
+          FABBottomAppBarItem(iconData: Icons.layers, text: 'Certificate'),
+          FABBottomAppBarItem(iconData: Icons.settings_overscan, text: 'Scan'),
+          FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
+        ],
       ),
     );
   }

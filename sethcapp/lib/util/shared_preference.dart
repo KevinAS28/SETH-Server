@@ -6,13 +6,13 @@ class UserPreferences {
   Future<bool> saveUser(User user) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    prefs.setInt("userId", user.userId);
+    prefs.setInt("userId", user.id);
     prefs.setString("name", user.name);
+    prefs.setString("nik", user.nik);
     prefs.setString("email", user.email);
     prefs.setString("phone", user.phone);
-    prefs.setString("type", user.type);
-    prefs.setString("token", user.token);
-    prefs.setString("renewalToken", user.renewalToken);
+    prefs.setString("username", user.username);
+    prefs.setString("password", user.password);
 
     return prefs.commit();
   }
@@ -22,20 +22,20 @@ class UserPreferences {
 
     int userId = prefs.getInt("userId");
     String name = prefs.getString("name");
+    String nik = prefs.getString("nik");
     String email = prefs.getString("email");
     String phone = prefs.getString("phone");
-    String type = prefs.getString("type");
-    String token = prefs.getString("token");
-    String renewalToken = prefs.getString("renewalToken");
+    String username = prefs.getString("username");
+    String password = prefs.getString("password");
 
     return User(
-        userId: userId,
+        id: userId,
         name: name,
         email: email,
         phone: phone,
-        type: type,
-        token: token,
-        renewalToken: renewalToken);
+        username: username,
+        password: password,
+    );
   }
 
   void removeUser() async {
@@ -44,8 +44,9 @@ class UserPreferences {
     prefs.remove("name");
     prefs.remove("email");
     prefs.remove("phone");
-    prefs.remove("type");
-    prefs.remove("token");
+    prefs.remove("nik");
+    prefs.remove("username");
+    prefs.remove("password");
   }
 
   Future<String> getToken(args) async {
@@ -53,4 +54,10 @@ class UserPreferences {
     String token = prefs.getString("token");
     return token;
   }
+  
+  Future<String> getPassword(args) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String password = prefs.getString("password");
+    return password;
+  }  
 }
