@@ -1,8 +1,15 @@
-import 'package:covid_19/cert_template.dart';
-import 'package:covid_19/constant.dart';
-import 'package:covid_19/widgets/my_header.dart';
+import 'package:sethcapp/cert_template.dart';
+import 'package:sethcapp/constant.dart';
+import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
+import 'package:sethcapp/widgets/my_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sethcapp/pages/dashboard.dart';
+import 'package:sethcapp/cert_made.dart';
+import 'package:sethcapp/qr_code.dart';
+import 'package:sethcapp/pages/place.dart';
+import 'package:sethcapp/info_screen.dart';
+import 'package:sethcapp/history_pass.dart';
 
 class info_rs extends StatefulWidget {
   @override
@@ -10,6 +17,44 @@ class info_rs extends StatefulWidget {
 }
 
 class _info_rsState extends State<info_rs> {
+  String _lastSelected = 'TAB: 0';
+  void _selectedTab(int index) {
+    if (index == 0) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new DashBoard()));
+    } else if (index == 1) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new cert_made()));
+    } else if (index == 2) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new qr_code()));
+    }
+    print("selectedTab: $index");
+    setState(() {
+      _lastSelected = 'TAB: $index';
+    });
+  }
+
+  void _selectedFab(int index) {
+    if (index == 0) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new Place()));
+    } else if (index == 1) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new info_screen()));
+    } else if (index == 3) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new history_pass()));
+    } else if (index == 2) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new info_rs()));
+    }
+    print("selectedFab: $index");
+    setState(() {
+      _lastSelected = 'FAB: $index';
+    });
+  }
+
   final controller = ScrollController();
   double offset = 0;
 
@@ -27,15 +72,15 @@ class _info_rsState extends State<info_rs> {
     super.dispose();
   }
 
-
   void onScroll() {
     setState(() {
       offset = (controller.hasClients) ? controller.offset : 0;
     });
   }
 
-  Center LayoutRS(List<Map> RSData, Function detailRS){
-    return new Center(child: ListView.builder(
+  Center LayoutRS(List<Map> RSData, Function detailRS) {
+    return new Center(
+        child: ListView.builder(
       itemCount: RSData.length,
       itemBuilder: (context, pos) {
         return Padding(
@@ -44,10 +89,19 @@ class _info_rsState extends State<info_rs> {
               color: Colors.white,
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
-                child: new GestureDetector( child: Text( "RS Cilandak" + RSData[pos]["Tests available: "] + "PCR / Rapid / Swab", style: TextStyle(fontSize: 18.0,height: 1.6,),), onTap: ()=>{detailRS(RSData[pos])}),
+                child: new GestureDetector(
+                    child: Text(
+                      "RS Cilandak" +
+                          RSData[pos]["Tests available: "] +
+                          "PCR / Rapid / Swab",
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        height: 1.6,
+                      ),
+                    ),
+                    onTap: () => {detailRS(RSData[pos])}),
               ),
-            )
-        );
+            ));
       },
     ));
   }
@@ -105,7 +159,6 @@ class _info_rsState extends State<info_rs> {
                 ],
               ),
             ),
-
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
@@ -114,28 +167,24 @@ class _info_rsState extends State<info_rs> {
                   SizedBox(height: 20),
                   //Text("Result", style: kTitleTextstyle),
                   PreventCard(
-                    text:
-                    "PCR / Rapid / Swab tests available",
+                    text: "PCR / Rapid / Swab tests available",
                     image: "assets/images/place.png",
                     title: "RS Cilandak",
                   ),
                   SizedBox(height: 20),
                   Text("Recommended hospitals", style: kTitleTextstyle),
                   PreventCard(
-                    text:
-                    "PCR / Rapid / Swab tests available",
+                    text: "PCR / Rapid / Swab tests available",
                     image: "assets/images/place.png",
                     title: "RS Fatmawati",
                   ),
                   PreventCard(
-                    text:
-                    "PCR " + "/ Swab tests available",
+                    text: "PCR " + "/ Swab tests available",
                     image: "assets/images/place.png",
                     title: "Puskesmas Pondok Indah",
                   ),
                   PreventCard(
-                    text:
-                    "PCR test available",
+                    text: "PCR test available",
                     image: "assets/images/place.png",
                     title: "RSUD Pasar Minggu",
                   ),
@@ -152,8 +201,7 @@ class _info_rsState extends State<info_rs> {
                         ),
                       );
                     },
-                    child:
-                    Text(
+                    child: Text(
                       "See Maps",
                       style: TextStyle(
                         color: kPrimaryColor,
@@ -167,6 +215,18 @@ class _info_rsState extends State<info_rs> {
             )
           ],
         ),
+      ),
+      bottomNavigationBar: FABBottomAppBar(
+        centerItemText: 'Info',
+        color: Colors.grey,
+        selectedColor: Colors.red,
+        onTabSelected: _selectedTab,
+        items: [
+          FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
+          FABBottomAppBarItem(iconData: Icons.layers, text: 'Certificate'),
+          FABBottomAppBarItem(iconData: Icons.settings_overscan, text: 'Scan'),
+          FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
+        ],
       ),
     );
   }
@@ -258,7 +318,6 @@ class SymptomCard extends StatelessWidget {
     this.title,
     this.isActive = false,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(

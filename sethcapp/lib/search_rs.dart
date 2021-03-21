@@ -128,6 +128,7 @@ class _search_rsState extends State<search_rs> {
                         "1.8 kilometers from you",
                     image: "assets/images/place.png",
                     title: "RS Cilandak",
+                  
                   ),
                   SizedBox(height: 20),
                   Text("Recommended hospitals", style: kTitleTextstyle),
@@ -152,12 +153,6 @@ class _search_rsState extends State<search_rs> {
                     image: "assets/images/place.png",
                     title: "RSUD Pasar Minggu",
                   ),
-                  Text("Maps View", style: kTitleTextstyle),
-                  SizedBox(height: 20),
-                  MapsCard(
-                    image: "",
-                  ),
-                  SizedBox(height: 80),
                 ],
               ),
             )
@@ -249,53 +244,6 @@ class PreventCard extends StatelessWidget {
                         )),
                   ],
                 ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class MapsCard extends StatelessWidget {
-  final String image;
-  const MapsCard({
-    Key key,
-    this.image,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: SizedBox(
-        height: 320,
-        child: Stack(
-          alignment: Alignment.centerLeft,
-          children: <Widget>[
-            Container(
-              height: 300,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 8),
-                    blurRadius: 24,
-                    color: kShadowColor,
-                  ),
-                ],
-              ),
-            ),
-            Image.asset(image),
-            Positioned(
-              left: 50,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                height: 90,
-                width: MediaQuery.of(context).size.width - 100,
               ),
             ),
           ],

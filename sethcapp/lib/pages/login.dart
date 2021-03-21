@@ -15,7 +15,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final formKey = new GlobalKey<FormState>();
 
-  String _username, _password;
+  String _username = "", _password = "";
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
 
     final usernameField = TextFormField(
       autofocus: false,
-      validator: validateEmail,
+      // validator: validateEmail,
       onSaved: (value) => _username = value,
       decoration: buildInputDecoration("Confirm password", Icons.email),
     );
@@ -31,7 +31,7 @@ class _LoginState extends State<Login> {
     final passwordField = TextFormField(
       autofocus: false,
       obscureText: true,
-      validator: (value) => value.isEmpty ? "Please enter password" : null,
+      // validator: (value) => value.isEmpty ? "Please enter password" : null,
       onSaved: (value) => _password = value,
       decoration: buildInputDecoration("Confirm password", Icons.lock),
     );
@@ -66,40 +66,70 @@ class _LoginState extends State<Login> {
     );
     var doLogin = () {
       User user = new User(
-          email: 'hello@gmail.com',
-          name: 'Hello',
-          userId: 1,
-          phone: '+620123',
-          type: 'Type',
-          token: 'Token',
-          renewalToken: 'renewalToken');
+        email: _username,
+        name: 'Hello',
+        id: 1,
+        phone: '+620123',
+        password: _password,
+      );
       Provider.of<UserProvider>(context, listen: false).setUser(user);
       Navigator.pushReplacementNamed(context, '/dashboard');
-      // final form = formKey.currentState;
-
-      // if (form.validate()) {
-      //   form.save();
-
-      //   final Future<Map<String, dynamic>> successfulMessage =
-      //   auth.login(_username, _password);
-
-      //   successfulMessage.then((response) {
-      //     if (response['status']) {
-      //       User user = response['user'];
-      //       Provider.of<UserProvider>(context, listen: false).setUser(user);
-      //       Navigator.pushReplacementNamed(context, '/dashboard');
-      //     } else {
-      //       Flushbar(
-      //         title: "Failed Login",
-      //         message: response['message']['message'].toString(),
-      //         duration: Duration(seconds: 3),
-      //       ).show(context);
-      //     }
-      //   });
-      // } else {
-      //   print("form is invalid");
-      // }
     };
+
+//       final form = formKey.currentState;
+
+//       if (form.validate()) {
+//         form.save();
+
+//         final Future<Map<String, dynamic>> successfulMessage =
+//             auth.login(_username, _password);
+
+//         successfulMessage.then((response) {
+//           if (response['status']) {
+//             User user = response['user'];
+//             Provider.of<UserProvider>(context, listen: false).setUser(user);
+//             Navigator.pushReplacementNamed(context, '/dashboard');
+//           } else {
+//             Flushbar(
+//               title: "Failed Login",
+//               message: response['message']['message'].toString(),
+//               duration: Duration(seconds: 3),
+//             ).show(context);
+//           }
+//         });
+//       } else {
+//         print("form is invalid");
+//       }
+//     };
+//   }
+// }
+//     final form = formKey.currentState;
+//     form.save();
+
+//     if (_username==""){
+//       _username = "cuser0";
+//       _password = "123450";
+//     }
+
+//     final Future<Map<String, dynamic>> successfulMessage = auth.login(_username, _password);
+
+//       successfulMessage.then((response) {
+//         print("response: $response");
+//         if (response['status']) {
+//           print(response);
+//           User user = response['user'];
+//           Provider.of<UserProvider>(context, listen: false).setUser(user);
+//           Navigator.pushReplacementNamed(context, '/dashboard');
+//         } else {
+//           Flushbar(
+//             title: "Failed Login",
+//             message: response['message'].toString(),
+//             duration: Duration(seconds: 3),
+//           ).show(context);
+//         }
+//       });
+//     };
+
     return SafeArea(
       child: Scaffold(
         body: Container(
