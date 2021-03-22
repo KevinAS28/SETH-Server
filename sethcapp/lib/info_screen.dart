@@ -89,7 +89,7 @@ class _info_screenState extends State<info_screen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             MyHeader(
-              image: "assets/icons/coronadr.svg",
+              image: "assets/icons/Drcorona.svg",
               textTop: "Info",
               textBottom: "Certificate",
               offset: offset,

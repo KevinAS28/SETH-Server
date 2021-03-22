@@ -278,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         items: [
           FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
           FABBottomAppBarItem(iconData: Icons.layers, text: 'Certificate'),
-          FABBottomAppBarItem(iconData: Icons.note_add, text: 'Test'),
+          FABBottomAppBarItem(iconData: Icons.settings_overscan, text: 'Scan'),
           FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
         ],
       ),

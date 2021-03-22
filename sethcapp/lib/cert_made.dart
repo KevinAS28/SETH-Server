@@ -3,13 +3,13 @@ import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/pages/dashboard.dart';
 import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
 import 'package:sethcapp/widgets/my_header.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sethcapp/qr_code.dart';
 import 'package:sethcapp/pages/place.dart';
 import 'package:sethcapp/info_screen.dart';
-import 'package:sethcapp/history_pass.dart';
 import 'package:sethcapp/info_rs.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sethcapp/history_pass.dart';
 
 class cert_made extends StatefulWidget {
   @override
@@ -18,6 +18,8 @@ class cert_made extends StatefulWidget {
 
 class _cert_madeState extends State<cert_made> {
   String _lastSelected = 'TAB: 0';
+
+  var subtitle;
 
   void _selectedTab(int index) {
     if (index == 0) {
@@ -81,6 +83,85 @@ class _cert_madeState extends State<cert_made> {
 
   @override
   Widget build(BuildContext context) {
+    var listItems = <Widget>[
+      SizedBox(height: 20),
+      Text("Result", style: kTitleTextstyle),
+    ];
+    var text = [
+      'Test Result : NEGATIVE',
+      'Test Result : NEGATIVE',
+      'Test Result : NEGATIVE',
+      'Test Result : NEGATIVE',
+      'Test Result : NEGATIVE',
+      'Test Result : NEGATIVE',
+      'Test Result : NEGATIVE',
+      'Test Result : NEGATIVE',
+      'Test Result : NEGATIVE',
+      'Test Result : NEGATIVE',
+    ];
+
+    var title = [
+      'Swab',
+      'Rapid',
+      'PCR',
+      'PCR1',
+      'PCR4',
+      'PCR5',
+      'PCR6',
+      'PCR',
+      'PCR',
+      'PCR'
+    ];
+
+    var subtitle = [
+      'Date Made: 26-02-2020',
+      'Date Made: 26-02-2020',
+      'Date Made: 26-02-2020',
+      'Date Made: 26-02-2020',
+      'Date Made: 26-02-2020',
+      'Date Made: 26-02-2020',
+      'Date Made: 26-02-2020',
+      'Date Made: 26-02-2020',
+      'Date Made: 26-02-2020',
+      'Date Made: 26-02-2020',
+    ];
+
+    var image = [
+      "assets/images/swab.png",
+      "assets/images/Rapid.png",
+      "assets/images/swab.png",
+      "assets/images/Rapid.png",
+      "assets/images/swab.png",
+      "assets/images/Rapid.png",
+      "assets/images/swab.png",
+      "assets/images/Rapid.png",
+      "assets/images/swab.png",
+      "assets/images/Rapid.png",
+    ];
+
+    var id = [
+      'ID Certificate : 12345678',
+      'ID Certificate : 23456781',
+      'ID Certificate : 12567852',
+      'ID Certificate : 12756782',
+      'ID Certificate : 12223678',
+      'ID Certificate : 23645678',
+      'ID Certificate : 62354978',
+      'ID Certificate : 78232948',
+      'ID Certificate : 47432978',
+      'ID Certificate : 63685678',
+    ];
+
+    for (var i = 0; i < 10; i++) {
+      listItems.add(PreventCard(
+        text: text[i],
+        subtitle: subtitle[i],
+        image: image[i],
+        title: title[i],
+        id: id[i],
+      ));
+      listItems.add(SizedBox(height: 20));
+    }
     return Scaffold(
       body: SingleChildScrollView(
         controller: controller,
@@ -96,59 +177,8 @@ class _cert_madeState extends State<cert_made> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  /*
-                  Text(
-                    "Jenis Sertifikat",
-                    style: kTitleTextstyle,
-                  ),
-                  SizedBox(height: 20),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                   */
-                  /*
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        SymptomCard(
-                          image: "assets/images/headache.png",
-                          title: "PCR",
-                          isActive: true,
-                        ),
-                        SymptomCard(
-                          image: "assets/images/caugh.png",
-                          title: "Swab",
-                        ),
-                        SymptomCard(
-                          image: "assets/images/fever.png",
-                          title: "Rapid",
-                        ),
-                      ],
-                    ),
-                  ),
-                  */
-                  PreventCard(
-                    text: "Test Result: NEGATIVE" +
-                        "\n" +
-                        "Date made: 26-02-2021 " +
-                        "\n" +
-                        "ID Certificate: 123456",
-                    image: "assets/images/swab.png",
-                    title: "Swab",
-                  ),
-                  PreventCard(
-                    text: "Test Result: NEGATIVE" +
-                        "\n" +
-                        "Date made: 06-03-2021 " +
-                        "\n" +
-                        "ID Certificate: 123456",
-                    image: "assets/images/Rapid.png",
-                    title: "Rapid",
-                  ),
-                  SizedBox(height: 50),
-                ],
-              ),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: listItems),
             )
           ],
         ),
@@ -173,11 +203,15 @@ class PreventCard extends StatelessWidget {
   final String image;
   final String title;
   final String text;
+  final String subtitle;
+  final String id;
   const PreventCard({
     Key key,
     this.image,
     this.title,
     this.text,
+    this.subtitle,
+    this.id,
   }) : super(key: key);
 
   @override
@@ -224,6 +258,26 @@ class PreventCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         text,
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        subtitle,
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        id,
                         maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
