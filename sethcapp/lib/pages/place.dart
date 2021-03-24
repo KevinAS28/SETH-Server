@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:provider/provider.dart';
 import 'package:sethcapp/constant.dart';
+import 'package:sethcapp/domain/user.dart';
+import 'package:sethcapp/providers/user_provider.dart';
+import 'package:sethcapp/util/app_url.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -10,8 +14,17 @@ import 'package:sethcapp/history_pass.dart';
 import 'package:sethcapp/info_rs.dart';
 import 'package:sethcapp/cert_made.dart';
 import 'package:sethcapp/pages/dashboard.dart';
+import 'package:sethcapp/util/api.dart';
 
 import 'fab_bottom_app_bar.dart';
+
+class PlaceItem0{
+  String name;
+  String placeId;
+  List<String> certificates;
+  PlaceItem0({this.name, this.placeId, this.certificates});
+  
+}
 
 class Place extends StatefulWidget {
   @override
@@ -80,78 +93,65 @@ class _PlaceState extends State<Place> {
     });
   }
 
-  Future<List<UserModel>> getData(filter) async {
-    var response = await Dio().get(
-      "http://5d85ccfb1e61af001471bf60.mockapi.io/user",
-      queryParameters: {"filter": filter},
-    );
+  Future<List<String>> getData(filter, context) async {
+    User user = Provider.of<UserProvider>(context, listen: false).user;
+    Map<String, dynamic> data = {"place": filter};
+    Map<String, dynamic> response = await hitApiUs(user, AppUrl.placeInput, data);
+    List<String> names = [];
+    if (response["status"]=="OK"){
+      for (var pred in response["predictions"]){
+        names.add(pred["description"]);
 
-    var models = UserModel.fromJsonList(response.data);
-    return models;
+      }
+    }
+    return names;
   }
 
   Widget _customDropDownExample(
-      BuildContext context, UserModel item, String itemDesignation) {
+      BuildContext context, String item, String itemDesignation) {
+    print(" _customDropDownExample");
     return Container(
-      child: (item?.avatar == null)
-          ? ListTile(
+      child: ListTile(
               contentPadding: EdgeInsets.all(0),
               leading: CircleAvatar(),
-              title: Text("No item selected"),
+              title: Text((item==null ? "Place undefined" : item) ),
             )
-          : ListTile(
-              contentPadding: EdgeInsets.all(0),
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(item.avatar),
-              ),
-              title: Text(item.name),
-              subtitle: Text(
-                item.createdAt.toString(),
-              ),
-            ),
     );
   }
 
-  Widget _customPopupItemBuilderExample2(
-      BuildContext context, UserModel item, bool isSelected) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 8),
-      decoration: !isSelected
-          ? null
-          : BoxDecoration(
-              border: Border.all(color: Theme.of(context).primaryColor),
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.white,
-            ),
-      child: ListTile(
-        selected: isSelected,
-        title: Text(item.name),
-        subtitle: Text(item.createdAt.toString()),
-        leading: CircleAvatar(
-          backgroundImage: NetworkImage(item.avatar),
-        ),
-      ),
-    );
-  }
+  // Widget _customPopupItemBuilderExample2(
+  //     BuildContext context, String item, bool isSelected) {
+  //       print(" _customPopupItemBuilderExample2");
+  //   return Container(
+  //     margin: EdgeInsets.symmetric(horizontal: 8),
+  //     decoration:
+  //          BoxDecoration(
+  //             border: Border.all(color: Theme.of(context).primaryColor),
+  //             borderRadius: BorderRadius.circular(5),
+  //             color: Colors.white,
+  //           ),
+  //     child: ListTile(
+  //       selected: isSelected,
+  //       title: Text(item),
+  //       onTap: () => {},
+  //     ),
+  //   );
+  // }
 
   Widget _customPopupItemBuilderExample(
-      BuildContext context, UserModel item, bool isSelected) {
+      BuildContext context, String item, bool isSelected) {
+        print("_customPopupItemBuilderExample");
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8),
-      decoration: !isSelected
-          ? null
-          : BoxDecoration(
+      decoration:  BoxDecoration(
               border: Border.all(color: Theme.of(context).primaryColor),
               borderRadius: BorderRadius.circular(5),
               color: Colors.white,
             ),
       child: ListTile(
         selected: isSelected,
-        title: Text(item.name),
-        subtitle: Text(item.createdAt.toString()),
-        leading: CircleAvatar(
-          backgroundImage: NetworkImage(item.avatar),
-        ),
+        title: Text(item),
+        onTap: () => {},
       ),
     );
   }
@@ -197,6 +197,7 @@ class _PlaceState extends State<Place> {
       ));
       listItems.add(SizedBox(height: 20));
     }
+
     return Scaffold(
       body: SingleChildScrollView(
         controller: controller,
@@ -225,26 +226,24 @@ class _PlaceState extends State<Place> {
                 children: <Widget>[
                   SizedBox(width: 20),
                   Expanded(
-                    child: DropdownSearch<UserModel>(
-                      searchBoxController: TextEditingController(text: 'Mrs'),
+                    child: DropdownSearch<String>(
+                      searchBoxController: TextEditingController(text: ''),
                       mode: Mode.BOTTOM_SHEET,
                       isFilteredOnline: true,
                       showClearButton: true,
                       showSearchBox: true,
-                      label: 'User *',
+                      label: 'Find a place to go',
                       dropdownSearchDecoration: InputDecoration(
                         filled: true,
                         fillColor:
                             Theme.of(context).inputDecorationTheme.fillColor,
                       ),
                       autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (UserModel u) =>
-                          u == null ? "user field is required " : null,
                       onFind: (String filter) {
                         print("Filter2: $filter");
-                        return getData(filter);
+                        return getData(filter, context);
                       },
-                      onChanged: (UserModel data) {
+                      onChanged: (var data) {
                         print(data);
                       },
                       dropdownBuilder: _customDropDownExample,

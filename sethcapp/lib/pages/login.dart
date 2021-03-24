@@ -66,11 +66,12 @@ class _LoginState extends State<Login> {
     );
     var doLogin = () {
       User user = new User(
-        email: _username,
+        username: "cuser0",
+        email: "cuser0",
         name: 'Hello',
         id: 1,
         phone: '+620123',
-        password: _password,
+        password: "123450",
       );
       Provider.of<UserProvider>(context, listen: false).setUser(user);
       Navigator.pushReplacementNamed(context, '/dashboard');

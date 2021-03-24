@@ -295,7 +295,7 @@ def make_cert(request):
         return redirect("a_web:makecert")
     elif request.method=="GET":
         user = list(CUser.objects.filter(nik=nik))[0]
-        return render(request, "front1/template_cert1.html", {"user": user, 'aplace_name': settings.A_PLACE_NAME})
+        return render(request, "front1/template_cert1.html", {"user": user, 'cert': cert, 'aplace_name': settings.A_PLACE_NAME})
     else:
         print("invalid method")
 

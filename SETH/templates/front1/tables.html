@@ -58,7 +58,7 @@ The above copyright notice and this permission notice shall be included in all c
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'a_web:dashboard' %}">
+            <a class="nav-link" href="{% url 'a_web:history' %}">
               <i class="material-icons">content_paste</i>
               <p>Certificate Made</p>
             </a>
@@ -152,6 +152,9 @@ The above copyright notice and this permission notice shall be included in all c
                             <th class="text-center">
                               Certificate Types
                             </th>
+                            <th class="text-center">
+                              Note
+                            </th>                            
                           </thead>
 
                           <tbody>
@@ -169,6 +172,9 @@ The above copyright notice and this permission notice shall be included in all c
                                 <td class="text-center">
                                   {{cert.cert_type}}
                                 </td>
+                                <td class="text-center">
+                                  {{cert.note}}
+                                </td>                                
                               </tr>
 
                             {% endfor %}
