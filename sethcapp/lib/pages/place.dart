@@ -20,6 +20,41 @@ class Place extends StatefulWidget {
 
 class _PlaceState extends State<Place> {
   String _lastSelected = 'TAB: 0';
+
+  void _logoutDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Confirmation"),
+          content: new Text("Are you sure you want to logout?"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            new FlatButton(
+              child: new Text("Logout"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+
+                ));
+              },
+            ),
+
+          ],
+        );
+      },
+    );
+  }
+
   void _selectedTab(int index) {
     if (index == 0) {
       Navigator.push(context,
@@ -30,6 +65,8 @@ class _PlaceState extends State<Place> {
     } else if (index == 2) {
       Navigator.push(
           context, new MaterialPageRoute(builder: (context) => new qr_code()));
+    } else if (index==3) {
+      return _logoutDialog();
     }
     print("selectedTab: $index");
     setState(() {
@@ -163,10 +200,10 @@ class _PlaceState extends State<Place> {
       Text("Result", style: kTitleTextstyle),
     ];
     var text = [
-      'PCR',
-      'Rapid',
-      'Swab',
-      'PCR',
+      'Require PCR / Rapid',
+      'Require PCR / Rapid',
+      'Require PCR / Rapid',
+      'Require PCR / Rapid',
       'Rapid',
       'Swab',
       'PCR',
@@ -205,8 +242,8 @@ class _PlaceState extends State<Place> {
           children: <Widget>[
             MyHeader(
               image: "assets/icons/Drcorona.svg",
-              textTop: "Info",
-              textBottom: "Place",
+              textTop: "Place",
+              textBottom: "Information",
               offset: offset,
             ),
             Container(

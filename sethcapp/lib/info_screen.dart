@@ -20,6 +20,41 @@ class info_screen extends StatefulWidget {
 
 class _info_screenState extends State<info_screen> {
   String _lastSelected = 'TAB: 0';
+
+  void _logoutDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Confirmation"),
+          content: new Text("Are you sure you want to logout?"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            new FlatButton(
+              child: new Text("Logout"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+
+                ));
+              },
+            ),
+
+          ],
+        );
+      },
+    );
+  }
+
   void _selectedTab(int index) {
     if (index == 0) {
       Navigator.push(context,
@@ -30,6 +65,8 @@ class _info_screenState extends State<info_screen> {
     } else if (index == 2) {
       Navigator.push(
           context, new MaterialPageRoute(builder: (context) => new qr_code()));
+    } else if (index == 3) {
+      return _logoutDialog();
     }
     print("selectedTab: $index");
     setState(() {
@@ -90,8 +127,8 @@ class _info_screenState extends State<info_screen> {
           children: <Widget>[
             MyHeader(
               image: "assets/icons/Drcorona.svg",
-              textTop: "Info",
-              textBottom: "Certificate",
+              textTop: "Certificate",
+              textBottom: "Info",
               offset: offset,
             ),
             Padding(
@@ -151,7 +188,7 @@ class _info_screenState extends State<info_screen> {
                               builder: (context) => new Swab_Page()));
                     },
                     title: PreventCard(
-                      text: "Swab test.",
+                      text: "A nasal (or nasopharyngeal) swab used to diagnose upper respiratory tract infections.",
                       image: "assets/images/swab.png",
                       title: "Swab",
                     ),
