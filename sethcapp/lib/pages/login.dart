@@ -67,6 +67,7 @@ class _LoginState extends State<Login> {
     var doLogin = () {
       User user = new User(
         username: "cuser0",
+        nik: "30919873421",
         email: "cuser0",
         name: 'Hello',
         id: 1,

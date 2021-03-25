@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:barcode_scan_fix/barcode_scan.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:sethcapp/domain/user.dart';
 import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
 import 'package:sethcapp/cert_made.dart';
 import 'package:sethcapp/pages/dashboard.dart';
@@ -10,6 +14,9 @@ import 'package:sethcapp/pages/place.dart';
 import 'package:sethcapp/info_screen.dart';
 import 'package:sethcapp/history_pass.dart';
 import 'package:sethcapp/info_rs.dart';
+import 'package:sethcapp/providers/user_provider.dart';
+import 'package:sethcapp/util/api.dart';
+import 'package:sethcapp/util/app_url.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 
 class qr_code extends StatefulWidget {
@@ -18,6 +25,10 @@ class qr_code extends StatefulWidget {
 }
 
 class _qr_codeState extends State<qr_code> {
+  // _qr_codeState(){
+
+  // }
+
   String _lastSelected = 'TAB: 0';
   void _selectedTab(int index) {
     if (index == 0) {
@@ -57,6 +68,7 @@ class _qr_codeState extends State<qr_code> {
   }
 
   String barcode = "";
+  int status = 0;
 
   @override
   initState() {
@@ -81,7 +93,45 @@ class _qr_codeState extends State<qr_code> {
   }
 
   @override
+  Future<bool> _onBackPressed() async {
+    print('Back Pressed');
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (this.status == 0) {
+      scan();
+      print('Barcode: ${this.barcode}');
+    } 
+    else {
+      // this.dispose();
+      // sleep(Duration(seconds:1));
+      if (this.status==-1){
+        User user = Provider.of<UserProvider>(context, listen: false).user;
+        Map<String, dynamic> data = {"user_id": user.nik};
+        hitApiUs(user, AppUrl.qr, data);
+        print('Sent data to B QR ${AppUrl.qr}');
+      }
+
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        Navigator.push(context,
+            new MaterialPageRoute(builder: (context) => new DashBoard()));
+      });
+    }
+
+    return Scaffold();
+
+    // if (this.barcode==""){
+    //   Navigator.push(context,
+    //       new MaterialPageRoute(builder: (context) => new DashBoard()));
+
+    // }
+    // this.dispose();
+    // Navigator.push(context,
+    //     new MaterialPageRoute(builder: (context) => new DashBoard()));
+    // Navigator.pop(context);
+    // return Scaffold();
+
     return Scaffold(
       body: SingleChildScrollView(
         controller: controller,
@@ -122,20 +172,41 @@ class _qr_codeState extends State<qr_code> {
   Future scan() async {
     try {
       String barcode = await BarcodeScanner.scan();
-      setState(() => this.barcode = barcode);
+      setState(
+        () => this.barcode = barcode
+        );
+      this.status = -1;
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
         setState(() {
-          this.barcode = 'The user did not grant the camera permission!';
+          var msg = 'The user did not grant the camera permission!';
+          this.barcode = msg;
+          print(msg);
+          this.status = 1;
         });
       } else {
-        setState(() => this.barcode = 'Unknown error: $e');
+        setState(() {
+          var msg = 'Unknown error: $e';
+          this.barcode = msg;
+          print(msg);
+          this.status = 2;
+        });
       }
     } on FormatException {
-      setState(() => this.barcode =
-          'null (User returned using the "back"-button before scanning anything. Result)');
+      setState(() {
+        var msg =
+            'null (User returned using the "back"-button before scanning anything. Result)';
+        this.barcode = msg;
+        print(msg);
+        this.status = 3;
+      });
     } catch (e) {
-      setState(() => this.barcode = 'Unknown error: $e');
+      setState(() {
+        var msg = 'Unknown error: $e';
+        this.barcode = msg;
+        print(msg);
+        this.status = 4;
+      });
     }
   }
 }

@@ -27,11 +27,21 @@ class PlaceItem0{
 }
 
 class Place extends StatefulWidget {
+  var data;
+
+  Place({this.data});
+
   @override
-  _PlaceState createState() => _PlaceState();
+  _PlaceState createState() => _PlaceState(this.data);
 }
 
 class _PlaceState extends State<Place> {
+  List<List<String>> data = [];
+  // _PlaceState({this.data});
+  _PlaceState(var data){
+    this.data = data;
+  }
+
   String _lastSelected = 'TAB: 0';
   void _selectedTab(int index) {
     if (index == 0) {
@@ -107,6 +117,33 @@ class _PlaceState extends State<Place> {
     return names;
   }
 
+  Future<List<List<List<String>>>> getPlaceDetail(filter, context) async {
+    User user = Provider.of<UserProvider>(context, listen: false).user;
+    Map<String, dynamic> data = {"place": filter};
+    Map<String, dynamic> response = await hitApiUs(user, AppUrl.findPlacesModel, data);
+
+    if (response["success"]==true){
+      List<List<String>> requiredCerts = [];
+      List<List<String>> notRequiredCerts = [];
+      for (var rc in response["require_certs"]){
+        for (var pl in rc.keys){
+          requiredCerts.add([pl, rc[pl].join(" / ")]);
+        }
+      }
+      
+
+      for (var rc in response["not_required_certs"]){
+        notRequiredCerts.add([rc, "No Certificate Needed"]);
+      }  
+      print('OK');
+      return [requiredCerts, notRequiredCerts];
+    }
+    else{
+      print('Not OK');
+    }
+    
+  }
+
   Widget _customDropDownExample(
       BuildContext context, String item, String itemDesignation) {
     print(" _customDropDownExample");
@@ -115,6 +152,7 @@ class _PlaceState extends State<Place> {
               contentPadding: EdgeInsets.all(0),
               leading: CircleAvatar(),
               title: Text((item==null ? "Place undefined" : item) ),
+              onTap: () => print("Cliecked 1"),
             )
     );
   }
@@ -151,7 +189,19 @@ class _PlaceState extends State<Place> {
       child: ListTile(
         selected: isSelected,
         title: Text(item),
-        onTap: () => {},
+        onTap: ()  async {
+          print('Clicked 2');
+          List<List<List<String>>> result = await getPlaceDetail(item, context);
+          // print(result);
+          var allPlaces = result[0] + result[1];
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Place(
+              data: allPlaces,
+            )),
+        );          
+        },
       ),
     );
   }
@@ -162,40 +212,55 @@ class _PlaceState extends State<Place> {
       SizedBox(height: 20),
       Text("Result", style: kTitleTextstyle),
     ];
-    var text = [
-      'PCR',
-      'Rapid',
-      'Swab',
-      'PCR',
-      'Rapid',
-      'Swab',
-      'PCR',
-      'Rapid',
-      'Swab',
-      'PCR',
-      'Rapid',
-      'Swab',
-    ];
 
-    var title = [
-      'Pondok Indah Mall',
-      'Rempah Asia',
-      'Soekarno Hatta Airport',
-      'Mall Grand Indonesia',
-      'PCR4',
-      'PCR5',
-      'PCR6',
-      'PCR',
-      'PCR',
-      'PCR'
-    ];
-    for (var i = 0; i < 10; i++) {
-      listItems.add(PreventCard(
-        text: text[i],
-        image: "assets/images/place.png",
-        title: title[i],
-      ));
-      listItems.add(SizedBox(height: 20));
+    if (this.data != null){
+      print('Length: ${this.data.length}');
+      for (List<String> p in this.data){
+        listItems.add(PreventCard(
+          text: p[1],
+          image: "assets/images/place.png",
+          title: p[0],
+        ));
+        listItems.add(SizedBox(height: 20));        
+      }
+    }
+    else{
+      print('Length: 0');
+      var text = [
+        'PCR',
+        'Rapid',
+        'Swab',
+        'PCR',
+        'Rapid',
+        'Swab',
+        'PCR',
+        'Rapid',
+        'Swab',
+        'PCR',
+        'Rapid',
+        'Swab',
+      ];
+
+      var title = [
+        'Pondok Indah Mall',
+        'Rempah Asia',
+        'Soekarno Hatta Airport',
+        'Mall Grand Indonesia',
+        'PCR4',
+        'PCR5',
+        'PCR6',
+        'PCR',
+        'PCR',
+        'PCR'
+      ];
+      for (var i = 0; i < 10; i++) {
+        listItems.add(PreventCard(
+          text: text[i],
+          image: "assets/images/place.png",
+          title: title[i],
+        ));
+        listItems.add(SizedBox(height: 20));
+      }
     }
 
     return Scaffold(

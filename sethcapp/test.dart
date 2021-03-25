@@ -20,18 +20,18 @@ void cert() async{
   var url = "http://127.0.0.1:8000/c_api/find_places_model";
   Map<String, dynamic> data = { "place": "Purwokerto Station"};
   Map<String, dynamic> response = await hitApiAuth(url, data);
-  List<Map<String, String>> requiredCerts = [];
-  List<Map<String, String>> notRequiredCerts = [];
+  List<List<String>> requiredCerts = [];
+  List<List<String>> notRequiredCerts = [];
   for (var rc in response["require_certs"]){
     for (var pl in rc.keys){
-      requiredCerts.add({pl: rc[pl].join(" / ")});
+      requiredCerts.add([pl, rc[pl].join(" / ")]);
     }
   }
   
 
   for (var rc in response["not_required_certs"]){
     for (var pl in rc.keys){
-      notRequiredCerts.add({pl: rc[pl].join(" / ")});
+      notRequiredCerts.add([pl, rc[pl].join(" / ")]);
     }
   }  
 
@@ -39,10 +39,33 @@ void cert() async{
 }
 
 
-void main() async {
-  var url = "http://127.0.0.1:8000/c_api/place_input";
-  Map<String, dynamic> data = { "filter": "Gadjah Mada"};
+void cert1() async{
+var url = "http://127.0.0.1:8000/c_api/find_places_model";
+  Map<String, dynamic> data = { "place": "USA"};
   Map<String, dynamic> response = await hitApiAuth(url, data);
-  print(response["predictions"][0]["description"]);
-  
+
+    if (response["status"]=="OK"){
+      List<List<String>> requiredCerts = [];
+      List<List<String>> notRequiredCerts = [];
+      for (var rc in response["require_certs"]){
+        for (var pl in rc.keys){
+          requiredCerts.add([pl, rc[pl].join(" / ")]);
+        }
+      }
+      
+
+      for (var rc in response["not_required_certs"]){
+        for (var pl in rc.keys){
+          notRequiredCerts.add([pl, "No Certificate Needed"]);
+        }
+      }  
+    }
+}
+
+void main() async {
+  // var url = "http://127.0.0.1:8000/c_api/place_input";
+  // Map<String, dynamic> data = { "filter": "Gadjah Mada"};
+  // Map<String, dynamic> response = await hitApiAuth(url, data);
+  // print(response["predictions"][0]["description"]);
+  cert1();
 }
