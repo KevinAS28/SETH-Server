@@ -30,6 +30,41 @@ class _qr_codeState extends State<qr_code> {
   // }
 
   String _lastSelected = 'TAB: 0';
+
+  void _logoutDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Confirmation"),
+          content: new Text("Are you sure you want to logout?"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            new FlatButton(
+              child: new Text("Logout"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+
+                ));
+              },
+            ),
+
+          ],
+        );
+      },
+    );
+  }
+
   void _selectedTab(int index) {
     if (index == 0) {
       Navigator.push(context,
@@ -40,6 +75,8 @@ class _qr_codeState extends State<qr_code> {
     } else if (index == 2) {
       Navigator.push(
           context, new MaterialPageRoute(builder: (context) => new qr_code()));
+    } else if (index == 3) {
+      return _logoutDialog();
     }
     print("selectedTab: $index");
     setState(() {
@@ -142,13 +179,20 @@ class _qr_codeState extends State<qr_code> {
             MyHeader(
               image: "assets/icons/Drcorona.svg",
               textTop: "Scan",
-              textBottom: "Qr",
+              textBottom: "Qr Code",
               offset: offset,
             ),
             new Container(
               child:
-                  new ElevatedButton(onPressed: scan, child: new Text("Scan")),
+              new ElevatedButton(onPressed: scan, child: new Text("Scan")),
               padding: const EdgeInsets.all(10.0),
+            ),
+            Text(
+              "Click to scan!",
+              style: TextStyle(
+                color: Colors.blue,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             new Text(barcode),
           ],

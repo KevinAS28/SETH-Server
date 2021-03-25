@@ -3,6 +3,18 @@ import 'package:sethcapp/widgets/my_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sethcapp/info_rs.dart';
+import 'package:sethcapp/info_rs.dart';
+import 'package:sethcapp/search_rs.dart';
+import 'package:sethcapp/cert_made.dart';
+import 'package:sethcapp/qr_code.dart';
+import 'package:sethcapp/pages/place.dart';
+import 'package:sethcapp/info_screen.dart';
+import 'package:sethcapp/history_pass.dart';
+import 'package:dio/dio.dart';
+import 'package:sethcapp/user_model.dart';
+import 'package:sethcapp/cert_template.dart';
+import 'package:sethcapp/pages/dashboard.dart';
+import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
 
 class Swab_Page extends StatefulWidget {
   @override
@@ -10,6 +22,81 @@ class Swab_Page extends StatefulWidget {
 }
 
 class _Swab_PageState extends State<Swab_Page> {
+  String _lastSelected = 'TAB: 0';
+
+  void _logoutDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Confirmation"),
+          content: new Text("Are you sure you want to logout?"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            new FlatButton(
+              child: new Text("Logout"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+
+                ));
+              },
+            ),
+
+          ],
+        );
+      },
+    );
+  }
+
+  void _selectedTab(int index) {
+    if (index == 0) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new DashBoard()));
+    } else if (index == 1) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new cert_made()));
+    } else if (index == 2) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new qr_code()));
+    } else if (index == 3) {
+      return _logoutDialog();
+    }
+    print("selectedTab: $index");
+    setState(() {
+      _lastSelected = 'TAB: $index';
+    });
+  }
+
+  void _selectedFab(int index) {
+    if (index == 0) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new Place()));
+    } else if (index == 1) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new info_screen()));
+    } else if (index == 3) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new history_pass()));
+    } else if (index == 2) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new info_rs()));
+    }
+    print("selectedFab: $index");
+    setState(() {
+      _lastSelected = 'FAB: $index';
+    });
+  }
+
   final controller = ScrollController();
   double offset = 0;
 
@@ -55,7 +142,7 @@ class _Swab_PageState extends State<Swab_Page> {
                   Text("What is Swab test?", style: kTitleTextstyle),
                   InfoCard(
                     text:
-                        "A nasopharyngeal swab (or nasopharyngeal culture) is a method for collecting a clinical test sample of nasal secretions from the back of the nose and throat.The sample is then analyzed for the presence of organisms or other clinical markers for disease.Average price: Rp 900.000. Test result will be out in 2-3 days. ",
+                        "A nasopharyngeal swab (or nasopharyngeal culture) is a method for collecting a clinical test sample of nasal secretions from the back of the nose and throat. The sample is then analyzed for the presence of organisms or other clinical markers for disease. Average price: Rp 900.000. Test result will be out in 2-3 days.",
                     image: "assets/images/pcr.png",
                     title: "",
                   ),
@@ -99,12 +186,43 @@ class _Swab_PageState extends State<Swab_Page> {
                       ),
                     ),
                   ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return info_screen();
+                          },
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "Back",
+                      style: TextStyle(
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
                   SizedBox(height: 30),
                 ],
               ),
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: FABBottomAppBar(
+        centerItemText: 'Info',
+        color: Colors.grey,
+        selectedColor: Colors.red,
+        onTabSelected: _selectedTab,
+        items: [
+          FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
+          FABBottomAppBarItem(iconData: Icons.layers, text: 'Certificate'),
+          FABBottomAppBarItem(iconData: Icons.settings_overscan, text: 'Scan'),
+          FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
+        ],
       ),
     );
   }

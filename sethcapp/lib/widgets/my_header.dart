@@ -38,19 +38,19 @@ class _MyHeaderState extends State<MyHeader> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return info_screen();
-                    },
-                  ),
-                );
-              },
-              child: SvgPicture.asset("assets/icons/menu.svg"),
-            ),
+            // GestureDetector(
+            //   onTap: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) {
+            //           return info_screen();
+            //         },
+            //       ),
+            //     );
+            //   },
+            //   child: SvgPicture.asset("assets/icons/menu.svg"),
+            // ),
             SizedBox(height: 20),
             Expanded(
               child: Stack(

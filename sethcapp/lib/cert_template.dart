@@ -2,6 +2,16 @@ import 'package:sethcapp/cert_made.dart';
 import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 import 'package:flutter/material.dart';
+import 'package:sethcapp/pages/dashboard.dart';
+import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
+import 'package:sethcapp/cert_made.dart';
+import 'package:sethcapp/qr_code.dart';
+import 'package:sethcapp/pages/place.dart';
+import 'package:sethcapp/info_screen.dart';
+import 'package:sethcapp/info_rs.dart';
+import 'package:sethcapp/history_pass.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 class cert_template extends StatefulWidget {
   cert_template({Key key, this.title}) : super(key: key);
@@ -12,6 +22,82 @@ class cert_template extends StatefulWidget {
 }
 
 class _cert_templateState extends State<cert_template> {
+  String _lastSelected = 'TAB: 0';
+
+  void _logoutDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Confirmation"),
+          content: new Text("Are you sure you want to logout?"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            new FlatButton(
+              child: new Text("Logout"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+
+                ));
+              },
+            ),
+
+          ],
+        );
+      },
+    );
+  }
+
+  var subtitle;
+  void _selectedTab(int index) {
+    if (index == 0) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new DashBoard()));
+    } else if (index == 1) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new cert_made()));
+    } else if (index == 2) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new qr_code()));
+    } else if (index == 3) {
+      return _logoutDialog();
+    }
+    print("selectedTab: $index");
+    setState(() {
+      _lastSelected = 'TAB: $index';
+    });
+  }
+
+  void _selectedFab(int index) {
+    if (index == 0) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new Place()));
+    } else if (index == 1) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new info_screen()));
+    } else if (index == 3) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new history_pass()));
+    } else if (index == 2) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new info_rs()));
+    }
+    print("selectedFab: $index");
+    setState(() {
+      _lastSelected = 'FAB: $index';
+    });
+  }
+
   final controller = ScrollController();
   double offset = 0;
 
@@ -147,6 +233,18 @@ class _cert_templateState extends State<cert_template> {
                 ],
               ),
             ]),
+      ),
+      bottomNavigationBar: FABBottomAppBar(
+        centerItemText: 'Info',
+        color: Colors.grey,
+        selectedColor: Colors.red,
+        onTabSelected: _selectedTab,
+        items: [
+          FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
+          FABBottomAppBarItem(iconData: Icons.layers, text: 'Certificate'),
+          FABBottomAppBarItem(iconData: Icons.settings_overscan, text: 'Scan'),
+          FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
+        ],
       ),
     );
   }

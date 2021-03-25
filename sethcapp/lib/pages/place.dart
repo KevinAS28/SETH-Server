@@ -18,12 +18,11 @@ import 'package:sethcapp/util/api.dart';
 
 import 'fab_bottom_app_bar.dart';
 
-class PlaceItem0{
+class PlaceItem0 {
   String name;
   String placeId;
   List<String> certificates;
   PlaceItem0({this.name, this.placeId, this.certificates});
-  
 }
 
 class Place extends StatefulWidget {
@@ -38,11 +37,44 @@ class Place extends StatefulWidget {
 class _PlaceState extends State<Place> {
   List<List<String>> data = [];
   // _PlaceState({this.data});
-  _PlaceState(var data){
+  _PlaceState(var data) {
     this.data = data;
   }
 
   String _lastSelected = 'TAB: 0';
+
+  void _logoutDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Confirmation"),
+          content: new Text("Are you sure you want to logout?"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            new FlatButton(
+              child: new Text("Logout"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ));
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _selectedTab(int index) {
     if (index == 0) {
       Navigator.push(context,
@@ -53,6 +85,8 @@ class _PlaceState extends State<Place> {
     } else if (index == 2) {
       Navigator.push(
           context, new MaterialPageRoute(builder: (context) => new qr_code()));
+    } else if (index == 3) {
+      return _logoutDialog();
     }
     print("selectedTab: $index");
     setState(() {
@@ -106,12 +140,12 @@ class _PlaceState extends State<Place> {
   Future<List<String>> getData(filter, context) async {
     User user = Provider.of<UserProvider>(context, listen: false).user;
     Map<String, dynamic> data = {"place": filter};
-    Map<String, dynamic> response = await hitApiUs(user, AppUrl.placeInput, data);
+    Map<String, dynamic> response =
+        await hitApiUs(user, AppUrl.placeInput, data);
     List<String> names = [];
-    if (response["status"]=="OK"){
-      for (var pred in response["predictions"]){
+    if (response["status"] == "OK") {
+      for (var pred in response["predictions"]) {
         names.add(pred["description"]);
-
       }
     }
     return names;
@@ -120,41 +154,38 @@ class _PlaceState extends State<Place> {
   Future<List<List<List<String>>>> getPlaceDetail(filter, context) async {
     User user = Provider.of<UserProvider>(context, listen: false).user;
     Map<String, dynamic> data = {"place": filter};
-    Map<String, dynamic> response = await hitApiUs(user, AppUrl.findPlacesModel, data);
+    Map<String, dynamic> response =
+        await hitApiUs(user, AppUrl.findPlacesModel, data);
 
-    if (response["success"]==true){
+    if (response["success"] == true) {
       List<List<String>> requiredCerts = [];
       List<List<String>> notRequiredCerts = [];
-      for (var rc in response["require_certs"]){
-        for (var pl in rc.keys){
+      for (var rc in response["require_certs"]) {
+        for (var pl in rc.keys) {
           requiredCerts.add([pl, rc[pl].join(" / ")]);
         }
       }
-      
 
-      for (var rc in response["not_required_certs"]){
+      for (var rc in response["not_required_certs"]) {
         notRequiredCerts.add([rc, "No Certificate Needed"]);
-      }  
+      }
       print('OK');
       return [requiredCerts, notRequiredCerts];
-    }
-    else{
+    } else {
       print('Not OK');
     }
-    
   }
 
   Widget _customDropDownExample(
       BuildContext context, String item, String itemDesignation) {
     print(" _customDropDownExample");
     return Container(
-      child: ListTile(
-              contentPadding: EdgeInsets.all(0),
-              leading: CircleAvatar(),
-              title: Text((item==null ? "Place undefined" : item) ),
-              onTap: () => print("Cliecked 1"),
-            )
-    );
+        child: ListTile(
+      contentPadding: EdgeInsets.all(0),
+      leading: CircleAvatar(),
+      title: Text((item == null ? "Place undefined" : item)),
+      onTap: () => print("Cliecked 1"),
+    ));
   }
 
   // Widget _customPopupItemBuilderExample2(
@@ -178,29 +209,29 @@ class _PlaceState extends State<Place> {
 
   Widget _customPopupItemBuilderExample(
       BuildContext context, String item, bool isSelected) {
-        print("_customPopupItemBuilderExample");
+    print("_customPopupItemBuilderExample");
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8),
-      decoration:  BoxDecoration(
-              border: Border.all(color: Theme.of(context).primaryColor),
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.white,
-            ),
+      decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).primaryColor),
+        borderRadius: BorderRadius.circular(5),
+        color: Colors.white,
+      ),
       child: ListTile(
         selected: isSelected,
         title: Text(item),
-        onTap: ()  async {
+        onTap: () async {
           print('Clicked 2');
           List<List<List<String>>> result = await getPlaceDetail(item, context);
           // print(result);
           var allPlaces = result[0] + result[1];
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Place(
-              data: allPlaces,
-            )),
-        );          
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Place(
+                      data: allPlaces,
+                    )),
+          );
         },
       ),
     );
@@ -213,18 +244,17 @@ class _PlaceState extends State<Place> {
       Text("Result", style: kTitleTextstyle),
     ];
 
-    if (this.data != null){
+    if (this.data != null) {
       print('Length: ${this.data.length}');
-      for (List<String> p in this.data){
+      for (List<String> p in this.data) {
         listItems.add(PreventCard(
           text: p[1],
           image: "assets/images/place.png",
           title: p[0],
         ));
-        listItems.add(SizedBox(height: 20));        
+        listItems.add(SizedBox(height: 20));
       }
-    }
-    else{
+    } else {
       print('Length: 0');
       var text = [
         'PCR',
@@ -271,8 +301,8 @@ class _PlaceState extends State<Place> {
           children: <Widget>[
             MyHeader(
               image: "assets/icons/Drcorona.svg",
-              textTop: "Info",
-              textBottom: "Place",
+              textTop: "Place",
+              textBottom: "Information",
               offset: offset,
             ),
             Container(

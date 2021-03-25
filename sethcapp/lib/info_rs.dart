@@ -36,6 +36,41 @@ class info_rs extends StatefulWidget {
 
 class _info_rsState extends State<info_rs> {
   String _lastSelected = 'TAB: 0';
+
+  void _logoutDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Confirmation"),
+          content: new Text("Are you sure you want to logout?"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            new FlatButton(
+              child: new Text("Logout"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+
+                ));
+              },
+            ),
+
+          ],
+        );
+      },
+    );
+  }
+
   void _selectedTab(int index) {
     if (index == 0) {
       Navigator.push(context,
@@ -46,6 +81,8 @@ class _info_rsState extends State<info_rs> {
     } else if (index == 2) {
       Navigator.push(
           context, new MaterialPageRoute(builder: (context) => new qr_code()));
+    } else if (index == 3) {
+      return _logoutDialog();
     }
     print("selectedTab: $index");
     setState(() {
@@ -247,8 +284,8 @@ class _info_rsState extends State<info_rs> {
           children: <Widget>[
             MyHeader(
               image: "assets/icons/Drcorona.svg",
-              textTop: "Info",
-              textBottom: "Hospital",
+              textTop: "Hospital",
+              textBottom: "Info",
               offset: offset,
             ),
             Container(
