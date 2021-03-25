@@ -26,7 +26,7 @@ The above copyright notice and this permission notice shall be included in all c
   <link href="/staticfiles/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="/staticfiles/assets/demo/demo.css" rel="stylesheet" />
-  {% if messages %}
+  {% comment %} {% if messages %}
   {% for message in messages %}
 
   <script>
@@ -34,7 +34,7 @@ The above copyright notice and this permission notice shall be included in all c
   </script>
 
   {% endfor %}
-  {% endif %}
+  {% endif %} {% endcomment %}
 
 </head>
 
@@ -67,7 +67,7 @@ The above copyright notice and this permission notice shall be included in all c
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="{% url 'a_web:dashboard' %}">
+            <a class="nav-link" href="{% url 'a_web:history' %}">
               <i class="material-icons">content_paste</i>
               <p>Certificate Made</p>
             </a>
@@ -194,22 +194,8 @@ The above copyright notice and this permission notice shall be included in all c
             </div>
 
             <div class="row">
-              <div class="col-md-4">
-                <div class="card card-profile">
-                  <div class="card-avatar">
-                      <img class="img" src="/staticfiles/assets/img/faces/KTP.jpg" />
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-category text-gray">IDENTITY CARD</h5>
-                    <p class="card-description">
-                      Scan user's Kartu Tanda Penduduk (KTP) to proceed.
-                    </p>
-                    <a href="javascript:;" class="btn btn-success btn-round">success</a> <!-- ini tombolnya warna ijo kalo udah ke scan -->
-                  </div>
-                </div>
-              </div>
-
-            <div class="col-md-4">
+            
+            <div class="col-md-6">
               <div class="card card-profile">
                 <div class="card-avatar">
                     <img class="img" src="/staticfiles/assets/img/faces/fingerprint.jpg" />
@@ -225,7 +211,7 @@ The above copyright notice and this permission notice shall be included in all c
               </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
               <div class="card card-profile">
                 <div class="card-avatar">
                     <img class="img" src="/staticfiles/assets/img/faces/facerecog.jpg" />

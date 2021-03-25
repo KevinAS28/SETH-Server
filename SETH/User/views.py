@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.contrib import messages 
 from django.contrib.auth import login, logout
 from django.core import serializers
-
+from django.conf import settings
 
 from User.backends.AuthenticationBackend import AuthenticationBackend
 from SETH import models
@@ -37,7 +37,7 @@ def auser_login(request):
         next += '/a_web/dashboard'
     print(f'auser_login next: {next}')
     request.session['login_origin'] = '/a_web/login'
-    return render(request, 'front1/login.html', {'title':'log in', 'login_origin': '/a_web/login', 'next': next}) 
+    return render(request, 'front1/login.html', {'title':'log in', 'login_origin': '/a_web/login', 'next': next, 'aplace_name': settings.A_PLACE_NAME}) 
 
 def buser_login(request):
     next = ''
@@ -47,7 +47,7 @@ def buser_login(request):
         next += '/b_web/qr_page'
     print(f'buser_login next: {next}')
     request.session['login_origin'] = '/b_web/login'
-    return render(request, 'front2/login.html', {'title':'log in', 'login_origin': '/b_web/login', 'next': next}) 
+    return render(request, 'front2/login.html', {'title':'log in', 'login_origin': '/b_web/login', 'next': next, 'bplace_name': settings.B_PLACE_NAME}) 
 
 def auser_logout(request):
     logout(request)
@@ -82,7 +82,7 @@ def cuser_login(func):
             return JsonResponse(response)
 
         else:
-            print("Invalid authentication")
+            print(f"Invalid authentication {username}|{password}")
             response = {'success': False, 'message': 'Invalid Authentication'}
             print('Response:', response)
             return JsonResponse(response)

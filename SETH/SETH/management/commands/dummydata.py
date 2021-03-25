@@ -4,6 +4,8 @@ from SETH import models as SETHModels
 import datetime
 import random
 import sys
+import json
+import requests
 
 class Command(BaseCommand):
     help = 'Genrate dummy data'
@@ -15,6 +17,7 @@ class Command(BaseCommand):
             'genA': self.generateA,
             'genB': self.generateB,
             'genC': self.generateC,
+            'genPlace': self.generatePlace
         }
 
 
@@ -67,15 +70,6 @@ class Command(BaseCommand):
             SETHModels.UserAuthentication(username=f'auser{index}', password=f'12345{index}', auser=auser, usertype=SETHModels.UserAuthentication.A_TYPE).save()            
             index += 1            
         
-        #Certificates
-        aplace_list = list(SETHModels.APlace.objects.all())
-        print(len(aplace_list))
-        index = 0
-        for cuser in list(SETHModels.CUser.objects.all()):
-            print(index)
-            SETHModels.Certificate(cuser=cuser, cert_type='PCR', note='No Problems', date=datetime.date.today(), a_place=random.choice(aplace_list), result=False).save()
-            index += 1
-        
         self.stdout.write(self.style.SUCCESS('generateA'))
 
     def generateB(self):
@@ -83,7 +77,7 @@ class Command(BaseCommand):
         cert_types = ['PCR', 'Genose', 'Swab', 'Rapid']#list(SETHModels.Certificate.objects.all())
 
         #BPlace CommonUser
-        cities = 'Bogor Jakarta Bandung Jogja Tangerang Depok Bali Semarang'.split()
+        cities = ['Gambir', 'Pasar Senen', 'Cirebon', 'Solo Balapan', 'Purwokerto']
         index = 0
         for city in cities:
             for ct in cert_types:
@@ -98,24 +92,25 @@ class Command(BaseCommand):
         #History
         cert_list = SETHModels.Certificate.objects.all()
         b_places = SETHModels.BPlace.objects.all()
+        cusers = SETHModels.CUser.objects.all()
         print(len(cert_list))
         index = 0
-        for cert in cert_list:
+        for c in cusers:
             for b in b_places:
                 print(index)
-                SETHModels.History(cert=cert, datetime=datetime.datetime.now(), passed=True, b_places=b).save()
+                SETHModels.History(cuser=c, datetime=datetime.datetime.now(), passed=True, b_place=b).save()
                 index += 1
 
         self.stdout.write(self.style.SUCCESS('generateB'))
 
     def generateC(self):
         self.stdout.write(self.style.NOTICE("Generate C..."))
-
-        for i in range(10):
+        names = open('names.txt', 'r').read().split('\n')
+        for i in range(len(names)):
             print(i)
             cuser = SETHModels.CUser(
-                nik = f'{i}',
-                name = f'cuser{i}',
+                nik = f'30129012887{i}',
+                name = f'{names[i]}',
                 email = f'a{i}@a.com',
                 phone = f'000{i}',
                 bday = '1997-02-02',
@@ -126,5 +121,61 @@ class Command(BaseCommand):
             cuser.save()
             SETHModels.UserAuthentication(username=f'cuser{i}', password=f'12345{i}', cuser=cuser, usertype=SETHModels.UserAuthentication.C_TYPE).save()           
 
+
+        #Certificates
+        aplace_list = list(SETHModels.APlace.objects.all())
+        print(len(aplace_list))
+        index = 0
+        for cuser in list(SETHModels.CUser.objects.all()):
+            print(index)
+            SETHModels.Certificate(cuser=cuser, cert_type='PCR', note='No Problems', date=datetime.date.today(), a_place=random.choice(aplace_list), result=False).save()
+            index += 1
+
         self.stdout.write(self.style.SUCCESS('generateC'))
 
+    def generatePlace(self):
+        self.stdout.write(self.style.NOTICE("Generate Places..."))
+        with open("kevin_api_key", "r+") as kevin_api:
+            kevin_api = kevin_api.read()
+
+        stations = [i+' Station' for i in ['Gambir', 'Pasar Senen', 'Cirebon', 'Solo Balapan', 'Purwokerto']]
+        place_names = stations+['Gadjah Mada University', 'National Monument', 'Taman Safari Bogor']
+        certs = list(SETHModels.Certificate.objects.all())
+        
+        for place in place_names:
+            params = {"key": kevin_api, "input": place, "inputtype": "textquery", "placeid": "ChIJ0xkTTRlx0i0Re3sZsgY3Olw", "language": "en"}
+            url = "https://maps.googleapis.com/maps/api/place/textsearch/json"
+            gcp_result = requests.post(url, params=params)
+            json_result = json.loads(gcp_result.content)
+
+            status = json_result['status']
+            if status=='OK':
+                for place_result in json_result['results']:
+                    gcp_name = place_result['name']
+                    place_id = place_result['place_id']
+                    formatted_address = place_result['formatted_address']
+
+                    bplaces = SETHModels.BPlace.objects.filter(name__contains=gcp_name)
+                    aplaces = SETHModels.APlace.objects.filter(name__contains=gcp_name)
+                    
+                    is_bplace=True if bplaces.exists() else False
+                    is_aplace=True if aplaces.exists() else False
+
+                    print(gcp_name)
+                    model_place = SETHModels.Place(name=gcp_name, place_gcp_id=place_id, formatted_address=formatted_address, is_aplace=is_aplace, is_bplace=is_bplace, aplace=aplaces[0] if is_aplace else None, bplace=bplaces[0] if is_bplace else None)
+                    model_place.save()
+
+                    rn = random.randrange(0, len(certs)-1)
+                    model_place.supported_certificates.add(certs[rn])
+                    model_place.supported_certificates.add(certs[rn+1])
+                    model_place.save()
+            else:
+                print(f'ERROR on {place}')
+                print(json_result)
+                print(f'ERROR on {place}')
+                exit()
+        self.stdout.write(self.style.SUCCESS('generate Places'))
+
+            
+
+        

@@ -80,11 +80,13 @@ def history(request):
         print("Invalid method")
 
 def face_auth_data(request, user_id):
+    cuser = CUser.objects.filter(nik=user_id)[0]
     data = {'redirect': True}
     config = configparser.ConfigParser()
     config.read(os.path.join(settings.BASE_DIR, 'face_core.ini'))       
     redirect_url = config['face_core']['auth_face_page_url']
     data['user_id'] = user_id
+    data['name'] = cuser.name
     data['success_url'] = 'http://127.0.0.1:8000'+reverse('b_web:auth_face_result')#'http://127.0.0.1:8000'+reverse('a_web:regist_c_notregistered')
     data['session'] = json.dumps(session_to_dict(request.session))
     data['redirect_url'] = f'{redirect_url}?params={quote(json.dumps(data))}'

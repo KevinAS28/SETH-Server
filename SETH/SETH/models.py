@@ -57,6 +57,7 @@ class Certificate(models.Model):
 class BPlace(models.Model):
     name = models.CharField(max_length=50, blank=False)
     supported_certs = models.CharField(max_length=50, blank=False, default='Genose')
+    # certificates = models.ManyToManyField(Certificate, blank=True, null=True)
     
 
 class AUser(models.Model):
@@ -67,18 +68,26 @@ class AUser(models.Model):
 class BUser(models.Model):
     bplace = models.ForeignKey(BPlace, on_delete=models.CASCADE, related_name='bplace')
 
-
-    
-
 class History(models.Model):
     cuser = models.ForeignKey(CUser, on_delete=models.CASCADE)
     datetime = models.DateTimeField(default=datetime.now, blank=True, null=True)
     passed = models.BooleanField(default=False)
     b_place = models.ForeignKey(BPlace, on_delete=models.CASCADE, blank=True, null=True)
+    cert = models.ForeignKey(Certificate, on_delete=models.CASCADE, related_name='certificate_history', blank=True, null=True)
 
 
+class Place(models.Model):
+    name = models.CharField(max_length=100, blank=False, default='Gadjah Mada University')
+    place_gcp_id = models.CharField(max_length=100, blank=False, default='Gadjah Mada University')
+    formatted_address = models.CharField(max_length=200, blank=False, default='Gadjah Mada University')
 
+    is_aplace = models.BooleanField(blank=False, default=False)
+    is_bplace = models.BooleanField(blank=False, default=False)
 
+    bplace = models.ForeignKey(BPlace, on_delete=models.CASCADE, related_name='bplace_place', blank=True, null=True)
+    aplace = models.ForeignKey(APlace, on_delete=models.CASCADE, related_name='aplace_place', blank=True, null=True)
+
+    supported_certificates = models.ManyToManyField(Certificate, blank=True)
 
 class UserAuthentication(AbstractBaseUser):
     A_TYPE = 1
@@ -105,6 +114,3 @@ class UserAuthentication(AbstractBaseUser):
     
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['password']
-
-
-

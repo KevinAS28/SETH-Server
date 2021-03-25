@@ -1,0 +1,6 @@
+tensorflow
+torch
+django
+django-qr-code
+opencv-python
+tf-slim
