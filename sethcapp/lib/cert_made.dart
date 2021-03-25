@@ -1,7 +1,11 @@
+import 'package:provider/provider.dart';
 import 'package:sethcapp/cert_template.dart';
 import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/pages/dashboard.dart';
 import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
+import 'package:sethcapp/providers/user_provider.dart';
+import 'package:sethcapp/util/api.dart';
+import 'package:sethcapp/util/app_url.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 import 'package:sethcapp/qr_code.dart';
 import 'package:sethcapp/pages/place.dart';
@@ -10,6 +14,8 @@ import 'package:sethcapp/info_rs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sethcapp/history_pass.dart';
+
+import 'domain/user.dart';
 
 class cert_made extends StatefulWidget {
   @override
@@ -81,88 +87,34 @@ class _cert_madeState extends State<cert_made> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Future<List<Widget>> getCerts(response)  async{
     var listItems = <Widget>[
       SizedBox(height: 20),
       Text("Result", style: kTitleTextstyle),
-    ];
-    var text = [
-      'Test Result : NEGATIVE',
-      'Test Result : NEGATIVE',
-      'Test Result : NEGATIVE',
-      'Test Result : NEGATIVE',
-      'Test Result : NEGATIVE',
-      'Test Result : NEGATIVE',
-      'Test Result : NEGATIVE',
-      'Test Result : NEGATIVE',
-      'Test Result : NEGATIVE',
-      'Test Result : NEGATIVE',
-    ];
-
-    var title = [
-      'Swab',
-      'Rapid',
-      'PCR',
-      'PCR1',
-      'PCR4',
-      'PCR5',
-      'PCR6',
-      'PCR',
-      'PCR',
-      'PCR'
-    ];
-
-    var subtitle = [
-      'Date Made: 26-02-2020',
-      'Date Made: 26-02-2020',
-      'Date Made: 26-02-2020',
-      'Date Made: 26-02-2020',
-      'Date Made: 26-02-2020',
-      'Date Made: 26-02-2020',
-      'Date Made: 26-02-2020',
-      'Date Made: 26-02-2020',
-      'Date Made: 26-02-2020',
-      'Date Made: 26-02-2020',
-    ];
-
-    var image = [
-      "assets/images/swab.png",
-      "assets/images/Rapid.png",
-      "assets/images/swab.png",
-      "assets/images/Rapid.png",
-      "assets/images/swab.png",
-      "assets/images/Rapid.png",
-      "assets/images/swab.png",
-      "assets/images/Rapid.png",
-      "assets/images/swab.png",
-      "assets/images/Rapid.png",
-    ];
-
-    var id = [
-      'ID Certificate : 12345678',
-      'ID Certificate : 23456781',
-      'ID Certificate : 12567852',
-      'ID Certificate : 12756782',
-      'ID Certificate : 12223678',
-      'ID Certificate : 23645678',
-      'ID Certificate : 62354978',
-      'ID Certificate : 78232948',
-      'ID Certificate : 47432978',
-      'ID Certificate : 63685678',
-    ];
-
-    for (var i = 0; i < 10; i++) {
+    ];    
+    List<List<String>> certificates = response["certs"];
+    for (List<String> cert in certificates) {
+      
       listItems.add(PreventCard(
-        text: text[i],
-        subtitle: subtitle[i],
-        image: image[i],
-        title: title[i],
-        id: id[i],
+        text: cert[0],
+        subtitle: cert[1],
+        image: cert[2],
+        title: cert[3],
+        id: "",
       ));
-      listItems.add(SizedBox(height: 20));
+      listItems.add(SizedBox(height: 20));    
     }
-    return Scaffold(
+    return listItems;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+
+    User user = Provider.of<UserProvider>(context).user;
+    Map<String, String> data = {"nik": user.nik};
+    hitApiUs(user, AppUrl.getCertificates, data).then((_) => getCerts(_)).then(
+      (listItems)=>   Scaffold(
       body: SingleChildScrollView(
         controller: controller,
         child: Column(
@@ -195,7 +147,7 @@ class _cert_madeState extends State<cert_made> {
           FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
         ],
       ),
-    );
+    ));
   }
 }
 

@@ -27,4 +27,3 @@ Future<Map<String, dynamic>> hitApiUs (User user, String url, Map<String, dynami
     return hitApiAuth(url, data, username, password);
 }
 
-
