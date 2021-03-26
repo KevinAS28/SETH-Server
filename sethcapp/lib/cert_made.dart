@@ -48,11 +48,9 @@ class _cert_madeState extends State<cert_made> {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => HomeScreen(),
-
                 ));
               },
             ),
-
           ],
         );
       },
@@ -71,7 +69,7 @@ class _cert_madeState extends State<cert_made> {
     } else if (index == 2) {
       Navigator.push(
           context, new MaterialPageRoute(builder: (context) => new qr_code()));
-    } else if (index==3) {
+    } else if (index == 3) {
       return _logoutDialog();
     }
     print("selectedTab: $index");
@@ -103,11 +101,18 @@ class _cert_madeState extends State<cert_made> {
   final controller = ScrollController();
   double offset = 0;
 
+  List<Widget> data;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     controller.addListener(onScroll);
+    getCerts(context).then((listItems) {
+      setState(() {
+        this.data = listItems;
+      });
+    });
   }
 
   @override
@@ -123,67 +128,85 @@ class _cert_madeState extends State<cert_made> {
     });
   }
 
-  Future<List<Widget>> getCerts(response)  async{
+  Future<List<Widget>> getCerts(context) async {
+    print('getCerts() called');
+    User user = Provider.of<UserProvider>(context, listen: false).user;
+    Map<String, String> data = {"nik": user.nik};
+    var response = await hitApiUs(user, AppUrl.getCertificates, data);
+
     var listItems = <Widget>[
       SizedBox(height: 20),
       Text("Result", style: kTitleTextstyle),
-    ];    
-    List<List<String>> certificates = response["certs"];
-    for (List<String> cert in certificates) {
-      
+    ];
+
+    List<dynamic> certificates = response["certs"];
+    for (List<dynamic> cert in certificates) {
+      var cert_image = 'swab';
+      if ((cert[1] as String).contains('PCR')){
+        cert_image = 'pcr';
+      } 
+      else if ((cert[1] as String).contains('Genose')){
+        cert_image = 'swab';
+      }
+      else if ((cert[1] as String).contains('Rapid')){
+        cert_image = 'Rapid';
+      }      
+
       listItems.add(PreventCard(
-        text: cert[0],
+        text: cert[3],
         subtitle: cert[1],
-        image: cert[2],
-        title: cert[3],
-        id: "",
+        image: "assets/images/$cert_image.png",
+        title: cert[0],
+        id: cert[2],
       ));
-      listItems.add(SizedBox(height: 20));    
+      listItems.add(SizedBox(height: 20));
     }
     return listItems;
   }
 
   @override
   Widget build(BuildContext context) {
-
-
-    User user = Provider.of<UserProvider>(context).user;
-    Map<String, String> data = {"nik": user.nik};
-    hitApiUs(user, AppUrl.getCertificates, data).then((_) => getCerts(_)).then(
-      (listItems)=>   Scaffold(
-      body: SingleChildScrollView(
-        controller: controller,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            MyHeader(
-              image: "assets/icons/Drcorona.svg",
-              textTop: "Certificate",
-              textBottom: "Made",
-              offset: offset,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: listItems),
-            )
-          ],
+    if (this.data == null) {
+      return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Loading..."),
         ),
-      ),
-      bottomNavigationBar: FABBottomAppBar(
-        centerItemText: 'Info',
-        color: Colors.grey,
-        selectedColor: Colors.red,
-        onTabSelected: _selectedTab,
-        items: [
-          FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
-          FABBottomAppBarItem(iconData: Icons.layers, text: 'Certificate'),
-          FABBottomAppBarItem(iconData: Icons.settings_overscan, text: 'Scan'),
-          FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
-        ],
-      ),
-    ));
+      );
+    }
+    return Scaffold(
+        body: SingleChildScrollView(
+          controller: controller,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              MyHeader(
+                image: "assets/icons/Drcorona.svg",
+                textTop: "Certificate",
+                textBottom: "Made",
+                offset: offset,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: this.data),
+              )
+            ],
+          ),
+        ),
+        bottomNavigationBar: FABBottomAppBar(
+          centerItemText: 'Info',
+          color: Colors.grey,
+          selectedColor: Colors.red,
+          onTabSelected: _selectedTab,
+          items: [
+            FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
+            FABBottomAppBarItem(iconData: Icons.layers, text: 'Certificate'),
+            FABBottomAppBarItem(
+                iconData: Icons.settings_overscan, text: 'Scan'),
+            FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
+          ],
+        ));
   }
 }
 

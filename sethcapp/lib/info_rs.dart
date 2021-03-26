@@ -284,7 +284,7 @@ class _info_rsState extends State<info_rs> {
           children: <Widget>[
             MyHeader(
               image: "assets/icons/Drcorona.svg",
-              textTop: "Hospital",
+              textTop: "Health Centers",
               textBottom: "Info",
               offset: offset,
             ),
@@ -305,12 +305,12 @@ class _info_rsState extends State<info_rs> {
                   SizedBox(width: 20),
                   Expanded(
                     child: DropdownSearch<UserModel>(
-                      searchBoxController: TextEditingController(text: 'Mrs'),
+                      searchBoxController: TextEditingController(text: ''),
                       mode: Mode.BOTTOM_SHEET,
                       isFilteredOnline: true,
                       showClearButton: true,
                       showSearchBox: true,
-                      label: 'User *',
+                      label: 'Find health centers',
                       dropdownSearchDecoration: InputDecoration(
                         filled: true,
                         fillColor:

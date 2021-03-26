@@ -185,12 +185,12 @@ class _info_screenState extends State<info_screen> {
                       Navigator.push(
                           context,
                           new MaterialPageRoute(
-                              builder: (context) => new Swab_Page()));
+                              builder: (context) => new Genose_Page()));
                     },
                     title: PreventCard(
-                      text: "A nasal (or nasopharyngeal) swab used to diagnose upper respiratory tract infections.",
+                      text: "GeNose C19 is an electronic nose developed by Gadjah Mada University (UGM) to detect Covid-19 more quickly and accurately with accuracy 97% and the price is only 2\$ (USD)",
                       image: "assets/images/swab.png",
-                      title: "Swab",
+                      title: "Genose",
                     ),
                   ),
                   SizedBox(height: 50),

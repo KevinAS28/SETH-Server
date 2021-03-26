@@ -1,5 +1,4 @@
 from django.core import serializers
-
 from django.http.response import JsonResponse
 
 import json
@@ -20,7 +19,7 @@ def test(request):
 
 
 def find_place_core(request):
-    with open("kevin_api_key", "r+") as kevin_api:
+    with open("kevin_api_key", "r") as kevin_api:
         kevin_api = kevin_api.read()
 
     data = json.loads(request.body)
@@ -56,7 +55,7 @@ def find_places_model(request):
 
         not_require_certs.append(gcp_name)        
 
-    with open("kevin_api_key", "r+") as kevin_api:
+    with open("kevin_api_key", "r") as kevin_api:
         kevin_api = kevin_api.read()
 
     data = json.loads(request.body)
@@ -102,9 +101,9 @@ def find_places_model(request):
 
 @cuser_login
 def place_input(request):
-    with open("kevin_api_key", "r+") as kevin_api:
+    with open("kevin_api_key", "r") as kevin_api:
         kevin_api = kevin_api.read()
-    
+    # print(kevin_api)
     data = json.loads(request.body)
 
     params = {"key": kevin_api, "input": data["place"], "inputtype": "textquery", "placeid": "ChIJ0xkTTRlx0i0Re3sZsgY3Olw", "language": "en"}
@@ -116,7 +115,7 @@ def place_input(request):
 
 @cuser_login
 def get_place_by_id(request):
-    with open("kevin_api_key", "r+") as kevin_api:
+    with open("kevin_api_key", "r") as kevin_api:
         kevin_api = kevin_api.read()
 
     data = json.loads(request.body)
@@ -129,7 +128,7 @@ def get_place_by_id(request):
 
 @cuser_login
 def get_transit(request):
-    with open("kevin_api_key", "r+") as kevin_api:
+    with open("kevin_api_key", "r") as kevin_api:
         kevin_api = kevin_api.read()
 
     data = json.loads(request.body)
@@ -154,6 +153,25 @@ def get_transit(request):
     url = "https://maps.googleapis.com/maps/api/directions/json"
     gcp_result = requests.post(url, params=params)
     return {'result': (json.loads(gcp_result.content))}
+
+@cuser_login
+def get_history(request):
+    data = json.loads(request.body)
+    username = data['username']
+
+@cuser_login
+def get_certificates(request):
+    data = json.loads(request.body)
+    nik = data['nik']
+    certs = [[c.cert_type, c.note, c.date, c.a_place.name] for c in models.Certificate.objects.filter(cuser__nik__contains=nik)]
+    return {'certs': certs}
+
+@cuser_login
+def cert_aplaces(request):
+    data = json.loads(request.body)
+    cert_name = data['cert_name']
+    aplaces = [i.name for i in list(models.APlace.objects.all()[:3])]
+    return {'aplaces': aplaces}
 
 def register(request):
     if request.method=='POST':

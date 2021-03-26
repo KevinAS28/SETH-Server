@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'qr_code',
     # 'django.contrib.staticfiles',
-    'django_node_assets',
+    # 'django_node_assets',
     'A_WEB',        
     'B_WEB',        
     'SETH',
@@ -148,9 +148,9 @@ AUTHENTICATION_BACKENDS = ('User.backends.AuthenticationBackend.AuthenticationBa
 
 LOGOUT_REDIRECT_URL = '/login/'
 
-NODE_PACKAGE_JSON = os.path.join(BASE_DIR, 'package.json')
+# NODE_PACKAGE_JSON = os.path.join(BASE_DIR, 'package.json')
 
-NODE_MODULES_ROOT = os.path.join(BASE_DIR, 'node_modules')
+# NODE_MODULES_ROOT = os.path.join(BASE_DIR, 'node_modules')
 
 SERVE_QR_CODE_IMAGE_PATH = 'qr-code-image/'
 

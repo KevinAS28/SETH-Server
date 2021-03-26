@@ -150,7 +150,7 @@ def receive_qr(request):
                     print(f'{b.supported_certs} == {c_cert.cert_type}: {cmp}')
                     if cmp:
                         user_id_received.append(user_id)
-                        return HttpResponse()
+                        return JsonResponse({'success': True})
 
         except Exception as e:
             print(traceback.format_exc())

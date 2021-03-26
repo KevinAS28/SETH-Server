@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               style: kTitleTextstyle,
                             ),
                             TextSpan(
-                              text: "Last Update 7 Maret",
+                              text: "Last Update: Today",
                               style: TextStyle(
                                 color: kTextLightColor,
                               ),

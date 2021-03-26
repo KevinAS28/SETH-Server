@@ -16,12 +16,12 @@ import 'package:sethcapp/cert_template.dart';
 import 'package:sethcapp/pages/dashboard.dart';
 import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
 
-class Swab_Page extends StatefulWidget {
+class Genose_Page extends StatefulWidget {
   @override
-  _Swab_PageState createState() => _Swab_PageState();
+  _Genose_PageState createState() => _Genose_PageState();
 }
 
-class _Swab_PageState extends State<Swab_Page> {
+class _Genose_PageState extends State<Genose_Page> {
   String _lastSelected = 'TAB: 0';
 
   void _logoutDialog() {
@@ -130,7 +130,7 @@ class _Swab_PageState extends State<Swab_Page> {
           children: <Widget>[
             MyHeader(
               image: "assets/icons/Drcorona.svg",
-              textTop: "Info Swab",
+              textTop: "Info Genose",
               textBottom: "Certificate",
               offset: offset,
             ),
@@ -139,31 +139,25 @@ class _Swab_PageState extends State<Swab_Page> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text("What is Swab test?", style: kTitleTextstyle),
+                  Text("What is Genose test?", style: kTitleTextstyle),
                   InfoCard(
                     text:
-                        "A nasopharyngeal swab (or nasopharyngeal culture) is a method for collecting a clinical test sample of nasal secretions from the back of the nose and throat. The sample is then analyzed for the presence of organisms or other clinical markers for disease. Average price: Rp 900.000. Test result will be out in 2-3 days.",
+                        "GeNose C19 is an electronic nose developed by Gadjah Mada University (UGM) to detect Covid-19 more quickly and accurately with accuracy 97% and the price is only 2\$ (USD)",
                     image: "assets/images/pcr.png",
                     title: "",
                   ),
                   SizedBox(height: 20),
                   Text("Recommended hospitals for you", style: kTitleTextstyle),
                   SizedBox(height: 20),
-                  PreventCard(
-                    text: "1.2 kilometers from you",
-                    image: "assets/images/place.png",
-                    title: "RS Pondok Indah",
-                  ),
-                  PreventCard(
-                    text: "1.8 kilometers from you",
-                    image: "assets/images/place.png",
-                    title: "RS Fatmawati",
-                  ),
-                  PreventCard(
-                    text: "2 kilometers from you",
-                    image: "assets/images/place.png",
-                    title: "RSUD Pasar Minggu",
-                  ),
+                  GestureDetector(
+                    onTap: () => print('Tapped'),
+                    child: PreventCard(
+                      text: "1.2 kilometers from you",
+                      image: "assets/images/place.png",
+                      title: "RS Pondok Indah",
+                    )
+                  )
+                  ,
                   GestureDetector(
                     onTap: () {
                       Navigator.push(

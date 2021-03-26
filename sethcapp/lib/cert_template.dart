@@ -1,5 +1,9 @@
+import 'package:provider/provider.dart';
 import 'package:sethcapp/cert_made.dart';
 import 'package:sethcapp/constant.dart';
+import 'package:sethcapp/providers/user_provider.dart';
+import 'package:sethcapp/util/api.dart';
+import 'package:sethcapp/util/app_url.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 import 'package:flutter/material.dart';
 import 'package:sethcapp/pages/dashboard.dart';
@@ -12,6 +16,7 @@ import 'package:sethcapp/info_rs.dart';
 import 'package:sethcapp/history_pass.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'domain/user.dart';
 
 class cert_template extends StatefulWidget {
   cert_template({Key key, this.title}) : super(key: key);
@@ -47,11 +52,9 @@ class _cert_templateState extends State<cert_template> {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => HomeScreen(),
-
                 ));
               },
             ),
-
           ],
         );
       },
@@ -101,11 +104,28 @@ class _cert_templateState extends State<cert_template> {
   final controller = ScrollController();
   double offset = 0;
 
+  Future<List<dynamic>> getCert(context) async {
+    print('getCerts() called');
+    User user = Provider.of<UserProvider>(context, listen: false).user;
+    Map<String, String> data = {"nik": user.nik};
+    var response = await hitApiUs(user, AppUrl.getCertificates, data);
+
+    List<dynamic> certificates = response["certs"];
+    return certificates[0];
+  }
+
+  var data;
+  
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     controller.addListener(onScroll);
+    getCert(context).then((listItems) {
+      setState(() {
+        this.data = listItems;
+      });
+    });    
   }
 
   @override
@@ -121,8 +141,17 @@ class _cert_templateState extends State<cert_template> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<UserProvider>(context, listen: false).user;
+    if (this.data == null) {
+      return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Loading..."),
+        ),
+      );
+    }    
     return Scaffold(
       body: SingleChildScrollView(
         controller: controller,
@@ -143,7 +172,7 @@ class _cert_templateState extends State<cert_template> {
                       color: Colors.blueAccent,
                     ),
                     title: const Text('Name'),
-                    subtitle: const Text('Kimi no nawa'),
+                    subtitle: Text(user.name),
                     trailing: const Icon(
                       Icons.check_circle,
                       color: Colors.green,
@@ -155,7 +184,7 @@ class _cert_templateState extends State<cert_template> {
                       color: Colors.blueAccent,
                     ),
                     title: const Text('Date'),
-                    subtitle: const Text('06-03-2021'),
+                    subtitle: Text(this.data[2]),
                     trailing: const Icon(
                       Icons.check_circle,
                       color: Colors.green,
@@ -166,8 +195,8 @@ class _cert_templateState extends State<cert_template> {
                       Icons.confirmation_number,
                       color: Colors.blueAccent,
                     ),
-                    title: const Text('ID Certificate'),
-                    subtitle: const Text('123456789'),
+                    title: const Text('NIK'),
+                    subtitle: Text(user.nik),
                     trailing: const Icon(
                       Icons.check_circle,
                       color: Colors.green,
@@ -179,7 +208,7 @@ class _cert_templateState extends State<cert_template> {
                       color: Colors.blueAccent,
                     ),
                     title: const Text('Hospital'),
-                    subtitle: const Text('RS Pondok Indah'),
+                    subtitle: Text(this.data[3]),
                     trailing: const Icon(
                       Icons.check_circle,
                       color: Colors.green,
@@ -190,8 +219,8 @@ class _cert_templateState extends State<cert_template> {
                       Icons.note_add,
                       color: Colors.blueAccent,
                     ),
-                    title: const Text('Test'),
-                    subtitle: const Text('PCR'),
+                    title: const Text('Test Type'),
+                    subtitle: Text(this.data[0]),
                     trailing: const Icon(
                       Icons.check_circle,
                       color: Colors.green,
@@ -203,7 +232,7 @@ class _cert_templateState extends State<cert_template> {
                       color: Colors.blueAccent,
                     ),
                     title: const Text('Result'),
-                    subtitle: const Text('NEGATIVE'),
+                    subtitle: Text(this.data[1]),
                     trailing: const Icon(
                       Icons.check_circle,
                       color: Colors.green,

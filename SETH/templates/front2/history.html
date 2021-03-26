@@ -200,8 +200,9 @@ The above copyright notice and this permission notice shall be included in all c
                           <tr>
                             <th class="text-center">NIK</th>
                             <th class="text-center">Name</th>
-                            <th class="text-center">Date Time</th>
+                            <th class="text-center">Passed</th>
                             <th class="text-center">Certificate Origin</th>
+                            <th class="text-center">Date Time</th>
                             <th></th>
                           </tr>
                         </thead>
@@ -220,6 +221,9 @@ The above copyright notice and this permission notice shall be included in all c
                                 <td class="text-center">
                                   {{hist.b_place.name}}
                                 </td>
+                                <td class="text-center">
+                                  {{hist.datetime}}
+                                </td>                                
                               </tr>
 
                             {% endfor %}

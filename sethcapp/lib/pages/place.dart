@@ -17,6 +17,7 @@ import 'package:sethcapp/pages/dashboard.dart';
 import 'package:sethcapp/util/api.dart';
 
 import 'fab_bottom_app_bar.dart';
+import 'navigate.dart';
 
 class PlaceItem0 {
   String name;
@@ -241,34 +242,39 @@ class _PlaceState extends State<Place> {
   Widget build(BuildContext context) {
     var listItems = <Widget>[
       SizedBox(height: 20),
-      Text("Result", style: kTitleTextstyle),
     ];
 
     if (this.data != null) {
+      listItems.add(Text("Result", style: kTitleTextstyle));
       print('Length: ${this.data.length}');
+      
       for (List<String> p in this.data) {
-        listItems.add(PreventCard(
-          text: p[1],
-          image: "assets/images/place.png",
-          title: p[0],
+        listItems.add(GestureDetector(
+          child: PreventCard(
+            text: p[1],
+            image: "assets/images/place.png",
+            title: p[0],
+          ),
+          onTap: () => navigateTo(7.7714, 110.3775)
         ));
         listItems.add(SizedBox(height: 20));
       }
     } else {
+      listItems.add(Text("Recommendations", style: kTitleTextstyle));
       print('Length: 0');
       var text = [
         'PCR',
         'Rapid',
-        'Swab',
+        'Genose',
         'PCR',
         'Rapid',
-        'Swab',
+        'Genose',
         'PCR',
         'Rapid',
-        'Swab',
+        'Genose',
         'PCR',
         'Rapid',
-        'Swab',
+        'Genose',
       ];
 
       var title = [
