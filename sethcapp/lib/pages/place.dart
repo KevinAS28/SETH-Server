@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:provider/provider.dart';
 import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/domain/user.dart';
+import 'package:sethcapp/pages/login.dart';
 import 'package:sethcapp/providers/user_provider.dart';
 import 'package:sethcapp/util/app_url.dart';
 import 'package:sethcapp/widgets/my_header.dart';
@@ -66,7 +67,7 @@ class _PlaceState extends State<Place> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => Login(),
                 ));
               },
             ),
@@ -298,8 +299,9 @@ class _PlaceState extends State<Place> {
       }
     }
 
-    return Scaffold(
-      body: SingleChildScrollView(
+    return SafeArea(child: Scaffold(
+      body: (
+          SingleChildScrollView(
         controller: controller,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -324,17 +326,17 @@ class _PlaceState extends State<Place> {
               ),
               child: Row(
                 children: <Widget>[
-                  SizedBox(width: 20),
+                  
                   Expanded(
                     child: DropdownSearch<String>(
                       searchBoxController: TextEditingController(text: ''),
-                      mode: Mode.BOTTOM_SHEET,
+                      mode: Mode.DIALOG,
                       isFilteredOnline: true,
                       showClearButton: true,
                       showSearchBox: true,
                       label: 'Find a place to go',
                       dropdownSearchDecoration: InputDecoration(
-                        filled: true,
+                        filled: false,
                         fillColor:
                             Theme.of(context).inputDecorationTheme.fillColor,
                       ),
@@ -361,7 +363,7 @@ class _PlaceState extends State<Place> {
             ),
           ],
         ),
-      ),
+      )),
       bottomNavigationBar: FABBottomAppBar(
         centerItemText: 'Info',
         color: Colors.grey,
@@ -374,7 +376,7 @@ class _PlaceState extends State<Place> {
           FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
         ],
       ),
-    );
+    ));
   }
 }
 

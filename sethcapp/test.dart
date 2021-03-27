@@ -94,8 +94,7 @@ Future<List<String>> findAplaces(name) async {
 Future<List<List<String>>> getHistory() async {
   print('getHistory() called');
   Map<String, String> data = {"nik": "30919873421"};
-  var response =
-      await hitApiAuth("http://127.0.0.1:8000/c_api/history_a", data);
+  var response = await hitApiAuth("http://127.0.0.1:8000/c_api/history_a", data);
   List<List<String>> history = [];
   for (var i in response["history"]) {
     history.add([i[0], i[1], i[2]]);
@@ -103,11 +102,21 @@ Future<List<List<String>>> getHistory() async {
   return history;
 }
 
+Future<List<String>> register() async {
+  print('register() called');
+  Map<String, String> data = {"nik": "3091987342111", "username": "h00", "password": "4321"};
+  var response = await hitApi("http://127.0.0.1:8000/c_api/register", data);
+  List<String> user = [];
+  print(response);
+
+  return user;
+}
+
 void main() async {
   // var url = "http://127.0.0.1:8000/c_api/place_input";
   // Map<String, dynamic> data = { "filter": "Gadjah Mada"};
   // Map<String, dynamic> response = await hitApiAuth(url, data);
   // print(response["predictions"][0]["description"]);
-  print(getHistory());
+  register();
   // print(('x' as String));
 }

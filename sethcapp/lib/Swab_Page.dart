@@ -1,4 +1,5 @@
 import 'package:sethcapp/constant.dart';
+import 'package:sethcapp/pages/login.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -46,7 +47,7 @@ class _Genose_PageState extends State<Genose_Page> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => Login(),
                 ));
               },
             ),

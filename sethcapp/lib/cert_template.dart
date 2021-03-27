@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:sethcapp/cert_made.dart';
 import 'package:sethcapp/constant.dart';
+import 'package:sethcapp/pages/login.dart';
 import 'package:sethcapp/providers/user_provider.dart';
 import 'package:sethcapp/util/api.dart';
 import 'package:sethcapp/util/app_url.dart';
@@ -51,7 +52,7 @@ class _cert_templateState extends State<cert_template> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => Login(),
                 ));
               },
             ),

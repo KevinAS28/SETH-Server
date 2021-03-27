@@ -2,6 +2,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:provider/provider.dart';
 import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
+import 'package:sethcapp/pages/login.dart';
 import 'package:sethcapp/providers/user_provider.dart';
 import 'package:sethcapp/util/api.dart';
 import 'package:sethcapp/util/app_url.dart';
@@ -65,7 +66,7 @@ class _info_rsState extends State<info_rs> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => Login(),
                 ));
               },
             ),

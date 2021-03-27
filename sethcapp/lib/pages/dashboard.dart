@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sethcapp/domain/user.dart';
+import 'package:sethcapp/pages/login.dart';
 import 'package:sethcapp/pages/place.dart';
 import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
 import 'package:sethcapp/pages/fab_with_icons.dart';
@@ -73,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => Login(),
 
                 ));
               },
@@ -258,7 +259,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             ),
                             TextSpan(
                               text:
-                                  "Check certificate info at your destination!",
+                                  "Check certificate information at your destination!",
                               style: TextStyle(
                                 color: kTextLightColor,
                               ),

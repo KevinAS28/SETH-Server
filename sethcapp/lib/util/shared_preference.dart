@@ -17,6 +17,16 @@ class UserPreferences {
     return prefs.commit();
   }
 
+  Future<bool> saveUserMinimal(User user) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setString("nik", user.nik);
+    prefs.setString("username", user.username);
+    prefs.setString("password", user.password);
+
+    return prefs.commit();
+  }
+
   Future<User> getUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 

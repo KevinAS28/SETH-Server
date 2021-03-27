@@ -25,7 +25,7 @@ class _LoginState extends State<Login> {
       autofocus: false,
       // validator: validateEmail,
       onSaved: (value) => _username = value,
-      decoration: buildInputDecoration("Confirm password", Icons.email),
+      decoration: buildInputDecoration("Input username", Icons.person_search),
     );
 
     final passwordField = TextFormField(
@@ -142,7 +142,7 @@ class _LoginState extends State<Login> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 15.0),
-                label("Email"),
+                label("Username"),
                 SizedBox(height: 5.0),
                 usernameField,
                 SizedBox(height: 20.0),

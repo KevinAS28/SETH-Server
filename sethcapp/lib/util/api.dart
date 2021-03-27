@@ -6,8 +6,6 @@ import 'package:sethcapp/domain/user.dart';
 // import 'package:sethcapp/providers/user_provider.dart';
 
 Future<Map<String, dynamic>> hitApiAuth (String url, Map<String, dynamic> data, [String username="cuser0", String password="123450"]) async{
-
-    
     data["username"] = username;
     data["password"] = password;
 
@@ -27,3 +25,13 @@ Future<Map<String, dynamic>> hitApiUs (User user, String url, Map<String, dynami
     return hitApiAuth(url, data, username, password);
 }
 
+
+Future<Map<String, dynamic>> hitApi(String url, Map<String, dynamic> data) async {
+    Response response = await post(
+      url,
+      body: json.encode(data),
+    );
+
+    final Map<String, dynamic> responseData = json.decode(response.body);
+    return responseData;
+}

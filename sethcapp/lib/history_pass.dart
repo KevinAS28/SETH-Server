@@ -3,6 +3,7 @@ import 'package:sethcapp/cert_template.dart';
 import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/pages/dashboard.dart';
 import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
+import 'package:sethcapp/pages/login.dart';
 import 'package:sethcapp/providers/user_provider.dart';
 import 'package:sethcapp/util/api.dart';
 import 'package:sethcapp/util/app_url.dart';
@@ -47,7 +48,7 @@ class _history_passState extends State<history_pass> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => Login(),
                 ));
               },
             ),
