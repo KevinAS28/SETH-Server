@@ -12,6 +12,8 @@ urlpatterns = [
     path('get_place_by_id', get_place_by_id),
     path('place_input', place_input),
     path('get_certificates', get_certificates),
-    path('cert_bplaces', cert_aplaces)
+    path('cert_bplaces', cert_aplaces),
+    path('find_aplaces', find_aplaces),
+    path('history_a', history_a)
 
 ]

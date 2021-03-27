@@ -4,8 +4,6 @@
 //   final String name;
 //   final String avatar;
 
-  
-
 //   factory UserModel.fromJson(Map<String, dynamic> json) {
 //     if (json == null) return null;
 //     return UserModel(

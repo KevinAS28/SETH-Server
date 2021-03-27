@@ -44,11 +44,9 @@ class _info_screenState extends State<info_screen> {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => HomeScreen(),
-
                 ));
               },
             ),
-
           ],
         );
       },
@@ -180,6 +178,7 @@ class _info_screenState extends State<info_screen> {
                       title: "Rapid",
                     ),
                   ),
+                  
                   ListTile(
                     onTap: () {
                       Navigator.push(
@@ -188,7 +187,8 @@ class _info_screenState extends State<info_screen> {
                               builder: (context) => new Genose_Page()));
                     },
                     title: PreventCard(
-                      text: "GeNose C19 is an electronic nose developed by Gadjah Mada University (UGM) to detect Covid-19 more quickly and accurately with accuracy 97% and the price is only 2\$ (USD)",
+                      text:
+                          "GeNose C19 is an electronic nose developed by Gadjah Mada University (UGM) to detect Covid-19 more quickly and accurately with accuracy 97% and the price is only Rp. 20.000",
                       image: "assets/images/swab.png",
                       title: "Genose",
                     ),

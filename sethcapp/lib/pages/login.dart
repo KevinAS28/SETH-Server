@@ -69,7 +69,7 @@ class _LoginState extends State<Login> {
         username: "cuser0",
         nik: "30919873421",
         email: "cuser0",
-        name: 'Hello',
+        name: 'Bayu Setiawan',
         id: 1,
         phone: '+620123',
         password: "123450",

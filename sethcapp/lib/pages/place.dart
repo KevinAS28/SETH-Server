@@ -247,16 +247,15 @@ class _PlaceState extends State<Place> {
     if (this.data != null) {
       listItems.add(Text("Result", style: kTitleTextstyle));
       print('Length: ${this.data.length}');
-      
+
       for (List<String> p in this.data) {
         listItems.add(GestureDetector(
-          child: PreventCard(
-            text: p[1],
-            image: "assets/images/place.png",
-            title: p[0],
-          ),
-          onTap: () => navigateTo(7.7714, 110.3775)
-        ));
+            child: PreventCard(
+              text: p[1],
+              image: "assets/images/place.png",
+              title: p[0],
+            ),
+            onTap: () => navigateTo(7.7714, 110.3775)));
         listItems.add(SizedBox(height: 20));
       }
     } else {

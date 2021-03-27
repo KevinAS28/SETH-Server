@@ -142,15 +142,13 @@ class _cert_madeState extends State<cert_made> {
     List<dynamic> certificates = response["certs"];
     for (List<dynamic> cert in certificates) {
       var cert_image = 'swab';
-      if ((cert[1] as String).contains('PCR')){
+      if ((cert[1] as String).contains('PCR')) {
         cert_image = 'pcr';
-      } 
-      else if ((cert[1] as String).contains('Genose')){
+      } else if ((cert[1] as String).contains('Genose')) {
         cert_image = 'swab';
-      }
-      else if ((cert[1] as String).contains('Rapid')){
+      } else if ((cert[1] as String).contains('Rapid')) {
         cert_image = 'Rapid';
-      }      
+      }
 
       listItems.add(PreventCard(
         text: cert[3],
@@ -164,14 +162,30 @@ class _cert_madeState extends State<cert_made> {
     return listItems;
   }
 
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+
   @override
   Widget build(BuildContext context) {
     if (this.data == null) {
-      return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Loading..."),
-        ),
-      );
+      return new WillPopScope(
+          onWillPop: () async => false,
+          child: SimpleDialog(
+              key: _keyLoader,
+              backgroundColor: Colors.black54,
+              children: <Widget>[
+                Center(
+                  child: Column(children: [
+                    CircularProgressIndicator(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Please Wait....",
+                      style: TextStyle(color: Colors.blueAccent),
+                    )
+                  ]),
+                )
+              ]));
     }
     return Scaffold(
         body: SingleChildScrollView(

@@ -173,6 +173,20 @@ def cert_aplaces(request):
     aplaces = [i.name for i in list(models.APlace.objects.all()[:3])]
     return {'aplaces': aplaces}
 
+@cuser_login
+def find_aplaces(request):
+    data = json.loads(request.body)
+    aplace_name = data['aplace_name']
+    aplaces = [i.name for i in list(models.APlace.objects.filter(name__contains=aplace_name))]
+    return {'aplaces': aplaces}
+
+@cuser_login
+def history_a(request):
+    data = json.loads(request.body)
+    nik = data['nik']
+    history = [[i.b_place.name, i.datetime, 'Passed' if i.passed else 'Not Passed'] for i in models.History.objects.filter(cuser__nik__contains=nik)]
+    return {'history': history}
+
 def register(request):
     if request.method=='POST':
         data = json.loads(request.body)
