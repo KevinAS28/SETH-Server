@@ -14,6 +14,7 @@ urlpatterns = [
     path('get_certificates', get_certificates),
     path('cert_bplaces', cert_aplaces),
     path('find_aplaces', find_aplaces),
-    path('history_a', history_a)
+    path('history_a', history_a),
+    path('register', register)
 
 ]

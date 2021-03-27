@@ -188,14 +188,23 @@ def history_a(request):
     return {'history': history}
 
 def register(request):
+    to_return = dict()
     if request.method=='POST':
-        data = json.loads(request.body)
-        user_data = data['user_data']
-        try:
-            models.CUser(**user_data).save()
-            return JsonResponse({'success': True, 'msg': ''})
-        except Exception as e:
-            return JsonResponse({'success': True, 'msg': str(e)})
-    else:
-        return JsonResponse({'success': False, 'msg': 'Invalid Method'})
+        user_data = json.loads(request.body)
+        print(user_data)
 
+        try:
+            username = user_data['username']
+            password = user_data['password']
+            
+            models.UserAuthentication(username=username, password=password).save()
+            cuser = models.CUser(nik=user_data['nik'])
+            cuser.save()
+
+            to_return = {'success': True, 'msg': '', 'data': {**user_data}}
+        except Exception as e:
+            to_return = {'success': True, 'msg': str(e)}
+    else:
+        to_return = {'success': False, 'msg': 'Invalid Method'}
+    print(to_return)
+    return JsonResponse(to_return)
