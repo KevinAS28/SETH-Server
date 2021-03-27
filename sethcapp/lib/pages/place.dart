@@ -244,22 +244,23 @@ class _PlaceState extends State<Place> {
       SizedBox(height: 20),
     ];
 
-    if (this.data != null) {
+    if (this.data != null) { //after search result
       listItems.add(Text("Result", style: kTitleTextstyle));
       print('Length: ${this.data.length}');
-      
+
       for (List<String> p in this.data) {
-        listItems.add(GestureDetector(
-          child: PreventCard(
-            text: p[1],
-            image: "assets/images/place.png",
-            title: p[0],
-          ),
-          onTap: () => navigateTo(7.7714, 110.3775)
-        ));
+        listItems.add(
+            GestureDetector(
+            child: PreventCard(
+              text: p[1],
+              image: "assets/images/place.png",
+              title: p[0],
+            ),
+            onTap: () => navigateTo(7.7714, 110.3775))
+        );
         listItems.add(SizedBox(height: 20));
       }
-    } else {
+    } else { //before search result
       listItems.add(Text("Recommendations", style: kTitleTextstyle));
       print('Length: 0');
       var text = [
@@ -282,19 +283,42 @@ class _PlaceState extends State<Place> {
         'Rempah Asia',
         'Soekarno Hatta Airport',
         'Mall Grand Indonesia',
-        'PCR4',
-        'PCR5',
+        'Stasiun Gambir',
+        'Pelabuhan Tanjung Priok',
         'PCR6',
         'PCR',
         'PCR',
         'PCR'
       ];
+
+      var image = [
+        "assets/images/place.png",
+        "assets/images/food.png",
+        "assets/images/airport.png",
+        "assets/images/place.png",
+        "assets/images/station.png",
+        "assets/images/port.png",
+        "assets/images/place.png",
+        "assets/images/place.png",
+        "assets/images/place.png",
+        "assets/images/place.png",
+      ];
+
+      var latList = [7.7714, 10];
+      var longList = [110.3775, 20];
+
       for (var i = 0; i < 10; i++) {
-        listItems.add(PreventCard(
-          text: text[i],
-          image: "assets/images/place.png",
-          title: title[i],
-        ));
+        listItems.add(
+          GestureDetector(
+            onTap: () {navigateTo(latList[i], longList[i]);},
+            child:             PreventCard(
+              text: text[i],
+              image: image[i],
+              title: title[i],
+            )
+          )
+
+        );
         listItems.add(SizedBox(height: 20));
       }
     }
