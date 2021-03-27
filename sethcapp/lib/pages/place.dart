@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:provider/provider.dart';
 import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/domain/user.dart';
+import 'package:sethcapp/pages/fab_with_icons.dart';
+import 'package:sethcapp/pages/layout.dart';
 import 'package:sethcapp/pages/login.dart';
 import 'package:sethcapp/providers/user_provider.dart';
 import 'package:sethcapp/util/app_url.dart';
@@ -179,7 +181,8 @@ class _PlaceState extends State<Place> {
   }
 
   Widget _customDropDownExample(
-      BuildContext context, String item, String itemDesignation) {
+      BuildContext context, String item, String itemDesignation
+      ) {
     print(" _customDropDownExample");
     return Container(
         child: ListTile(
@@ -300,6 +303,8 @@ class _PlaceState extends State<Place> {
     }
 
     return SafeArea(child: Scaffold(
+      floatingActionButtonLocation: (this.data!=null)?FloatingActionButtonLocation.centerDocked:null,
+      floatingActionButton: (this.data!=null)?_buildFab1(context):null,
       body: (
           SingleChildScrollView(
         controller: controller,
@@ -378,7 +383,58 @@ class _PlaceState extends State<Place> {
       ),
     ));
   }
+
+  
+  void _selectedFabb(int index) {
+    if (index == 0) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new Place()));
+    } else if (index == 1) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new info_screen()));
+    } else if (index == 3) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new history_pass()));
+    } else if (index == 2) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new info_rs()));
+    }
+    print("selectedFab: $index");
+    setState(() {
+      _lastSelected = 'FAB: $index';
+    });
+  }
+
+  Widget _buildFab1(BuildContext context) {
+    final icons = [
+      Icons.place,
+      Icons.article,
+      Icons.local_hospital,
+      Icons.history
+    ];
+    return AnchoredOverlay(
+      showOverlay: true,
+      overlayBuilder: (context, offset) {
+        return CenterAbout(
+          position: Offset(offset.dx, offset.dy - icons.length * 35.0),
+          child: FabWithIcons(
+            icons: icons,
+            onIconTapped: _selectedFabb,
+          ),
+        );
+      },
+      child: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Info',
+        child: Icon(Icons.info),
+        elevation: 2.0,
+      ),
+    );
+  }
+
+  
 }
+
 
 class PreventCard extends StatelessWidget {
   final String image;

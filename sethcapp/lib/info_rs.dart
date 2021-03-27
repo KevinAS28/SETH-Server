@@ -259,6 +259,7 @@ class _info_rsState extends State<info_rs> {
         listItems.add(SizedBox(height: 20));
       }
     }
+    
     return Scaffold(
       body: SingleChildScrollView(
         controller: controller,

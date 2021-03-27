@@ -58,16 +58,15 @@ class _cert_madeState extends State<cert_made> {
     );
   }
 
-
-
-
   var subtitle;
 
   void _selectedTab(int index) {
     if (index == 0) {
+      Navigator.pop(context);
       Navigator.push(context,
           new MaterialPageRoute(builder: (context) => new DashBoard()));
     } else if (index == 1) {
+      Navigator.pop(context);
       Navigator.push(context,
           new MaterialPageRoute(builder: (context) => new cert_made()));
     } else if (index == 2) {
@@ -112,6 +111,7 @@ class _cert_madeState extends State<cert_made> {
     // TODO: implement initState
     super.initState();
     controller.addListener(onScroll);
+    FABBottomAppBar.staticSelectedIndex = 1;
     getCerts(context).then((listItems) {
       setState(() {
         this.data = listItems;
@@ -213,6 +213,7 @@ class _cert_madeState extends State<cert_made> {
           ),
         ),
         bottomNavigationBar: FABBottomAppBar(
+          selectedIndex: FABBottomAppBar.staticSelectedIndex,
           centerItemText: 'Info',
           color: Colors.grey,
           selectedColor: Colors.red,
@@ -224,7 +225,8 @@ class _cert_madeState extends State<cert_made> {
                 iconData: Icons.settings_overscan, text: 'Scan'),
             FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
           ],
-        ));
+        )
+        );
   }
 }
 
