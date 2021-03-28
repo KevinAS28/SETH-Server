@@ -150,20 +150,19 @@ class _info_screenState extends State<info_screen> {
                   SizedBox(height: 20),
                   Text("Types of Certificate", style: kTitleTextstyle),
                   SizedBox(height: 20),
-                  ListTile(
+                 ListTile(
                     onTap: () {
                       Navigator.push(
                           context,
                           new MaterialPageRoute(
-                              builder: (context) => new PCR_Page()));
+                              builder: (context) => new Genose_Page()));
                     },
                     title: PreventCard(
-                      text: "Polymerase chain reaction (PCR) test.",
-                      image: "assets/images/pcr.png",
-                      title: "PCR",
-                      child: SvgPicture.asset("assets/icons/forward.svg"),
+                      text: "GeNose C19\n(From Gadjah Mada University)",
+                      image: "assets/images/swab.png",
+                      title: "Genose",
                     ),
-                  ),
+                  ),                  
 
                   ListTile(
                     onTap: () {
@@ -174,26 +173,26 @@ class _info_screenState extends State<info_screen> {
                     },
                     title: PreventCard(
                       text:
-                          "Antigen test (frequently referred to as a rapid test).",
+                          "Antigen test.",
                       image: "assets/images/Rapid.png",
                       title: "Rapid",
                     ),
                   ),
-
+                  SizedBox(height: 20),
                   ListTile(
                     onTap: () {
                       Navigator.push(
                           context,
                           new MaterialPageRoute(
-                              builder: (context) => new Genose_Page()));
+                              builder: (context) => new PCR_Page()));
                     },
                     title: PreventCard(
-                      text:
-                          "GeNose C19 is an electronic nose developed by Gadjah Mada University (UGM) to detect Covid-19 more quickly and accurately with accuracy 97% and the price is only Rp. 20.000",
-                      image: "assets/images/swab.png",
-                      title: "Genose",
+                      text: "Polymerase chain reaction\n(PCR) test.",
+                      image: "assets/images/pcr.png",
+                      title: "PCR",
+                      child: SvgPicture.asset("assets/icons/forward.svg"),
                     ),
-                  ),
+                  ),                  
                   SizedBox(height: 50),
                 ],
               ),

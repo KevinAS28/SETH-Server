@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sethcapp/pages/dashboard.dart';
 import 'package:sethcapp/pages/login.dart';
 import 'package:sethcapp/pages/register.dart';
@@ -12,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'domain/user.dart';
 
 void main() {
+  // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
   runApp(MyApp());
 }
 

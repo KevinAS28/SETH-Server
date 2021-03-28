@@ -17,7 +17,7 @@ def test(request):
     print(data)
     return {'data': data, 'auth': serializers.serialize('json', cauth), }
 
-
+@cuser_login
 def find_place_core(request):
     with open("kevin_api_key", "r") as kevin_api:
         kevin_api = kevin_api.read()
@@ -36,7 +36,13 @@ def find_place(request):
 
 @cuser_login
 def find_places_model(request):
+    global not_require_certs
+    
+    require_certs = []
+    not_require_certs = []
+
     def nr_cert(place_result):
+        global not_require_certs
         gcp_name = place_result['name']
         place_id = place_result['place_id']
         print(f'NR place {gcp_name}')
@@ -68,8 +74,6 @@ def find_places_model(request):
     # print('len:', len(json_result['results']))
     status = json_result['status']
 
-    require_certs = []
-    not_require_certs = []
 
     if status=='OK':
         for place_result in json_result['results']:  
@@ -87,6 +91,15 @@ def find_places_model(request):
                     rp1 = list(set([i.cert_type for i in rp.supported_certificates.all()]))#serializers.serialize('json', rp.supported_certificates.all())
                     if len(rp1) > 0:
                         print(f'RP place {gcp_name}')
+
+                        params1 = {"key": kevin_api, "place_id": place_id, "inputtype": "textquery", "language": "en"}
+                        url1 = "https://maps.googleapis.com/maps/api/place/details/json"
+                        gcp_result1 = requests.post(url1, params=params1)
+                        json_result1 = json.loads(gcp_result1.content)
+                        print(json_result1)
+                        cid = json_result1['result']['url'].split('cid=')[1]
+                        # rp1.insert(0, cid)
+
                         require_certs.append({rp0: rp1})
                     else:
                         print(f'RP  00 place {gcp_name}')
@@ -121,8 +134,8 @@ def get_place_by_id(request):
     data = json.loads(request.body)
     place_id = data['place_id']
 
-    params = {"key": kevin_api, "place_id": place_id, "inputtype": "textquery", "placeid": "ChIJ0xkTTRlx0i0Re3sZsgY3Olw", "language": "en"}
-    url = "https://maps.googleapis.com/maps/api/place/textsearch/json"
+    params = {"key": kevin_api, "place_id": place_id, "inputtype": "textquery", "language": "en"}
+    url = "https://maps.googleapis.com/maps/api/place/details/json"
     gcp_result = requests.post(url, params=params)
     return {'result': (json.loads(gcp_result.content))}
 

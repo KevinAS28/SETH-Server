@@ -141,16 +141,16 @@ class _Rapid_PageState extends State<Rapid_Page> {
     ];
 
     var title = [
-      'RS Pondok Indah',
-      'RS Fatmawati',
+      'Hospital Pondok Indah',
+      'Hospital Fatmawati',
       'RSUD Pasar Minggu',
-      'RS Pondok Indah',
-      'RS Fatmawati',
+      'Hospital Pondok Indah',
+      'Hospital Fatmawati',
       'RSUD Pasar Minggu',
-      'RS Pondok Indah',
-      'RS Fatmawati',
+      'Hospital Pondok Indah',
+      'Hospital Fatmawati',
       'RSUD Pasar Minggu',
-      'RS Pondok Indah',
+      'Hospital Pondok Indah',
     ];
     for (var i = 0; i < 10; i++) {
       listItems.add(PreventCard(
@@ -190,12 +190,12 @@ class _Rapid_PageState extends State<Rapid_Page> {
                   PreventCard(
                     text: "1.2 kilometers from you",
                     image: "assets/images/place.png",
-                    title: "RS Pondok Indah",
+                    title: "Hospital Pondok Indah",
                   ),
                   PreventCard(
                     text: "1.8 kilometers from you",
                     image: "assets/images/place.png",
-                    title: "RS Fatmawati",
+                    title: "Hospital Fatmawati",
                   ),
                   PreventCard(
                     text: "2 kilometers from you",

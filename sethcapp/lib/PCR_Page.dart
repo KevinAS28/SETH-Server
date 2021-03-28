@@ -150,12 +150,12 @@ class _PCR_PageState extends State<PCR_Page> {
                   PreventCard(
                     text: "1.2 kilometers from you",
                     image: "assets/images/place.png",
-                    title: "RS Pondok Indah",
+                    title: "Hospital Pondok Indah",
                   ),
                   PreventCard(
                     text: "1.8 kilometers from you",
                     image: "assets/images/place.png",
-                    title: "RS Fatmawati",
+                    title: "Hospital Fatmawati",
                   ),
                   PreventCard(
                     text: "2 kilometers from you",
