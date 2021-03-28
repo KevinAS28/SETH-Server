@@ -346,14 +346,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       Icons.local_hospital,
       Icons.history
     ];
+
+    final hints = [
+      'Find Places',
+      'Certificate Types',
+      'Create Certificates',
+      'Pass History'
+    ];
+
     return AnchoredOverlay(
       showOverlay: true,
       overlayBuilder: (context, offset) {
         return CenterAbout(
           position: Offset(offset.dx, offset.dy - icons.length * 35.0),
-          child: FabWithIcons(
+          child: FabWithIcons.complete(
             icons: icons,
             onIconTapped: _selectedFab,
+            hints: hints
+
           ),
         );
       },

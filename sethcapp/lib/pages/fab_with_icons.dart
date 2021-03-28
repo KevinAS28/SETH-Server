@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 
 class FabWithIcons extends StatefulWidget {
-  FabWithIcons({this.icons, this.onIconTapped});
+  FabWithIcons({this.icons, this.onIconTapped}){
+    this.hints= [];
+    for (var i in icons){
+      hints.add("Find places");
+    }
+  }
+
+  FabWithIcons.complete({this.icons, this.onIconTapped, this.hints});
+
   final List<IconData> icons;
+  List<String> hints;
   ValueChanged<int> onIconTapped;
   @override
   State createState() => FabWithIconsState();
@@ -23,6 +32,7 @@ class FabWithIconsState extends State<FabWithIcons>
 
   @override
   Widget build(BuildContext context) {
+    
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
@@ -49,9 +59,10 @@ class FabWithIconsState extends State<FabWithIcons>
               curve: Curves.easeOut),
         ),
         child: FloatingActionButton(
+          tooltip: widget.hints[index],
           backgroundColor: backgroundColor,
           mini: true,
-          child: Icon(widget.icons[index], color: foregroundColor),
+          child: Icon(widget.icons[index], color: foregroundColor, semanticLabel: 'test0',),
           onPressed: () => _onTapped(index),
         ),
       ),
