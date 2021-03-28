@@ -1,4 +1,5 @@
 import 'package:sethcapp/constant.dart';
+import 'package:sethcapp/pages/login.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -46,12 +47,10 @@ class _Genose_PageState extends State<Genose_Page> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
-
+                  builder: (context) => Login(),
                 ));
               },
             ),
-
           ],
         );
       },
@@ -130,7 +129,7 @@ class _Genose_PageState extends State<Genose_Page> {
           children: <Widget>[
             MyHeader(
               image: "assets/icons/Drcorona.svg",
-              textTop: "Info Genose",
+              textTop: "Genose Information",
               textBottom: "Certificate",
               offset: offset,
             ),
@@ -150,14 +149,12 @@ class _Genose_PageState extends State<Genose_Page> {
                   Text("Recommended hospitals for you", style: kTitleTextstyle),
                   SizedBox(height: 20),
                   GestureDetector(
-                    onTap: () => print('Tapped'),
-                    child: PreventCard(
-                      text: "1.2 kilometers from you",
-                      image: "assets/images/place.png",
-                      title: "RS Pondok Indah",
-                    )
-                  )
-                  ,
+                      onTap: () => print('Tapped'),
+                      child: PreventCard(
+                        text: "1.2 kilometers from you",
+                        image: "assets/images/place.png",
+                        title: "RS Pondok Indah",
+                      )),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(

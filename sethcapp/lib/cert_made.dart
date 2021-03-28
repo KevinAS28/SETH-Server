@@ -3,6 +3,7 @@ import 'package:sethcapp/cert_template.dart';
 import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/pages/dashboard.dart';
 import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
+import 'package:sethcapp/pages/login.dart';
 import 'package:sethcapp/providers/user_provider.dart';
 import 'package:sethcapp/util/api.dart';
 import 'package:sethcapp/util/app_url.dart';
@@ -47,7 +48,7 @@ class _cert_madeState extends State<cert_made> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => Login(),
                 ));
               },
             ),
@@ -61,9 +62,11 @@ class _cert_madeState extends State<cert_made> {
 
   void _selectedTab(int index) {
     if (index == 0) {
+      Navigator.pop(context);
       Navigator.push(context,
           new MaterialPageRoute(builder: (context) => new DashBoard()));
     } else if (index == 1) {
+      Navigator.pop(context);
       Navigator.push(context,
           new MaterialPageRoute(builder: (context) => new cert_made()));
     } else if (index == 2) {
@@ -108,6 +111,7 @@ class _cert_madeState extends State<cert_made> {
     // TODO: implement initState
     super.initState();
     controller.addListener(onScroll);
+    FABBottomAppBar.staticSelectedIndex = 1;
     getCerts(context).then((listItems) {
       setState(() {
         this.data = listItems;
@@ -142,15 +146,13 @@ class _cert_madeState extends State<cert_made> {
     List<dynamic> certificates = response["certs"];
     for (List<dynamic> cert in certificates) {
       var cert_image = 'swab';
-      if ((cert[1] as String).contains('PCR')){
+      if ((cert[1] as String).contains('PCR')) {
         cert_image = 'pcr';
-      } 
-      else if ((cert[1] as String).contains('Genose')){
+      } else if ((cert[1] as String).contains('Genose')) {
         cert_image = 'swab';
-      }
-      else if ((cert[1] as String).contains('Rapid')){
+      } else if ((cert[1] as String).contains('Rapid')) {
         cert_image = 'Rapid';
-      }      
+      }
 
       listItems.add(PreventCard(
         text: cert[3],
@@ -164,14 +166,30 @@ class _cert_madeState extends State<cert_made> {
     return listItems;
   }
 
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+
   @override
   Widget build(BuildContext context) {
     if (this.data == null) {
-      return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Loading..."),
-        ),
-      );
+      return new WillPopScope(
+          onWillPop: () async => false,
+          child: SimpleDialog(
+              key: _keyLoader,
+              backgroundColor: Colors.black54,
+              children: <Widget>[
+                Center(
+                  child: Column(children: [
+                    CircularProgressIndicator(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Please Wait....",
+                      style: TextStyle(color: Colors.blueAccent),
+                    )
+                  ]),
+                )
+              ]));
     }
     return Scaffold(
         body: SingleChildScrollView(
@@ -195,6 +213,7 @@ class _cert_madeState extends State<cert_made> {
           ),
         ),
         bottomNavigationBar: FABBottomAppBar(
+          selectedIndex: FABBottomAppBar.staticSelectedIndex,
           centerItemText: 'Info',
           color: Colors.grey,
           selectedColor: Colors.red,
@@ -205,7 +224,8 @@ class _cert_madeState extends State<cert_made> {
             FABBottomAppBarItem(iconData: Icons.settings_overscan, text: 'Scan'),
             FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
           ],
-        ));
+        )
+        );
   }
 }
 

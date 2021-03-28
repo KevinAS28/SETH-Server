@@ -173,15 +173,38 @@ def cert_aplaces(request):
     aplaces = [i.name for i in list(models.APlace.objects.all()[:3])]
     return {'aplaces': aplaces}
 
-def register(request):
-    if request.method=='POST':
-        data = json.loads(request.body)
-        user_data = data['user_data']
-        try:
-            models.CUser(**user_data).save()
-            return JsonResponse({'success': True, 'msg': ''})
-        except Exception as e:
-            return JsonResponse({'success': True, 'msg': str(e)})
-    else:
-        return JsonResponse({'success': False, 'msg': 'Invalid Method'})
+@cuser_login
+def find_aplaces(request):
+    data = json.loads(request.body)
+    aplace_name = data['aplace_name']
+    aplaces = [i.name for i in list(models.APlace.objects.filter(name__contains=aplace_name))]
+    return {'aplaces': aplaces}
 
+@cuser_login
+def history_a(request):
+    data = json.loads(request.body)
+    nik = data['nik']
+    history = [[i.b_place.name, i.datetime, 'Passed' if i.passed else 'Not Passed'] for i in models.History.objects.filter(cuser__nik__contains=nik)]
+    return {'history': history}
+
+def register(request):
+    to_return = dict()
+    if request.method=='POST':
+        user_data = json.loads(request.body)
+        print(user_data)
+
+        try:
+            username = user_data['username']
+            password = user_data['password']
+            
+            models.UserAuthentication(username=username, password=password).save()
+            cuser = models.CUser(nik=user_data['nik'])
+            cuser.save()
+
+            to_return = {'success': True, 'msg': '', 'data': {**user_data}}
+        except Exception as e:
+            to_return = {'success': True, 'msg': str(e)}
+    else:
+        to_return = {'success': False, 'msg': 'Invalid Method'}
+    print(to_return)
+    return JsonResponse(to_return)

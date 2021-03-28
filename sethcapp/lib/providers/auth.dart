@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:sethcapp/domain/user.dart';
+import 'package:sethcapp/util/api.dart';
 import 'package:sethcapp/util/app_url.dart';
 import 'package:sethcapp/util/shared_preference.dart';
 
@@ -31,7 +32,8 @@ class AuthProvider with ChangeNotifier {
     var result;
 
     final Map<String, dynamic> loginData = {
-      'username': username, 'password': password
+      'username': username,
+      'password': password
     };
 
     _loggedInStatus = Status.Authenticating;
@@ -48,7 +50,7 @@ class AuthProvider with ChangeNotifier {
 
       print('responseData: $responseData');
 
-      if (responseData['success'] == true){
+      if (responseData['success'] == true) {
         var userData = responseData['data'];
 
         User authUser = User.fromJson(userData);
@@ -59,18 +61,14 @@ class AuthProvider with ChangeNotifier {
         notifyListeners();
 
         result = {'status': true, 'message': 'Successful', 'user': authUser};
+      } else {
+        _loggedInStatus = Status.NotLoggedIn;
+        notifyListeners();
+        result = {
+          'status': false,
+          'message': json.decode(response.body)['message']
+        };
       }
-    
-    else{
-      _loggedInStatus = Status.NotLoggedIn;
-      notifyListeners();
-      result = {
-        'status': false,
-        'message': json.decode(response.body)['message']
-      };
-    }
-
-
     } else {
       _loggedInStatus = Status.NotLoggedIn;
       notifyListeners();
@@ -83,14 +81,17 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<Map<String, dynamic>> register(
-      String username, String password, String passwordConfirmation) async {
+    String username,
+    String password,
+    String passwordConfirmation,
+    String nik,
+  ) async {
     final Map<String, dynamic> registrationData = {
-      'user': {
-        'username': username,
-        'password': password,
-        'password_confirmation': passwordConfirmation
-      }
+      'username': username,
+      'password': password,
+      'nik': nik,
     };
+    print('register() called');
     return await post(AppUrl.register,
             body: json.encode(registrationData),
             headers: {'Content-Type': 'application/json'})
@@ -105,15 +106,18 @@ class AuthProvider with ChangeNotifier {
     print(response.statusCode);
     if (response.statusCode == 200) {
       var userData = responseData['data'];
+      print('userDta: $userData');
 
-      User authUser = User.fromJson(userData);
+      User authUser = User.fromJsonMinimal(userData);
 
-      UserPreferences().saveUser(authUser);
+      print('Userpreferences');
+      UserPreferences().saveUserMinimal(authUser);
       result = {
         'status': true,
         'message': 'Successfully registered',
         'data': authUser
       };
+      
     } else {
 //      if (response.statusCode == 401) Get.toNamed("/login");
       result = {

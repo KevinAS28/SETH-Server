@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sethcapp/domain/user.dart';
+import 'package:sethcapp/pages/login.dart';
 import 'package:sethcapp/pages/place.dart';
 import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
 import 'package:sethcapp/pages/fab_with_icons.dart';
@@ -23,6 +24,8 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
+  static bool showFloating = true;
+
   @override
   Widget build(BuildContext context) {
     User user = Provider.of<UserProvider>(context).user;
@@ -51,6 +54,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   String _lastSelected = 'TAB: 0';
 
+  static int selected = 0;
+
   void _logoutDialog() {
     // flutter defined function
     showDialog(
@@ -73,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => Login(),
 
                 ));
               },
@@ -86,10 +91,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   void _selectedTab(int index) {
+    _DashBoardState.showFloating = false;
+    // Navigator.pop(context);
     if (index == 0) {
-      Navigator.push(context,
-          new MaterialPageRoute(builder: (context) => new DashBoard()));
+      // Navigator.push(context,
+      //     new MaterialPageRoute(builder: (context) => new DashBoard()));
     } else if (index == 1) {
+      // _HomeScreenState.selected = 1;
+      FABBottomAppBar.staticSelectedIndex = 1;
       Navigator.push(context,
           new MaterialPageRoute(builder: (context) => new cert_made()));
     } else if (index == 2) {
@@ -105,10 +114,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   void _selectedFab(int index) {
+    _DashBoardState.showFloating = false;
     if (index == 0) {
       Navigator.push(
           context, new MaterialPageRoute(builder: (context) => new Place()));
     } else if (index == 1) {
+      // Navigator.pop(context);
       Navigator.push(context,
           new MaterialPageRoute(builder: (context) => new info_screen()));
     } else if (index == 3) {
@@ -125,7 +136,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
+    
+    var widget = Scaffold(
       body: SingleChildScrollView(
         controller: controller,
         child: Column(
@@ -258,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             ),
                             TextSpan(
                               text:
-                                  "Check certificate info at your destination!",
+                                  "Check certificate information at your destination!",
                               style: TextStyle(
                                 color: kTextLightColor,
                               ),
@@ -308,6 +320,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
 
       bottomNavigationBar: FABBottomAppBar(
+        selectedIndex: FABBottomAppBar.staticSelectedIndex,
         centerItemText: 'Info',
         color: Colors.grey,
         selectedColor: Colors.red,
@@ -320,9 +333,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: _buildFab1(context), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: _buildFab1(context), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButtonLocation: (this.showFloat)?FloatingActionButtonLocation.centerDocked:null,
+      floatingActionButton: (this.showFloat)?_buildFab1(context):null, // This trailing comma makes auto-formatting nicer for build methods.
     );
+    // setState((){this.showFloat = false;});
+    return widget;
+
   }
 
   Widget _buildFab1(BuildContext context) {
@@ -356,11 +374,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final controller = ScrollController();
   double offset = 0;
 
+  bool showFloat = true;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     controller.addListener(onScroll);
+    FABBottomAppBar.staticSelectedIndex = 0;
+    
   }
 
   @override
@@ -368,6 +390,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     // TODO: implement dispose
     controller.dispose();
     super.dispose();
+    
   }
 
   void onScroll() {

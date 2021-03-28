@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:sethcapp/cert_made.dart';
 import 'package:sethcapp/constant.dart';
+import 'package:sethcapp/pages/login.dart';
 import 'package:sethcapp/providers/user_provider.dart';
 import 'package:sethcapp/util/api.dart';
 import 'package:sethcapp/util/app_url.dart';
@@ -51,7 +52,7 @@ class _cert_templateState extends State<cert_template> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => Login(),
                 ));
               },
             ),
@@ -115,7 +116,7 @@ class _cert_templateState extends State<cert_template> {
   }
 
   var data;
-  
+
   @override
   void initState() {
     // TODO: implement initState
@@ -125,7 +126,7 @@ class _cert_templateState extends State<cert_template> {
       setState(() {
         this.data = listItems;
       });
-    });    
+    });
   }
 
   @override
@@ -141,17 +142,32 @@ class _cert_templateState extends State<cert_template> {
     });
   }
 
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
 
   @override
   Widget build(BuildContext context) {
     User user = Provider.of<UserProvider>(context, listen: false).user;
     if (this.data == null) {
-      return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Loading..."),
-        ),
-      );
-    }    
+      return new WillPopScope(
+          onWillPop: () async => false,
+          child: SimpleDialog(
+              key: _keyLoader,
+              backgroundColor: Colors.black54,
+              children: <Widget>[
+                Center(
+                  child: Column(children: [
+                    CircularProgressIndicator(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Please Wait....",
+                      style: TextStyle(color: Colors.blueAccent),
+                    )
+                  ]),
+                )
+              ]));
+    }
     return Scaffold(
       body: SingleChildScrollView(
         controller: controller,

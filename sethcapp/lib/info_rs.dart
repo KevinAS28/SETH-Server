@@ -1,6 +1,11 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:provider/provider.dart';
 import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
+import 'package:sethcapp/pages/login.dart';
+import 'package:sethcapp/providers/user_provider.dart';
+import 'package:sethcapp/util/api.dart';
+import 'package:sethcapp/util/app_url.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 import 'package:flutter/material.dart';
 import 'package:sethcapp/pages/dashboard.dart';
@@ -12,6 +17,8 @@ import 'package:sethcapp/history_pass.dart';
 import 'package:dio/dio.dart';
 import 'package:sethcapp/user_model.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'domain/user.dart';
 
 class MapUtils {
   MapUtils._();
@@ -59,12 +66,10 @@ class _info_rsState extends State<info_rs> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
-
+                  builder: (context) => Login(),
                 ));
               },
             ),
-
           ],
         );
       },
@@ -113,6 +118,19 @@ class _info_rsState extends State<info_rs> {
   final controller = ScrollController();
   double offset = 0;
 
+  Future<List<String>> findAplaces(context, name) async {
+    print('findAplaces() called');
+    User user = Provider.of<UserProvider>(context, listen: false).user;
+    Map<String, String> data = {"aplace_name": name};
+    var response = await hitApiUs(user, AppUrl.findAplaces, data);
+    List<dynamic> listItems0 = response["aplaces"];
+    List<String> listItems = [];
+    for (var i in listItems0) {
+      listItems.add(i as String);
+    }
+    return listItems;
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -133,77 +151,27 @@ class _info_rsState extends State<info_rs> {
     });
   }
 
-  Future<List<UserModel>> getData(filter) async {
-    var response = await Dio().get(
-      "http://5d85ccfb1e61af001471bf60.mockapi.io/user",
-      queryParameters: {"filter": filter},
-    );
-
-    var models = UserModel.fromJsonList(response.data);
-    return models;
-  }
-
   Widget _customDropDownExample(
-      BuildContext context, UserModel item, String itemDesignation) {
+      BuildContext context, String item, String itemDesignation) {
     return Container(
-      child: (item?.avatar == null)
-          ? ListTile(
-              contentPadding: EdgeInsets.all(0),
-              leading: CircleAvatar(),
-              title: Text("No item selected"),
-            )
-          : ListTile(
-              contentPadding: EdgeInsets.all(0),
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(item.avatar),
-              ),
-              title: Text(item.name),
-              subtitle: Text(
-                item.createdAt.toString(),
-              ),
-            ),
-    );
-  }
-
-  Widget _customPopupItemBuilderExample2(
-      BuildContext context, UserModel item, bool isSelected) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 8),
-      decoration: !isSelected
-          ? null
-          : BoxDecoration(
-              border: Border.all(color: Theme.of(context).primaryColor),
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.white,
-            ),
       child: ListTile(
-        selected: isSelected,
-        title: Text(item.name),
-        subtitle: Text(item.createdAt.toString()),
-        leading: CircleAvatar(
-          backgroundImage: NetworkImage(item.avatar),
+        contentPadding: EdgeInsets.all(0),
+        title: Text(item),
+        subtitle: Text(
+          'Genose/Rapid/PCR test available',
         ),
       ),
     );
   }
 
   Widget _customPopupItemBuilderExample(
-      BuildContext context, UserModel item, bool isSelected) {
+      BuildContext context, String item, bool isSelected) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 8),
-      decoration: !isSelected
-          ? null
-          : BoxDecoration(
-              border: Border.all(color: Theme.of(context).primaryColor),
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.white,
-            ),
       child: ListTile(
-        selected: isSelected,
-        title: Text(item.name),
-        subtitle: Text(item.createdAt.toString()),
-        leading: CircleAvatar(
-          backgroundImage: NetworkImage(item.avatar),
+        contentPadding: EdgeInsets.all(0),
+        title: Text(item),
+        subtitle: Text(
+          'Genose/Rapid/PCR test available',
         ),
       ),
     );
@@ -237,45 +205,61 @@ class _info_rsState extends State<info_rs> {
     ));
   }
 
+  var data;
+
   @override
   Widget build(BuildContext context) {
     var listItems = <Widget>[
       SizedBox(height: 20),
-      Text("Result", style: kTitleTextstyle),
-    ];
-    var text = [
-      'PCR/Rapid/Swab test available',
-      'PCR/Rapid/Swab test available',
-      'PCR/Swab test available',
-      'PCR test available',
-      'Rapid test available',
-      'Swab test available',
-      'PCR/Rapid test available',
-      'Rapid/Swab/PCR test available',
-      'Swab/PCR test available',
-      'PCR/Rapid test available',
+      Text((this.data != null) ? "Result" : "Recommendations",
+          style: kTitleTextstyle),
     ];
 
-    var title = [
-      'RS Cilandak',
-      'RS Fatmawati',
-      'Puskesmas Pondok Indah',
-      'RSUD Pasar Minggu',
-      'RS Pondok Indah',
-      'RS Fatmawati',
-      'Puskesmas Pondok Indah',
-      'RSUD Pasar Minggu',
-      'Puskesmas Pondok Indah',
-      'RSUD Pasar Minggu',
-    ];
-    for (var i = 0; i < 10; i++) {
-      listItems.add(PreventCard(
-        text: text[i],
-        image: "assets/images/place.png",
-        title: title[i],
-      ));
-      listItems.add(SizedBox(height: 20));
+    if (this.data != null) {
+      for (var i = 0; i < 10; i++) {
+        listItems.add(PreventCard(
+          text: this.data[i],
+          image: "assets/images/place.png",
+          title: this.data[i],
+        ));
+        listItems.add(SizedBox(height: 20));
+      }
+    } else {
+      var text = [
+        'Genose/Rapid/PCR test available',
+        'Genose test available',
+        'PCR/Swab test available',
+        'Genose/Rapid/PCR test available',
+        'Genose test available',
+        'PCR/Swab test available',
+        'Genose/Rapid/PCR test available',
+        'Genose test available',
+        'PCR/Swab test available',
+        'PCR/Swab test available'
+      ];
+
+      var title = [
+        'RS Cilandak',
+        'RS Fatmawati',
+        'Puskesmas Pondok Indah',
+        'RSUD Pasar Minggu',
+        'RS Pondok Indah',
+        'RS Fatmawati',
+        'Puskesmas Pondok Indah',
+        'RSUD Pasar Minggu',
+        'Puskesmas Pondok Indah',
+        'RSUD Pasar Minggu',
+      ];
+      for (var i = 0; i < 10; i++) {
+        listItems.add(PreventCard(
+          text: text[i],
+          image: "assets/images/place.png",
+          title: title[i],
+        ));
+        listItems.add(SizedBox(height: 20));
+      }
     }
+    
     return Scaffold(
       body: SingleChildScrollView(
         controller: controller,
@@ -285,7 +269,7 @@ class _info_rsState extends State<info_rs> {
             MyHeader(
               image: "assets/icons/Drcorona.svg",
               textTop: "Health Centers",
-              textBottom: "Info",
+              textBottom: "Informations",
               offset: offset,
             ),
             Container(
@@ -304,7 +288,7 @@ class _info_rsState extends State<info_rs> {
                 children: <Widget>[
                   SizedBox(width: 20),
                   Expanded(
-                    child: DropdownSearch<UserModel>(
+                    child: DropdownSearch<String>(
                       searchBoxController: TextEditingController(text: ''),
                       mode: Mode.BOTTOM_SHEET,
                       isFilteredOnline: true,
@@ -317,13 +301,10 @@ class _info_rsState extends State<info_rs> {
                             Theme.of(context).inputDecorationTheme.fillColor,
                       ),
                       autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (UserModel u) =>
-                          u == null ? "user field is required " : null,
                       onFind: (String filter) {
-                        print("Filter2: $filter");
-                        return getData(filter);
+                        return findAplaces(context, filter);
                       },
-                      onChanged: (UserModel data) {
+                      onChanged: (var data) {
                         print(data);
                       },
                       dropdownBuilder: _customDropDownExample,

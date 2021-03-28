@@ -1,5 +1,6 @@
 import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
+import 'package:sethcapp/pages/login.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -43,12 +44,10 @@ class _info_screenState extends State<info_screen> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
-
+                  builder: (context) => Login(),
                 ));
               },
             ),
-
           ],
         );
       },
@@ -180,6 +179,7 @@ class _info_screenState extends State<info_screen> {
                       title: "Rapid",
                     ),
                   ),
+
                   ListTile(
                     onTap: () {
                       Navigator.push(
@@ -188,7 +188,8 @@ class _info_screenState extends State<info_screen> {
                               builder: (context) => new Genose_Page()));
                     },
                     title: PreventCard(
-                      text: "GeNose C19 is an electronic nose developed by Gadjah Mada University (UGM) to detect Covid-19 more quickly and accurately with accuracy 97% and the price is only 2\$ (USD)",
+                      text:
+                          "GeNose C19 is an electronic nose developed by Gadjah Mada University (UGM) to detect Covid-19 more quickly and accurately with accuracy 97% and the price is only Rp. 20.000",
                       image: "assets/images/swab.png",
                       title: "Genose",
                     ),

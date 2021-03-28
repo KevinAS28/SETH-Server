@@ -1,8 +1,8 @@
 class UserModel {
-  final String id;
-  final DateTime createdAt;
-  final String name;
-  final String avatar;
+  String id = '-1';
+  DateTime createdAt = new DateTime(2021);
+  String name = 'Name Model';
+  String avatar = 'Avatar';
 
   UserModel({this.id, this.createdAt, this.name, this.avatar});
 

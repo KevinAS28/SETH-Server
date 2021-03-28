@@ -1,7 +1,12 @@
+import 'package:provider/provider.dart';
 import 'package:sethcapp/cert_template.dart';
 import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/pages/dashboard.dart';
 import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
+import 'package:sethcapp/pages/login.dart';
+import 'package:sethcapp/providers/user_provider.dart';
+import 'package:sethcapp/util/api.dart';
+import 'package:sethcapp/util/app_url.dart';
 import 'package:sethcapp/widgets/my_header.dart';
 import 'package:sethcapp/cert_made.dart';
 import 'package:sethcapp/qr_code.dart';
@@ -10,6 +15,8 @@ import 'package:sethcapp/info_screen.dart';
 import 'package:sethcapp/info_rs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'domain/user.dart';
 
 class history_pass extends StatefulWidget {
   @override
@@ -41,7 +48,7 @@ class _history_passState extends State<history_pass> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => Login(),
                 ));
               },
             ),
@@ -95,11 +102,30 @@ class _history_passState extends State<history_pass> {
   final controller = ScrollController();
   double offset = 0;
 
+  var data;
+
+  Future<List<List<String>>> getHistory(context) async {
+    print('getHistory() called');
+    User user = Provider.of<UserProvider>(context, listen: false).user;
+    Map<String, String> data = {"nik": user.nik};
+    var response = await hitApiUs(user, AppUrl.historyA, data);
+    List<List<String>> history = [];
+    for (var i in response["history"]) {
+      history.add([i[0], i[1], i[2], "assets/images/place.png"]);
+    }
+    return history;
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     controller.addListener(onScroll);
+    getHistory(context).then((history) {
+      setState(() {
+        this.data = history;
+      });
+    });
   }
 
   @override
@@ -115,89 +141,47 @@ class _history_passState extends State<history_pass> {
     });
   }
 
+  static Future<void> showLoadingDialog(
+      BuildContext context, GlobalKey key) async {}
+
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+
   @override
   Widget build(BuildContext context) {
     var listItems = <Widget>[
       SizedBox(height: 20),
-      Text("Result", style: kTitleTextstyle),
-    ];
-    var text = [
-      'Pass Date: 26-02-2020',
-      'Pass Date: 27-02-2020',
-      'Pass Date: 28-02-2020',
-      'Pass Date: 01-03-2020',
-      'Pass Date: 02-03-2020',
-      'Pass Date: 03-03-2020',
-      'Pass Date: 04-03-2020',
-      'Pass Date: 05-03-2020',
-      'Pass Date: 06-03-2020',
-      'Pass Date: 07-03-2020',
-      'Pass Date: 08-03-2020',
-      'Pass Date: 09-03-2020',
+      Text((this.data != null) ? "Result" : "Loading...",
+          style: kTitleTextstyle),
     ];
 
-    var title = [
-      'Pondok Indah Mall',
-      'Rempah Asia',
-      'Soekarno Hatta Airport',
-      'Mall Grand Indonesia',
-      'PCR4',
-      'PCR5',
-      'PCR6',
-      'PCR',
-      'PCR',
-      'PCR'
-    ];
-
-    var subtitle = [
-      'Test Type : PCR',
-      'Test Type : PCR',
-      'Test Type : Swab',
-      'Test Type : Rapid',
-      'Test Type : PCR',
-      'Test Type : Swab',
-      'Test Type : Rapid',
-      'Test Type : Swab',
-      'Test Type : Rapid',
-      'Test Type : PCR',
-    ];
-
-    var image = [
-      "assets/images/place.png",
-      "assets/images/food.png",
-      "assets/images/airport.png",
-      "assets/images/place.png",
-      "assets/images/place.png",
-      "assets/images/place.png",
-      "assets/images/place.png",
-      "assets/images/place.png",
-      "assets/images/place.png",
-      "assets/images/place.png",
-    ];
-
-    var id = [
-      'ID Certificate : 12345678',
-      'ID Certificate : 23456781',
-      'ID Certificate : 12567852',
-      'ID Certificate : 12756782',
-      'ID Certificate : 12223678',
-      'ID Certificate : 23645678',
-      'ID Certificate : 62354978',
-      'ID Certificate : 78232948',
-      'ID Certificate : 47432978',
-      'ID Certificate : 63685678',
-    ];
-
-    for (var i = 0; i < 10; i++) {
-      listItems.add(PreventCard(
-        text: text[i],
-        subtitle: subtitle[i],
-        image: image[i],
-        title: title[i],
-        id: id[i],
-      ));
-      listItems.add(SizedBox(height: 20));
+    if (this.data != null) {
+      for (List<String> hist in this.data) {
+        listItems.add(PreventCard(
+            text: hist[1], subtitle: hist[2], title: hist[0], image: hist[3]));
+        listItems.add(SizedBox(height: 20));
+      }
+    } else {
+      return new WillPopScope(
+          onWillPop: () async => false,
+          child: SimpleDialog(
+              key: _keyLoader,
+              backgroundColor: Colors.black54,
+              children: <Widget>[
+                Center(
+                  child: Column(children: [
+                    CircularProgressIndicator(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Please Wait....",
+                      style: TextStyle(color: Colors.blueAccent),
+                    )
+                  ]),
+                )
+              ]));
     }
+
     return Scaffold(
       body: SingleChildScrollView(
         controller: controller,
@@ -292,14 +276,14 @@ class PreventCard extends StatelessWidget {
   final String title;
   final String text;
   final String subtitle;
-  final String id;
+  // final String id;
   const PreventCard({
     Key key,
     this.image,
     this.title,
     this.text,
     this.subtitle,
-    this.id,
+    // this.id,
   }) : super(key: key);
 
   @override
@@ -356,16 +340,6 @@ class PreventCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         subtitle,
-                        maxLines: 4,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        id,
                         maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(

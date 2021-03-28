@@ -42,7 +42,7 @@ class CUser(models.Model):
 
 class APlace(models.Model):
     name = models.CharField(max_length=50, blank=False)
-
+    
 
 class Certificate(models.Model):
     cuser = models.ForeignKey(CUser, on_delete=models.CASCADE)
@@ -56,6 +56,7 @@ class Certificate(models.Model):
 
 class BPlace(models.Model):
     name = models.CharField(max_length=50, blank=False)
+    # supported_certificates = models.ManyToManyField(Certificate, blank=True)
     supported_certs = models.CharField(max_length=50, blank=False, default='Genose')
     # certificates = models.ManyToManyField(Certificate, blank=True, null=True)
     

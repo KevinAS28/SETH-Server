@@ -6,6 +6,10 @@ import 'package:sethcapp/providers/user_provider.dart';
 import 'package:sethcapp/util/validators.dart';
 import 'package:sethcapp/util/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:sethcapp/widgets/my_header.dart';
+import 'package:sethcapp/providers/user_provider.dart';
+import 'package:sethcapp/providers/user_provider.dart';
+
 
 class Login extends StatefulWidget {
   @override
@@ -17,6 +21,8 @@ class _LoginState extends State<Login> {
 
   String _username = "", _password = "";
 
+  get image => null;
+
   @override
   Widget build(BuildContext context) {
     AuthProvider auth = Provider.of<AuthProvider>(context);
@@ -25,7 +31,7 @@ class _LoginState extends State<Login> {
       autofocus: false,
       // validator: validateEmail,
       onSaved: (value) => _username = value,
-      decoration: buildInputDecoration("Confirm password", Icons.email),
+      decoration: buildInputDecoration("Input username", Icons.person_search),
     );
 
     final passwordField = TextFormField(
@@ -69,7 +75,7 @@ class _LoginState extends State<Login> {
         username: "cuser0",
         nik: "30919873421",
         email: "cuser0",
-        name: 'Hello',
+        name: 'Bayu Setiawan',
         id: 1,
         phone: '+620123',
         password: "123450",
@@ -136,13 +142,23 @@ class _LoginState extends State<Login> {
       child: Scaffold(
         body: Container(
           padding: EdgeInsets.all(40.0),
-          child: Form(
-            key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+            Padding(
+            padding: const EdgeInsets.only(top: 60.0),
+          child: Center(
+            child: Container(
+                width: 200,
+                height: 150,
+                /*decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(50.0)),*/
+                child: Image.asset('assets/images/logo.png')),
+          ),
+        ),
                 SizedBox(height: 15.0),
-                label("Email"),
+                label("Username"),
                 SizedBox(height: 5.0),
                 usernameField,
                 SizedBox(height: 20.0),
@@ -159,7 +175,6 @@ class _LoginState extends State<Login> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

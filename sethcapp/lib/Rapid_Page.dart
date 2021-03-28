@@ -168,7 +168,7 @@ class _Rapid_PageState extends State<Rapid_Page> {
           children: <Widget>[
             MyHeader(
               image: "assets/icons/Drcorona.svg",
-              textTop: "Info Rapid",
+              textTop: "Rapid test Information",
               textBottom: "Certificate",
               offset: offset,
             ),

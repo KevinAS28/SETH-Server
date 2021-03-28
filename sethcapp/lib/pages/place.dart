@@ -2,6 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:provider/provider.dart';
 import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/domain/user.dart';
+import 'package:sethcapp/pages/fab_with_icons.dart';
+import 'package:sethcapp/pages/layout.dart';
+import 'package:sethcapp/pages/login.dart';
 import 'package:sethcapp/providers/user_provider.dart';
 import 'package:sethcapp/util/app_url.dart';
 import 'package:sethcapp/widgets/my_header.dart';
@@ -66,7 +69,7 @@ class _PlaceState extends State<Place> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => Login(),
                 ));
               },
             ),
@@ -185,7 +188,7 @@ class _PlaceState extends State<Place> {
       contentPadding: EdgeInsets.all(0),
       leading: CircleAvatar(),
       title: Text((item == null ? "Place undefined" : item)),
-      onTap: () => print("Cliecked 1"),
+      onTap: () => print("Clicked 1"),
     ));
   }
 
@@ -244,23 +247,23 @@ class _PlaceState extends State<Place> {
       SizedBox(height: 20),
     ];
 
-    if (this.data != null) { //after search result
+    if (this.data != null) {
+      //after search result
       listItems.add(Text("Result", style: kTitleTextstyle));
       print('Length: ${this.data.length}');
 
       for (List<String> p in this.data) {
-        listItems.add(
-            GestureDetector(
+        listItems.add(GestureDetector(
             child: PreventCard(
               text: p[1],
               image: "assets/images/place.png",
               title: p[0],
             ),
-            onTap: () => navigateTo(7.7714, 110.3775))
-        );
+            onTap: () => navigateTo(7.7714, 110.3775)));
         listItems.add(SizedBox(height: 20));
       }
-    } else { //before search result
+    } else {
+      //before search result
       listItems.add(Text("Recommendations", style: kTitleTextstyle));
       print('Length: 0');
       var text = [
@@ -304,27 +307,53 @@ class _PlaceState extends State<Place> {
         "assets/images/place.png",
       ];
 
-      var latList = [7.7714, 10];
-      var longList = [110.3775, 20];
+      var latList = [
+        7.7714,
+        -6.607272470191218,
+        -6.598411508864702,
+        -6.579141566238919,
+        -6.5572432463449655,
+        -6.58019311578963,
+        -6.571418420056807,
+        -6.595450638642818,
+        -6.575309080455157,
+        -6.596317092171037,
+      ];
+
+      var longList = [
+        110.3775,
+        106.81111168465574,
+        106.80507495402675,
+        106.80726336567132,
+        106.77379419635528,
+        106.77809105217781,
+        106.73955988286193,
+        106.80468809635563,
+        106.80742096936854,
+        106.79136609635566,
+      ];
 
       for (var i = 0; i < 10; i++) {
-        listItems.add(
-          GestureDetector(
-            onTap: () {navigateTo(latList[i], longList[i]);},
-            child:             PreventCard(
+        listItems.add(GestureDetector(
+            onTap: () {
+              navigateTo(latList[i], longList[i]);
+            },
+            child: PreventCard(
               text: text[i],
               image: image[i],
               title: title[i],
-            )
-          )
-
-        );
+            )));
         listItems.add(SizedBox(height: 20));
       }
     }
 
-    return Scaffold(
-      body: SingleChildScrollView(
+    return SafeArea(
+        child: Scaffold(
+      floatingActionButtonLocation: (this.data != null)
+          ? FloatingActionButtonLocation.centerDocked
+          : null,
+      floatingActionButton: (this.data != null) ? _buildFab1(context) : null,
+      body: (SingleChildScrollView(
         controller: controller,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -349,17 +378,16 @@ class _PlaceState extends State<Place> {
               ),
               child: Row(
                 children: <Widget>[
-                  SizedBox(width: 20),
                   Expanded(
                     child: DropdownSearch<String>(
                       searchBoxController: TextEditingController(text: ''),
-                      mode: Mode.BOTTOM_SHEET,
+                      mode: Mode.DIALOG,
                       isFilteredOnline: true,
                       showClearButton: true,
                       showSearchBox: true,
                       label: 'Find a place to go',
                       dropdownSearchDecoration: InputDecoration(
-                        filled: true,
+                        filled: false,
                         fillColor:
                             Theme.of(context).inputDecorationTheme.fillColor,
                       ),
@@ -386,7 +414,7 @@ class _PlaceState extends State<Place> {
             ),
           ],
         ),
-      ),
+      )),
       bottomNavigationBar: FABBottomAppBar(
         centerItemText: 'Info',
         color: Colors.grey,
@@ -398,6 +426,53 @@ class _PlaceState extends State<Place> {
           FABBottomAppBarItem(iconData: Icons.settings_overscan, text: 'Scan'),
           FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
         ],
+      ),
+    ));
+  }
+
+  void _selectedFabb(int index) {
+    if (index == 0) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new Place()));
+    } else if (index == 1) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new info_screen()));
+    } else if (index == 3) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new history_pass()));
+    } else if (index == 2) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new info_rs()));
+    }
+    print("selectedFab: $index");
+    setState(() {
+      _lastSelected = 'FAB: $index';
+    });
+  }
+
+  Widget _buildFab1(BuildContext context) {
+    final icons = [
+      Icons.place,
+      Icons.article,
+      Icons.local_hospital,
+      Icons.history
+    ];
+    return AnchoredOverlay(
+      showOverlay: true,
+      overlayBuilder: (context, offset) {
+        return CenterAbout(
+          position: Offset(offset.dx, offset.dy - icons.length * 35.0),
+          child: FabWithIcons(
+            icons: icons,
+            onIconTapped: _selectedFabb,
+          ),
+        );
+      },
+      child: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Info',
+        child: Icon(Icons.info),
+        elevation: 2.0,
       ),
     );
   }

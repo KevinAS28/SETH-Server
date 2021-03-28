@@ -128,7 +128,7 @@ class _PCR_PageState extends State<PCR_Page> {
           children: <Widget>[
             MyHeader(
               image: "assets/icons/Drcorona.svg",
-              textTop: "Info PCR",
+              textTop: "PCR Information",
               textBottom: "Certificate",
               offset: offset,
             ),
