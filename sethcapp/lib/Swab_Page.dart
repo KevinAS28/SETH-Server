@@ -153,7 +153,7 @@ class _Genose_PageState extends State<Genose_Page> {
                       child: PreventCard(
                         text: "1.2 kilometers from you",
                         image: "assets/images/place.png",
-                        title: "RS Pondok Indah",
+                        title: "Hospital Pondok Indah",
                       )),
                   GestureDetector(
                     onTap: () {

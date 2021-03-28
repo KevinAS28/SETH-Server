@@ -113,10 +113,10 @@ Future<List<String>> register() async {
 }
 
 void main() async {
-  // var url = "http://127.0.0.1:8000/c_api/place_input";
-  // Map<String, dynamic> data = { "filter": "Gadjah Mada"};
-  // Map<String, dynamic> response = await hitApiAuth(url, data);
-  // print(response["predictions"][0]["description"]);
-  register();
+  var url = "http://127.0.0.1:8000/c_api/place_input";
+  Map<String, dynamic> data = { "filter": "Gadjah Mada"};
+  Map<String, dynamic> response = await hitApiAuth(url, data);
+  print(response["predictions"][0]);
+  // register();
   // print(('x' as String));
 }

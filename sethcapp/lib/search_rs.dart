@@ -127,7 +127,7 @@ class _search_rsState extends State<search_rs> {
                         "\n" +
                         "1.8 kilometers from you",
                     image: "assets/images/place.png",
-                    title: "RS Cilandak",
+                    title: "Hospital Cilandak",
                   
                   ),
                   SizedBox(height: 20),
@@ -137,7 +137,7 @@ class _search_rsState extends State<search_rs> {
                         "\n" +
                         "1.8 kilometers from you",
                     image: "assets/images/place.png",
-                    title: "RS Fatmawati",
+                    title: "Hospital Fatmawati",
                   ),
                   PreventCard(
                     text: "PCR " +

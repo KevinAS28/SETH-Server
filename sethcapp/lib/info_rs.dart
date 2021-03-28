@@ -1,8 +1,12 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/pages/fab_bottom_app_bar.dart';
+import 'package:sethcapp/pages/fab_with_icons.dart';
+import 'package:sethcapp/pages/layout.dart';
 import 'package:sethcapp/pages/login.dart';
+import 'package:sethcapp/pages/navigate.dart';
 import 'package:sethcapp/providers/user_provider.dart';
 import 'package:sethcapp/util/api.dart';
 import 'package:sethcapp/util/app_url.dart';
@@ -20,28 +24,24 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'domain/user.dart';
 
-class MapUtils {
-  MapUtils._();
-
-  static Future<void> openMap(double latitude, double longitude) async {
-    String googleUrl =
-        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
-    if (await canLaunch(googleUrl)) {
-      await launch(googleUrl);
-    } else {
-      throw 'Could not open the map.';
-    }
-    MapUtils.openMap(-3.823216, -38.481700);
-    ;
-  }
-}
-
 class info_rs extends StatefulWidget {
+  var data;
+
+  info_rs({this.data = null});
+
   @override
-  _info_rsState createState() => _info_rsState();
+  _info_rsState createState() => _info_rsState(data);
 }
 
 class _info_rsState extends State<info_rs> {
+  List<String> data;
+
+  _info_rsState(data) {
+    this.data = data;
+  }
+
+  _info_rsState.noArgs() {}
+
   String _lastSelected = 'TAB: 0';
 
   void _logoutDialog() {
@@ -120,6 +120,9 @@ class _info_rsState extends State<info_rs> {
 
   Future<List<String>> findAplaces(context, name) async {
     print('findAplaces() called');
+    if (name == '') {
+      return <String>[];
+    }
     User user = Provider.of<UserProvider>(context, listen: false).user;
     Map<String, String> data = {"aplace_name": name};
     var response = await hitApiUs(user, AppUrl.findAplaces, data);
@@ -134,6 +137,7 @@ class _info_rsState extends State<info_rs> {
   @override
   void initState() {
     // TODO: implement initState
+    SystemChrome.setEnabledSystemUIOverlays([]);
     super.initState();
     controller.addListener(onScroll);
   }
@@ -156,7 +160,7 @@ class _info_rsState extends State<info_rs> {
     return Container(
       child: ListTile(
         contentPadding: EdgeInsets.all(0),
-        title: Text(item),
+        title: Text((item == null) ? '' : item),
         subtitle: Text(
           'Genose/Rapid/PCR test available',
         ),
@@ -167,45 +171,30 @@ class _info_rsState extends State<info_rs> {
   Widget _customPopupItemBuilderExample(
       BuildContext context, String item, bool isSelected) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 8),
+      decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).primaryColor),
+        borderRadius: BorderRadius.circular(5),
+        color: Colors.white,
+      ),
       child: ListTile(
-        contentPadding: EdgeInsets.all(0),
+        selected: isSelected,
         title: Text(item),
-        subtitle: Text(
-          'Genose/Rapid/PCR test available',
-        ),
+        onTap: () async {
+          print('Clicked 2');
+          List<String> result = await findAplaces(context, item);
+          // print(result);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => info_rs(
+                      data: result,
+                    )),
+          );
+        },
       ),
     );
   }
-
-  Center LayoutRS(List<Map> RSData, Function detailRS) {
-    return new Center(
-        child: ListView.builder(
-      itemCount: RSData.length,
-      itemBuilder: (context, pos) {
-        return Padding(
-            padding: EdgeInsets.only(bottom: 16.0),
-            child: Card(
-              color: Colors.white,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
-                child: new GestureDetector(
-                    child: Text(
-                      "RS Cilandak" +
-                          RSData[pos]["Tests available: "] +
-                          "PCR / Rapid / Swab",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        height: 1.6,
-                      ),
-                    ),
-                    onTap: () => {detailRS(RSData[pos])}),
-              ),
-            ));
-      },
-    ));
-  }
-
-  var data;
 
   @override
   Widget build(BuildContext context) {
@@ -215,36 +204,39 @@ class _info_rsState extends State<info_rs> {
           style: kTitleTextstyle),
     ];
 
+    var text = [
+      'Genose/Rapid/PCR test available',
+      'Genose test available',
+      'PCR/Swab test available',
+      'Genose/Rapid/PCR test available',
+      'Genose test available',
+      'PCR/Swab test available',
+      'Genose/Rapid/PCR test available',
+      'Genose test available',
+      'PCR/Swab test available',
+      'PCR/Swab test available'
+    ];
+
     if (this.data != null) {
-      for (var i = 0; i < 10; i++) {
-        listItems.add(PreventCard(
-          text: this.data[i],
-          image: "assets/images/place.png",
-          title: this.data[i],
-        ));
+      for (var i = 0; i < this.data.length; i++) {
+        listItems.add(GestureDetector(
+            onTap: () => navigateToBHC(),
+            child: PreventCard(
+              text: text[i],
+              image: "assets/images/place.png",
+              title: this.data[i],
+            )));
+
         listItems.add(SizedBox(height: 20));
       }
     } else {
-      var text = [
-        'Genose/Rapid/PCR test available',
-        'Genose test available',
-        'PCR/Swab test available',
-        'Genose/Rapid/PCR test available',
-        'Genose test available',
-        'PCR/Swab test available',
-        'Genose/Rapid/PCR test available',
-        'Genose test available',
-        'PCR/Swab test available',
-        'PCR/Swab test available'
-      ];
-
       var title = [
-        'RS Cilandak',
-        'RS Fatmawati',
+        'Hospital Cilandak',
+        'Hospital Fatmawati',
         'Puskesmas Pondok Indah',
         'RSUD Pasar Minggu',
-        'RS Pondok Indah',
-        'RS Fatmawati',
+        'Hospital Pondok Indah',
+        'Hospital Fatmawati',
         'Puskesmas Pondok Indah',
         'RSUD Pasar Minggu',
         'Puskesmas Pondok Indah',
@@ -259,17 +251,22 @@ class _info_rsState extends State<info_rs> {
         listItems.add(SizedBox(height: 20));
       }
     }
-    
-    return Scaffold(
-      body: SingleChildScrollView(
+
+    return Container(
+        child: Scaffold(
+      floatingActionButtonLocation: (this.data != null)
+          ? FloatingActionButtonLocation.centerDocked
+          : null,
+      floatingActionButton: (this.data != null) ? _buildFab1(context) : null,
+      body: (SingleChildScrollView(
         controller: controller,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             MyHeader(
               image: "assets/icons/Drcorona.svg",
-              textTop: "Health Centers",
-              textBottom: "Informations",
+              textTop: "Find",
+              textBottom: "Health Centers",
               offset: offset,
             ),
             Container(
@@ -286,22 +283,22 @@ class _info_rsState extends State<info_rs> {
               ),
               child: Row(
                 children: <Widget>[
-                  SizedBox(width: 20),
                   Expanded(
                     child: DropdownSearch<String>(
                       searchBoxController: TextEditingController(text: ''),
-                      mode: Mode.BOTTOM_SHEET,
+                      mode: Mode.DIALOG,
                       isFilteredOnline: true,
                       showClearButton: true,
                       showSearchBox: true,
                       label: 'Find health centers',
                       dropdownSearchDecoration: InputDecoration(
-                        filled: true,
+                        filled: false,
                         fillColor:
                             Theme.of(context).inputDecorationTheme.fillColor,
                       ),
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       onFind: (String filter) {
+                        print("Filter2: $filter");
                         return findAplaces(context, filter);
                       },
                       onChanged: (var data) {
@@ -322,7 +319,7 @@ class _info_rsState extends State<info_rs> {
             ),
           ],
         ),
-      ),
+      )),
       bottomNavigationBar: FABBottomAppBar(
         centerItemText: 'Info',
         color: Colors.grey,
@@ -334,6 +331,53 @@ class _info_rsState extends State<info_rs> {
           FABBottomAppBarItem(iconData: Icons.settings_overscan, text: 'Scan'),
           FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
         ],
+      ),
+    ));
+  }
+
+  void _selectedFabb(int index) {
+    if (index == 0) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new Place()));
+    } else if (index == 1) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new info_screen()));
+    } else if (index == 3) {
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => new history_pass()));
+    } else if (index == 2) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new info_rs()));
+    }
+    print("selectedFab: $index");
+    setState(() {
+      _lastSelected = 'FAB: $index';
+    });
+  }
+
+  Widget _buildFab1(BuildContext context) {
+    final icons = [
+      Icons.place,
+      Icons.article,
+      Icons.local_hospital,
+      Icons.history
+    ];
+    return AnchoredOverlay(
+      showOverlay: true,
+      overlayBuilder: (context, offset) {
+        return CenterAbout(
+          position: Offset(offset.dx, offset.dy - icons.length * 35.0),
+          child: FabWithIcons(
+            icons: icons,
+            onIconTapped: _selectedFabb,
+          ),
+        );
+      },
+      child: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Info',
+        child: Icon(Icons.info),
+        elevation: 2.0,
       ),
     );
   }

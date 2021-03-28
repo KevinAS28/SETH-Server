@@ -1,5 +1,6 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sethcapp/domain/user.dart';
 import 'package:sethcapp/providers/auth.dart';
 import 'package:sethcapp/providers/user_provider.dart';
@@ -17,6 +18,14 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  @override
+  void initState() {
+    SystemChrome.setEnabledSystemUIOverlays([]);
+    // TODO: implement initState
+    super.initState();
+  }
+
+
   final formKey = new GlobalKey<FormState>();
 
   String _username = "", _password = "";
@@ -138,7 +147,7 @@ class _LoginState extends State<Login> {
 //       });
 //     };
 
-    return SafeArea(
+    return Container(
       child: Scaffold(
         body: Container(
           padding: EdgeInsets.all(40.0),

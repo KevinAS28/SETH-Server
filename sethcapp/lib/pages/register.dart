@@ -101,7 +101,7 @@ class _RegisterState extends State<Register> {
       }
     };
 
-    return SafeArea(
+    return Container(
       child: Scaffold(
         body: Container(
           padding: EdgeInsets.all(40.0),

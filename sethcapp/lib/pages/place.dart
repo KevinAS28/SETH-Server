@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:sethcapp/constant.dart';
 import 'package:sethcapp/domain/user.dart';
@@ -125,6 +126,8 @@ class _PlaceState extends State<Place> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    // SystemChrome.setEnabledSystemUIOverlays([]);
+    // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     controller.addListener(onScroll);
   }
 
@@ -173,6 +176,7 @@ class _PlaceState extends State<Place> {
       for (var rc in response["not_required_certs"]) {
         notRequiredCerts.add([rc, "No Certificate Needed"]);
       }
+
       print('OK');
       return [requiredCerts, notRequiredCerts];
     } else {
@@ -191,25 +195,6 @@ class _PlaceState extends State<Place> {
       onTap: () => print("Clicked 1"),
     ));
   }
-
-  // Widget _customPopupItemBuilderExample2(
-  //     BuildContext context, String item, bool isSelected) {
-  //       print(" _customPopupItemBuilderExample2");
-  //   return Container(
-  //     margin: EdgeInsets.symmetric(horizontal: 8),
-  //     decoration:
-  //          BoxDecoration(
-  //             border: Border.all(color: Theme.of(context).primaryColor),
-  //             borderRadius: BorderRadius.circular(5),
-  //             color: Colors.white,
-  //           ),
-  //     child: ListTile(
-  //       selected: isSelected,
-  //       title: Text(item),
-  //       onTap: () => {},
-  //     ),
-  //   );
-  // }
 
   Widget _customPopupItemBuilderExample(
       BuildContext context, String item, bool isSelected) {
@@ -259,7 +244,7 @@ class _PlaceState extends State<Place> {
               image: "assets/images/place.png",
               title: p[0],
             ),
-            onTap: () => navigateTo(7.7714, 110.3775)));
+            onTap: () => navigateToGambir()));
         listItems.add(SizedBox(height: 20));
       }
     } else {
@@ -347,7 +332,7 @@ class _PlaceState extends State<Place> {
       }
     }
 
-    return SafeArea(
+    return Container(
         child: Scaffold(
       floatingActionButtonLocation: (this.data != null)
           ? FloatingActionButtonLocation.centerDocked
