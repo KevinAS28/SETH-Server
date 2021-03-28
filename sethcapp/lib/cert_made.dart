@@ -221,8 +221,7 @@ class _cert_madeState extends State<cert_made> {
           items: [
             FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
             FABBottomAppBarItem(iconData: Icons.layers, text: 'Certificate'),
-            FABBottomAppBarItem(
-                iconData: Icons.settings_overscan, text: 'Scan'),
+            FABBottomAppBarItem(iconData: Icons.settings_overscan, text: 'Scan'),
             FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
           ],
         )

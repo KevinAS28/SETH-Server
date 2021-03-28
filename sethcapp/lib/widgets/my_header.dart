@@ -30,8 +30,8 @@ class _MyHeaderState extends State<MyHeader> {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
-              Color(0xFF3383CD),
-              Color(0xFF11249F),
+              Color(0xFF1359AA),
+              Color(0xFF041C37),
             ],
           ),
         ),

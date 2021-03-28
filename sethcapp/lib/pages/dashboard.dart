@@ -318,11 +318,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ],
         ),
       ),
+
       bottomNavigationBar: FABBottomAppBar(
         selectedIndex: FABBottomAppBar.staticSelectedIndex,
         centerItemText: 'Info',
         color: Colors.grey,
         selectedColor: Colors.red,
+        notchedShape: CircularNotchedRectangle(),
         onTabSelected: _selectedTab,
         items: [
           FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
@@ -331,6 +333,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           FABBottomAppBarItem(iconData: Icons.logout, text: 'Logout'),
         ],
       ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: _buildFab1(context), // This trailing comma makes auto-formatting nicer for build methods.
       floatingActionButtonLocation: (this.showFloat)?FloatingActionButtonLocation.centerDocked:null,
       floatingActionButton: (this.showFloat)?_buildFab1(context):null, // This trailing comma makes auto-formatting nicer for build methods.
     );

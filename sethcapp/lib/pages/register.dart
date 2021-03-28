@@ -110,6 +110,15 @@ class _RegisterState extends State<Register> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: Center(
+                    child: Container(
+                        width: 150,
+                        height: 150,
+                        child: Image.asset('assets/images/logo.png')),
+                  ),
+                ),
                 SizedBox(height: 15.0),
                 label("Username"),
                 SizedBox(height: 5.0),

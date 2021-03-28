@@ -7,6 +7,10 @@ import 'package:sethcapp/providers/user_provider.dart';
 import 'package:sethcapp/util/validators.dart';
 import 'package:sethcapp/util/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:sethcapp/widgets/my_header.dart';
+import 'package:sethcapp/providers/user_provider.dart';
+import 'package:sethcapp/providers/user_provider.dart';
+
 
 class Login extends StatefulWidget {
   @override
@@ -25,6 +29,8 @@ class _LoginState extends State<Login> {
   final formKey = new GlobalKey<FormState>();
 
   String _username = "", _password = "";
+
+  get image => null;
 
   @override
   Widget build(BuildContext context) {
@@ -145,11 +151,21 @@ class _LoginState extends State<Login> {
       child: Scaffold(
         body: Container(
           padding: EdgeInsets.all(40.0),
-          child: Form(
-            key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+            Padding(
+            padding: const EdgeInsets.only(top: 60.0),
+          child: Center(
+            child: Container(
+                width: 200,
+                height: 150,
+                /*decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(50.0)),*/
+                child: Image.asset('assets/images/logo.png')),
+          ),
+        ),
                 SizedBox(height: 15.0),
                 label("Username"),
                 SizedBox(height: 5.0),
@@ -168,7 +184,6 @@ class _LoginState extends State<Login> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

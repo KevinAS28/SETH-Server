@@ -175,7 +175,7 @@ class _PlaceState extends State<Place> {
 
       for (var rc in response["not_required_certs"]) {
         notRequiredCerts.add([rc, "No Certificate Needed"]);
-      } 
+      }
 
       print('OK');
       return [requiredCerts, notRequiredCerts];
@@ -185,18 +185,16 @@ class _PlaceState extends State<Place> {
   }
 
   Widget _customDropDownExample(
-      BuildContext context, String item, String itemDesignation
-      ) {
+      BuildContext context, String item, String itemDesignation) {
     print(" _customDropDownExample");
     return Container(
         child: ListTile(
       contentPadding: EdgeInsets.all(0),
       leading: CircleAvatar(),
       title: Text((item == null ? "Place undefined" : item)),
-      onTap: () => print("Cliecked 1"),
+      onTap: () => print("Clicked 1"),
     ));
   }
-
 
   Widget _customPopupItemBuilderExample(
       BuildContext context, String item, bool isSelected) {
@@ -235,6 +233,7 @@ class _PlaceState extends State<Place> {
     ];
 
     if (this.data != null) {
+      //after search result
       listItems.add(Text("Result", style: kTitleTextstyle));
       print('Length: ${this.data.length}');
 
@@ -249,6 +248,7 @@ class _PlaceState extends State<Place> {
         listItems.add(SizedBox(height: 20));
       }
     } else {
+      //before search result
       listItems.add(Text("Recommendations", style: kTitleTextstyle));
       print('Length: 0');
       var text = [
@@ -271,28 +271,74 @@ class _PlaceState extends State<Place> {
         'Rempah Asia',
         'Soekarno Hatta Airport',
         'Mall Grand Indonesia',
-        'PCR4',
-        'PCR5',
+        'Stasiun Gambir',
+        'Pelabuhan Tanjung Priok',
         'PCR6',
         'PCR',
         'PCR',
         'PCR'
       ];
+
+      var image = [
+        "assets/images/place.png",
+        "assets/images/food.png",
+        "assets/images/airport.png",
+        "assets/images/place.png",
+        "assets/images/station.png",
+        "assets/images/port.png",
+        "assets/images/place.png",
+        "assets/images/place.png",
+        "assets/images/place.png",
+        "assets/images/place.png",
+      ];
+
+      var latList = [
+        7.7714,
+        -6.607272470191218,
+        -6.598411508864702,
+        -6.579141566238919,
+        -6.5572432463449655,
+        -6.58019311578963,
+        -6.571418420056807,
+        -6.595450638642818,
+        -6.575309080455157,
+        -6.596317092171037,
+      ];
+
+      var longList = [
+        110.3775,
+        106.81111168465574,
+        106.80507495402675,
+        106.80726336567132,
+        106.77379419635528,
+        106.77809105217781,
+        106.73955988286193,
+        106.80468809635563,
+        106.80742096936854,
+        106.79136609635566,
+      ];
+
       for (var i = 0; i < 10; i++) {
-        listItems.add(PreventCard(
-          text: text[i],
-          image: "assets/images/place.png",
-          title: title[i],
-        ));
+        listItems.add(GestureDetector(
+            onTap: () {
+              navigateTo(latList[i], longList[i]);
+            },
+            child: PreventCard(
+              text: text[i],
+              image: image[i],
+              title: title[i],
+            )));
         listItems.add(SizedBox(height: 20));
       }
     }
 
-    return Container(child: Scaffold(
-      floatingActionButtonLocation: (this.data!=null)?FloatingActionButtonLocation.centerDocked:null,
-      floatingActionButton: (this.data!=null)?_buildFab1(context):null,
-      body: (
-          SingleChildScrollView(
+    return Container(
+        child: Scaffold(
+      floatingActionButtonLocation: (this.data != null)
+          ? FloatingActionButtonLocation.centerDocked
+          : null,
+      floatingActionButton: (this.data != null) ? _buildFab1(context) : null,
+      body: (SingleChildScrollView(
         controller: controller,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -317,7 +363,6 @@ class _PlaceState extends State<Place> {
               ),
               child: Row(
                 children: <Widget>[
-                  
                   Expanded(
                     child: DropdownSearch<String>(
                       searchBoxController: TextEditingController(text: ''),
@@ -370,7 +415,6 @@ class _PlaceState extends State<Place> {
     ));
   }
 
-  
   void _selectedFabb(int index) {
     if (index == 0) {
       Navigator.push(
@@ -417,10 +461,7 @@ class _PlaceState extends State<Place> {
       ),
     );
   }
-
-  
 }
-
 
 class PreventCard extends StatelessWidget {
   final String image;
