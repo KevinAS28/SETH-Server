@@ -133,6 +133,40 @@ def auth_face_result(request):
     else:
         return HttpResponseNotAllowed('Invalid method')
 
+finger_success = True
+
+def fingerprint_result(request):
+    global finger_success
+    result = finger_success
+    finger_success = None
+    if request.method=='GET':
+        if result:
+            return render(request, 'front2/fingerprint_result.html', {'success': True})
+        else:
+            return render(request, 'front2/fingerprint_result.html', {'not_success':True})
+
+def check_fingerprint(request):
+    global finger_success
+    if not (finger_success is None):
+        return JsonResponse({'done': finger_success, 'success_url': ('fingerprint_result')})
+    else:
+        return JsonResponse({'done': 'fail'})
+
+def fingerprint(request):
+    return render(request, 'front2/fingerprint_auth.html')
+
+def receive_fingerprint(request):
+    global finger_success
+    print(request.body)
+    data = json.loads(request.body)
+    if data['result']==True:
+        finger_success = True
+        return JsonResponse({'success': True})
+    else:
+        finger_success = False
+        return JsonResponse({'success': False})
+        
+
 def receive_qr(request):
     global user_id_received, cert_not_supported, failed_msg
     if request.method == 'POST':

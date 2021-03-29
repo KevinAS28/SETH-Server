@@ -18,5 +18,9 @@ urlpatterns = [
     path('qr_page', views.qr_page, name='qr_page'),
     path('check_qr', views.check_qr, name='check_qr'),
     path('receive_qr', views.receive_qr, name='receive_qr'),
+    path('fingerprint', views.fingerprint, name='fingerprint'),
+    path('check_fingerprint', views.check_fingerprint, name='check_fingerprint'),
+    path('fingerprint_result', views.fingerprint_result, name='fingerprint_result'),
+    path('receive_finger', views.receive_fingerprint, name='receive_finger'),
     path('qr_src', qr_views.serve_qr_code_image, name='qr_src'),
 ]

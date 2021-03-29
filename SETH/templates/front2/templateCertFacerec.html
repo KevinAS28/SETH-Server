@@ -617,6 +617,48 @@ The above copyright notice and this permission notice shall be included in all c
       console.log('Facebook Track Error:', err);
     }
   </script>
+  <script>
+      $(document).ready(function() {
+      // Javascript method's body can be found in assets/js/demos.js
+      md.initDashboardPageCharts();
+
+      document.getElementById("success").style.visibility='hidden';
+      document.getElementById("face_recognition").style.visibility='visible';
+
+      function hitAPI(){
+        var face_code = {code: {{face_code}} , token_id: {{token_id}} };
+            $.ajax({
+          url: "{% url 'face_core:check_auth_face' %}",
+          type: "POST",
+          data: JSON.stringify(face_code),
+          contentType: "application/json",
+          dataType: 'json',
+          success: function(response){
+            //result = JSON.parse(response);
+            var result = response;
+            console.log(result);
+
+            console.log(result['done']);
+            if (result['done']=='fail'){
+              document.getElementById("success-text").innerHTML = "FAILED! Maybe no cam availble?";
+            }
+
+            else if ((result['done']==true) || (result['done']=='True')){
+              console.log('DONE!')
+              window.location = result["success_url"];
+
+            }else{
+              setTimeout(function() {
+                  hitAPI();
+              }, 500);              
+            }
+
+          }
+        });
+      }
+      hitAPI();   
+      });
+  </script>
   <noscript>
     <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=111649226022273&ev=PageView&noscript=1" />
   </noscript>

@@ -107,28 +107,30 @@ The above copyright notice and this permission notice shall be included in all c
         <div class="card card-plain">
           <div class="card-header card-header-warning">
             <h4 class="card-title">Fingerprint</h4>
-          </div>
+          </div> 
 
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
               <div class="card card-profile">
                 <div class="card-body">
                   <h5 class="card-category text-gray">FINGERPRINT</h5>
-                  <h2 class="card-description text-danger">FAILED</h2>
-                  <h5 class="card-category text-gray">BODY TEMPERATURE</h5>
-                  <h1 class="card-description text-danger">39</h1>
-                  <p>Degrees Celcius</p>
-                  <a class="btn">>> See Certificate</a>
+                  {% if success %}
+                    <h2 class="card-description text-success">Fingerprint Verification:<br/>SUCCESS</h2>
+                  {% endif %}
+                  {% if not_success %}
+                    <h2 class="card-description text-danger">Fingerprint Verification:<br/>FAILED</h2>
+                  {% endif %}
+                  <h2 class="card-description" id="description">Redirect in 5 seconds...</h2>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="row">
+          {% comment %} <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
               <a href="./dashboard.html" class="btn btn-primary btn-round pull-right">Verify</a>
             </div>
-          </div>
+          </div> {% endcomment %}
 
         </div>
         </div>
@@ -369,6 +371,10 @@ The above copyright notice and this permission notice shall be included in all c
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
       md.initDashboardPageCharts();
+
+      setTimeout(function() {
+                  window.location = "{% url 'b_web:qr_page' %}";
+        },6000);
 
     });
   </script>

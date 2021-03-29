@@ -18,7 +18,7 @@ The above copyright notice and this permission notice shall be included in all c
   <link rel="icon" type="image/png" href="/staticfiles/assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    SETH - {{bplace_name}}
+    SETH
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -33,14 +33,14 @@ The above copyright notice and this permission notice shall be included in all c
 <body class="">
     <div class="sidebar" data-color="azure" data-background-color="white" data-image="/staticfiles/assets/img/sidebar-1.jpg">
       <div class="logo"><a href="/staticfiles/assets/img/favicon.png" class="simple-text logo-normal">
-          SETH <br/> {{bplace_name}}
+          SETH
         </a>
       </div>
 
       <!-- SIDEBAR -->
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'b_web:qr_page' %}">
               <i class="material-icons">dashboard</i>
               <p>Scan QR</p>
@@ -52,7 +52,7 @@ The above copyright notice and this permission notice shall be included in all c
               <p>Input user</p>
             </a>
           </li> 
-          <li class="nav-item">
+          <li class="nav-item  active">
             <a class="nav-link" href="{% url 'b_web:fingerprint' %}">
               <i class="material-icons">dashboard</i>
               <p>Fingerprint</p>
@@ -98,7 +98,7 @@ The above copyright notice and this permission notice shall be included in all c
                   <a class="dropdown-item" href="#">Profile</a>
                   <div class="dropdown-divider"></div>
                   -->
-                  <a class="dropdown-item" href="{% url 'b_web:buser_logout'  %}">Log out</a>
+                  <a class="dropdown-item" href=".\login.html">Log out</a>
                 </div>
               </li>
             </ul>
@@ -112,16 +112,16 @@ The above copyright notice and this permission notice shall be included in all c
       <div class="container-fluid">
         <div class="card card-plain">
           <div class="card-header card-header-warning">
-            <h4 class="card-title">Scan this QR with SETH mobile application</h4>
+            <h4 class="card-title">FINGERPRINT AUTHENTICATION</h4>
           </div>
           <div class="row" id="face_recognition" >
             <div class="col-md-12">
               <div class="card-body">
                 <div class="iframe-container d-none d-lg-block">
-                  <div class="col-md-8 ml-auto mr-auto">
+                  <div class="col-md-6 ml-auto mr-auto">
                     <div class="card card-profile">
                       <div class="card">
-                      <img src="{% url 'b_web:qr_src' %}" ></img>
+                      <img src="/staticfiles/assets/img/faces/fingerprint.jpg" ></img>
                       </div>
                    </div>
                   </div>
@@ -133,13 +133,42 @@ The above copyright notice and this permission notice shall be included in all c
             </div>
           </div>
 
-          <div class="row" id="success" style='visibility: hidden;'>
+          {% comment %} <div class="row" >
+            <div class="col-md-4">
+              <div class="card card-profile" >
+                <div class="card-body">
+                  <h5 class="card-category text-gray">LEFT</h5>
+                  <h3 class="card-description text-success" id="left_percent">0.0%</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-body">
+                  <h5 class="card-category text-gray">CENTER</h5>
+                  <h3 class="card-description text-info" id="center_percent">0.0%</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-body">
+                  <h5 class="card-category text-gray">RIGHT</h5>
+                  <h3 class="card-description text-danger" id="right_percent">0.0%</h3>
+                </div>
+              </div>
+            </div>
+          </div> {% endcomment %}
+
+          <div class="row" id="success" style=''>
             <div class="col-md-8 ml-auto mr-auto">
               <div class="card card-profile">
                 <div class="card-body">
-                  <h5 class="card-category text-gray">FACE RECOGNITION</h5>
-                  <h2 class="card-description text-success" id="success-text">SUCCESS</h2>
-                  <a href=".\user.html" class="btn btn-success">Finish</a>
+                  <h5 class="card-category text-gray">FINGERPRINT AUTHENTICATION</h5>
+                  <h2 class="card-description text-gray" >Please Tap Your Finger</h2>
+                  {% comment %} <a href="{{success_url}}?params={{params}}" class="btn btn-success">Finish</a> {% endcomment %}
                 </div>
               </div>
             </div>
@@ -384,30 +413,42 @@ The above copyright notice and this permission notice shall be included in all c
       // Javascript method's body can be found in assets/js/demos.js
       md.initDashboardPageCharts();
 
+      //document.getElementById("success").style.visibility='hidden';
+      //document.getElementById("face_recognition").style.visibility='visible';
+
       function hitAPI(){
-        var data_to_send = {check_qr: true};
+        var face_code = {};
             $.ajax({
-          url: "{% url 'b_web:check_qr' %}",
+          url: "{% url 'b_web:check_fingerprint' %}",
           type: "POST",
-          data: JSON.stringify(data_to_send),
+          data: JSON.stringify(face_code),
           contentType: "application/json",
           dataType: 'json',
           success: function(response){
             //result = JSON.parse(response);
             var result = response;
             console.log(result);
-            if (result["redirect"]){
-              window.location = result["redirect_url"];
+
+            console.log(result['done']);
+            if ((result['done']==false) || (result['done']=='False')){
+              //document.getElementById("success-text").innerHTML = "FAILED! Maybe no cam availble?";
+              window.location = result["success_url"];
             }
-            else{
+
+            else if ((result['done']==true) || (result['done']=='True')){
+              console.log('DONE!')
+              window.location = result["success_url"];
+
+            }else{
               setTimeout(function() {
                   hitAPI();
-              }, 500);
+              }, 500);              
             }
+
           }
         });
       }
-      hitAPI();
+      hitAPI();   
       });
   </script>
 </body>
@@ -418,7 +459,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 
 
-
+  
 </script>
 
 
