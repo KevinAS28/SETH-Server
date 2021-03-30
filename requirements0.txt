@@ -1,6 +1,0 @@
-tensorflow
-django
-django-qr-code
-opencv-python
-tf-slim
-
