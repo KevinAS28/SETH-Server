@@ -1,12 +1,12 @@
 from django.core import serializers
 from django.http.response import JsonResponse
+from django.forms.models import model_to_dict
 
 import json
 import requests
 
 from SETH import models
 from User.views import cuser_login
-
 
 
 @cuser_login
@@ -176,7 +176,7 @@ def get_history(request):
 def get_certificates(request):
     data = json.loads(request.body)
     nik = data['nik']
-    certs = [[c.cert_type, c.note, c.date, c.a_place.name] for c in models.Certificate.objects.filter(cuser__nik__contains=nik)]
+    certs = [[c.id, c.cert_type, c.note, c.date, c.a_place.name] for c in models.Certificate.objects.filter(cuser__nik__contains=nik)]
     return {'certs': certs}
 
 @cuser_login
@@ -200,6 +200,15 @@ def history_a(request):
     history = [[i.b_place.name, i.datetime, 'Passed' if i.passed else 'Not Passed'] for i in models.History.objects.filter(cuser__nik__contains=nik)]
     return {'history': history}
 
+@cuser_login
+def delete_cert(request):
+    data = json.loads(request.body)
+    cert_id = data['cert_id']
+    cert = models.Certificate.objects.get(id=cert_id)
+    cert_dict = model_to_dict(cert)
+    cert.delete()
+    return {'deleted cert':  cert_dict}
+
 def register(request):
     to_return = dict()
     if request.method=='POST':
@@ -221,3 +230,4 @@ def register(request):
         to_return = {'success': False, 'msg': 'Invalid Method'}
     print(to_return)
     return JsonResponse(to_return)
+

@@ -63,7 +63,7 @@ def cuser_login(func):
         if request.method == 'GET':
             username = request.GET['username']
             password = request.GET['password']
-        elif request.method == 'POST':
+        elif request.method in ['POST', 'DELETE', 'PATCH']:
             data = json.loads(request.body)
             username = data['username']
             password = data['password']   
