@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "3b6d6bb4-662b-4464-b75d-e399ae721931",
+		"name": "PPPB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all certificates",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nik\": \"30919873421\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/c_api/get_certificates?username=cuser0&password=123450",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"c_api",
+								"get_certificates"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "cuser0"
+								},
+								{
+									"key": "password",
+									"value": "123450"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 09 Dec 2021 02:16:55 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.7.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "329"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"certs\": [\n        [\n            21,\n            \"Genose\",\n            \"Passed\",\n            \"2021-03-23\",\n            \"Bogor Hospital Center\"\n        ]\n    ],\n    \"success\": true,\n    \"message\": \"OK\",\n    \"user\": \"[{\\\"model\\\": \\\"SETH.userauthentication\\\", \\\"pk\\\": 29, \\\"fields\\\": {\\\"last_login\\\": null, \\\"username\\\": \\\"cuser0\\\", \\\"password\\\": \\\"123450\\\", \\\"usertype\\\": 3, \\\"auser\\\": null, \\\"buser\\\": null, \\\"cuser\\\": 1}}]\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete certificate",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"cuser0\",\n    \"password\": \"123450\",\n    \"cert_id\": 21\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/c_api/delete_cert",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"c_api",
+						"delete_cert"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete certificate",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"cuser0\",\n    \"password\": \"123450\",\n    \"cert_id\": 19\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/c_api/delete_cert",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"c_api",
+								"delete_cert"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 09 Dec 2021 03:05:45 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.7.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "412"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"deleted cert\": {\n        \"id\": 19,\n        \"cuser\": 19,\n        \"cert_type\": \"PCR\",\n        \"note\": \"No Problems\",\n        \"date\": \"2021-03-23\",\n        \"a_place\": 1,\n        \"result\": false,\n        \"good_result\": false\n    },\n    \"success\": true,\n    \"message\": \"OK\",\n    \"user\": \"[{\\\"model\\\": \\\"SETH.userauthentication\\\", \\\"pk\\\": 29, \\\"fields\\\": {\\\"last_login\\\": null, \\\"username\\\": \\\"cuser0\\\", \\\"password\\\": \\\"123450\\\", \\\"usertype\\\": 3, \\\"auser\\\": null, \\\"buser\\\": null, \\\"cuser\\\": 1}}]\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Edit Profile",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"cuser00\",\n    \"password\": \"1234500\",\n    \"new_profile\": {\n        \"name\" : \"new name\",\n        \"phone\": \"01010010101001\"\n    },\n    \"new_auth\": {\n        \"username\": \"cuser0\",\n        \"password\": \"123450\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/c_api/edit_profile",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"c_api",
+						"edit_profile"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Edit Profile",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"cuser00\",\n    \"password\": \"1234500\",\n    \"new_profile\": {\n        \"name\" : \"new name\",\n        \"phone\": \"01010010101001\"\n    },\n    \"new_auth\": {\n        \"username\": \"cuser0\",\n        \"password\": \"123450\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/c_api/edit_profile",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"c_api",
+								"edit_profile"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 09 Dec 2021 03:14:08 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.7.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "483"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"new profile user\": {\n        \"id\": 1,\n        \"nik\": \"301290128870\",\n        \"name\": \"new name\",\n        \"email\": \"a0@a.com\",\n        \"phone\": \"01010010101001\",\n        \"bday\": \"1997-02-02\",\n        \"address\": \"street 0\",\n        \"city\": \"\",\n        \"country\": \"Indonesia\",\n        \"postalcode\": \"0\",\n        \"password\": \"12345\",\n        \"face_data\": false,\n        \"fingerprint\": false\n    },\n    \"new auth user\": {\n        \"id\": 29,\n        \"last_login\": null,\n        \"username\": \"cuser0\",\n        \"password\": \"123450\",\n        \"usertype\": 3,\n        \"auser\": null,\n        \"buser\": null,\n        \"cuser\": 1\n    },\n    \"success\": true,\n    \"message\": \"OK\",\n    \"user\": \"[]\"\n}"
+				}
+			]
+		}
+	]
+}
