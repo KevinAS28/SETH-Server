@@ -228,7 +228,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"cuser00\",\n    \"password\": \"1234500\",\n    \"new_profile\": {\n        \"name\" : \"new name\",\n        \"phone\": \"01010010101001\"\n    },\n    \"new_auth\": {\n        \"username\": \"cuser0\",\n        \"password\": \"123450\"\n    }\n}",
+							"raw": "{\n    \"username\": \"cuser0\",\n    \"password\": \"123450\",\n    \"new_profile\": {\n        \"nik\": \"301290128870\",\n        \"name\": \"name\",\n        \"email\": \"a0@a.com\",\n        \"phone\": \"01010010101001\",\n        \"bday\": \"1997-02-02\",\n        \"address\": \"street 0\",\n        \"city\": \"\",\n        \"country\": \"Indonesia\",\n        \"postalcode\": \"0\"\n    },\n    \"new_auth\": {\n        \"username\": \"cuser0\",\n        \"password\": \"123450\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -257,7 +257,7 @@
 					"header": [
 						{
 							"key": "Date",
-							"value": "Thu, 09 Dec 2021 03:14:08 GMT"
+							"value": "Thu, 09 Dec 2021 03:20:40 GMT"
 						},
 						{
 							"key": "Server",
@@ -273,7 +273,7 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "483"
+							"value": "684"
 						},
 						{
 							"key": "X-Content-Type-Options",
@@ -285,7 +285,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"new profile user\": {\n        \"id\": 1,\n        \"nik\": \"301290128870\",\n        \"name\": \"new name\",\n        \"email\": \"a0@a.com\",\n        \"phone\": \"01010010101001\",\n        \"bday\": \"1997-02-02\",\n        \"address\": \"street 0\",\n        \"city\": \"\",\n        \"country\": \"Indonesia\",\n        \"postalcode\": \"0\",\n        \"password\": \"12345\",\n        \"face_data\": false,\n        \"fingerprint\": false\n    },\n    \"new auth user\": {\n        \"id\": 29,\n        \"last_login\": null,\n        \"username\": \"cuser0\",\n        \"password\": \"123450\",\n        \"usertype\": 3,\n        \"auser\": null,\n        \"buser\": null,\n        \"cuser\": 1\n    },\n    \"success\": true,\n    \"message\": \"OK\",\n    \"user\": \"[]\"\n}"
+					"body": "{\n    \"new profile user\": {\n        \"id\": 1,\n        \"nik\": \"301290128870\",\n        \"name\": \"name\",\n        \"email\": \"a0@a.com\",\n        \"phone\": \"01010010101001\",\n        \"bday\": \"1997-02-02\",\n        \"address\": \"street 0\",\n        \"city\": \"\",\n        \"country\": \"Indonesia\",\n        \"postalcode\": \"0\",\n        \"password\": \"12345\",\n        \"face_data\": false,\n        \"fingerprint\": false\n    },\n    \"new auth user\": {\n        \"id\": 29,\n        \"last_login\": null,\n        \"username\": \"cuser0\",\n        \"password\": \"123450\",\n        \"usertype\": 3,\n        \"auser\": null,\n        \"buser\": null,\n        \"cuser\": 1\n    },\n    \"success\": true,\n    \"message\": \"OK\",\n    \"user\": \"[{\\\"model\\\": \\\"SETH.userauthentication\\\", \\\"pk\\\": 29, \\\"fields\\\": {\\\"last_login\\\": null, \\\"username\\\": \\\"cuser0\\\", \\\"password\\\": \\\"123450\\\", \\\"usertype\\\": 3, \\\"auser\\\": null, \\\"buser\\\": null, \\\"cuser\\\": 1}}]\"\n}"
 				}
 			]
 		}
