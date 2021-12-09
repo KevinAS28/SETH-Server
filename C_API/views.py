@@ -209,6 +209,27 @@ def delete_cert(request):
     cert.delete()
     return {'deleted cert':  cert_dict}
 
+@cuser_login
+def edit_profile(request):
+    data = json.loads(request.body)
+    
+    new_profile = data['new_profile']
+    new_auth = data['new_auth']
+
+    cuser_auth = models.UserAuthentication.objects.get(username=data['username'], password=data['password'])
+    cuser = cuser_auth.cuser
+
+    for key, val in new_profile.items():
+        setattr(cuser, key, val)
+    cuser.save()
+
+    for key, val in new_auth.items():
+        setattr(cuser_auth, key, val)
+    cuser_auth.save()
+
+    return {'new profile user': model_to_dict(cuser), 'new auth user': model_to_dict(cuser_auth)}
+
+
 def register(request):
     to_return = dict()
     if request.method=='POST':
