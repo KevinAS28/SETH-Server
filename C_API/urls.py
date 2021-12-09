@@ -16,6 +16,7 @@ urlpatterns = [
     path('find_aplaces', find_aplaces),
     path('history_a', history_a),
     path('register', register),
-    path('find_place_core', find_place_core)
+    path('find_place_core', find_place_core),
+    path('delete_cert', delete_cert)
 
 ]
