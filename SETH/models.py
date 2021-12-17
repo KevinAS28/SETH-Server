@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models 
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -45,14 +45,18 @@ class APlace(models.Model):
     
 
 class Certificate(models.Model):
+    def expire_date(days=30):
+        return date.today()+timedelta(days=days)
+
     cuser = models.ForeignKey(CUser, on_delete=models.CASCADE)
     cert_type = models.CharField(max_length=10, blank=False)
     note = models.CharField(max_length=250, blank=True, null=True)
-    date = models.DateField(default=date.today, blank=True, null=True)
+    date_issued = models.DateField(default=date.today, blank=True, null=True)
+    date_expire = models.DateField(default=expire_date, blank=True, null=True)
     a_place = models.ForeignKey(APlace, on_delete=models.CASCADE, blank=True, null=True)
     result = models.BooleanField(blank=False, default=True)
     good_result = models.BooleanField(blank=False, default=False)
-
+    
 
 class BPlace(models.Model):
     name = models.CharField(max_length=50, blank=False)
@@ -106,7 +110,6 @@ class UserAuthentication(AbstractBaseUser):
     username = models.CharField(_('username'), blank=True, null=True, unique=True, max_length=30, )
     password = models.CharField(_('password'), max_length=30)
     usertype = models.PositiveSmallIntegerField(choices=USER_TYPES, blank=True, null=True)
-
 
     auser = models.OneToOneField(AUser, on_delete=models.CASCADE, blank=True, null=True)
     buser = models.OneToOneField(BUser, on_delete=models.CASCADE, blank=True, null=True)
