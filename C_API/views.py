@@ -229,6 +229,12 @@ def edit_profile(request):
 
     return {'new profile user': model_to_dict(cuser), 'new auth user': model_to_dict(cuser_auth)}
 
+@cuser_login
+def get_profile(request):
+    data = json.loads(request.body)
+    cuser_auth = models.UserAuthentication.objects.get(username=data['username'], password=data['password'])
+    cuser = cuser_auth.cuser
+    return {'profile': model_to_dict(cuser)}
 
 def register(request):
     to_return = dict()

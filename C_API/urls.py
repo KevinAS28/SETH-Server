@@ -18,6 +18,7 @@ urlpatterns = [
     path('register', register),
     path('find_place_core', find_place_core),
     path('delete_cert', delete_cert),
-    path('edit_profile', edit_profile)
+    path('edit_profile', edit_profile),
+    path('get_profile', get_profile)
 
 ]
