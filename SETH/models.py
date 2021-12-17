@@ -51,7 +51,7 @@ class Certificate(models.Model):
     cuser = models.ForeignKey(CUser, on_delete=models.CASCADE)
     cert_type = models.CharField(max_length=10, blank=False)
     note = models.CharField(max_length=250, blank=True, null=True)
-    date_issued = models.DateField(default=date.today, blank=True, null=True)
+    date = models.DateField(default=date.today, blank=True, null=True)
     date_expire = models.DateField(default=expire_date, blank=True, null=True)
     a_place = models.ForeignKey(APlace, on_delete=models.CASCADE, blank=True, null=True)
     result = models.BooleanField(blank=False, default=True)
