@@ -176,7 +176,8 @@ def get_history(request):
 def get_certificates(request):
     data = json.loads(request.body)
     nik = data['nik']
-    certs = [[c.id, c.cert_type, c.note, c.date, c.a_place.name] for c in models.Certificate.objects.filter(cuser__nik__contains=nik)]
+    # certs = [[c.id, c.cert_type, c.note, c.date, c.a_place.name] for c in models.Certificate.objects.filter(cuser__nik__contains=nik)]
+    certs = [model_to_dict(c) for c in models.Certificate.objects.filter(cuser__nik__contains=nik)]
     return {'certs': certs}
 
 @cuser_login
