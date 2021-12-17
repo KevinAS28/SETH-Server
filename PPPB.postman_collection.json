@@ -288,6 +288,51 @@
 					"body": "{\n    \"new profile user\": {\n        \"id\": 1,\n        \"nik\": \"301290128870\",\n        \"name\": \"name\",\n        \"email\": \"a0@a.com\",\n        \"phone\": \"01010010101001\",\n        \"bday\": \"1997-02-02\",\n        \"address\": \"street 0\",\n        \"city\": \"\",\n        \"country\": \"Indonesia\",\n        \"postalcode\": \"0\",\n        \"password\": \"12345\",\n        \"face_data\": false,\n        \"fingerprint\": false\n    },\n    \"new auth user\": {\n        \"id\": 29,\n        \"last_login\": null,\n        \"username\": \"cuser0\",\n        \"password\": \"123450\",\n        \"usertype\": 3,\n        \"auser\": null,\n        \"buser\": null,\n        \"cuser\": 1\n    },\n    \"success\": true,\n    \"message\": \"OK\",\n    \"user\": \"[{\\\"model\\\": \\\"SETH.userauthentication\\\", \\\"pk\\\": 29, \\\"fields\\\": {\\\"last_login\\\": null, \\\"username\\\": \\\"cuser0\\\", \\\"password\\\": \\\"123450\\\", \\\"usertype\\\": 3, \\\"auser\\\": null, \\\"buser\\\": null, \\\"cuser\\\": 1}}]\"\n}"
 				}
 			]
+		},
+		{
+			"name": "Get profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"cuser0\",\n    \"password\": \"123450\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/c_api/edit_profile?username=cuser0&password=123450",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"c_api",
+						"edit_profile"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "cuser0"
+						},
+						{
+							"key": "password",
+							"value": "123450"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
