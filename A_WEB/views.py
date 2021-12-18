@@ -132,8 +132,8 @@ def register_face(request, data=dict()):
     config = configparser.ConfigParser()
     config.read(os.path.join(settings.BASE_DIR, 'face_core.ini'))       
     redirect_url = config['face_core']['add_face_page_url']
-    data['success_url'] = 'http://127.0.0.1:8000'+reverse('a_web:process_c_registration')#'http://127.0.0.1:8000'+reverse('a_web:regist_c_notregistered')
-    data['send_data_only_url'] = 'http://127.0.0.1:8000'+reverse('a_web:process_c_registration')
+    data['success_url'] = f'http://{settings.WEB_HOST}'+reverse('a_web:process_c_registration')#'http://127.0.0.1:8000'+reverse('a_web:regist_c_notregistered')
+    data['send_data_only_url'] = f'http://{settings.WEB_HOST}'+reverse('a_web:process_c_registration')
     # data['send_data_only_url']
     data['session'] = json.dumps(session_to_dict(request.session))
     data['user_id'] = data['nik']
@@ -211,7 +211,7 @@ def register_c(request):
         messages.success(request, f' Data {data["name"]} sucessfully registered !!') 
         request.session['params'] = json.dumps(params)
         request.session['register_score'] = 0
-        return render(request, 'redirect.html', {'url': 'http://127.0.0.1:8000/a_web/not_registered', 'aplace_name': settings.A_PLACE_NAME})        
+        return render(request, 'redirect.html', {'url': f'http://{settings.WEB_HOST}/a_web/not_registered', 'aplace_name': settings.A_PLACE_NAME})        
         
 
     elif request.method=='GET':

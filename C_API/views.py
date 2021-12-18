@@ -13,7 +13,7 @@ from User.views import cuser_login
 def test(request):
     data = json.loads(request.body)
     cauth = models.UserAuthentication.objects.filter(username=data['username'], password=data['password'])
-    cuser = cauth[0].cuser
+    data = {**model_to_dict(cauth[0].cuser), **data}
     print(data)
     return {'data': data, 'auth': serializers.serialize('json', cauth), }
 

@@ -158,3 +158,4 @@ A_PLACE_NAME = 'Bogor Hospital Center'
 
 B_PLACE_NAME = 'Gambir Station'
 
+WEB_HOST = '192.168.100.9:8000'

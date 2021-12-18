@@ -87,7 +87,7 @@ def face_auth_data(request, user_id):
     redirect_url = config['face_core']['auth_face_page_url']
     data['user_id'] = user_id
     data['name'] = cuser.name
-    data['success_url'] = 'http://127.0.0.1:8000'+reverse('b_web:auth_face_result')#'http://127.0.0.1:8000'+reverse('a_web:regist_c_notregistered')
+    data['success_url'] = f'http://{settings.WEB_HOST}'+reverse('b_web:auth_face_result')#'http://127.0.0.1:8000'+reverse('a_web:regist_c_notregistered')
     data['session'] = json.dumps(session_to_dict(request.session))
     data['redirect_url'] = f'{redirect_url}?params={quote(json.dumps(data))}'
     return data
@@ -171,9 +171,8 @@ def receive_qr(request):
     global user_id_received, cert_not_supported, failed_msg
     if request.method == 'POST':
         data = json.loads(request.body)
+        print('data receive_qr:', data)
         user_id = data['user_id']
-
-    
         try:
             cuser = list(CUser.objects.filter(nik=user_id))[0]
             certs = Certificate.objects.filter(cuser=cuser)

@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.core import serializers
 from django.conf import settings
+from django.forms.models import model_to_dict
+
 
 from User.backends.AuthenticationBackend import AuthenticationBackend
 from SETH import models
@@ -69,16 +71,19 @@ def cuser_login(func):
             password = data['password']   
         else:
             response = {'success': False, 'message': 'Invalid method'}
-            print('Response:', response)
+            # print('Response:', response)
             return JsonResponse(response)
-
+        print('username, password:', username, password)
         user = models.UserAuthentication.objects.filter(username=username, password=password)
         if user.exists():
             print(f"Login success: {user[0].username} -> {request.build_absolute_uri()}")
             result = func(*args, **kwargs)
-            auth_success = {'success': True, 'message': 'OK', 'user': serializers.serialize('json', user)}
+            
+            data_user = {**model_to_dict(user[0]), **model_to_dict(user[0].cuser)}
+            # print('data user:', data_user)
+            auth_success = {'success': True, 'message': 'OK', 'user': data_user}
             response = {**result, **auth_success}
-            print('Response:', response)
+            # print('Response:', response)
             return JsonResponse(response)
 
         else:
